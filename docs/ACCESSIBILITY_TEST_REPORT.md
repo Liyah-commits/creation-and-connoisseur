@@ -6,7 +6,7 @@
 |---|---|
 | **Site** | Creation and Connoisseur website (English and Spanish) |
 | **Build tested** | Local production and template builds of this repository, served from `.vercel/output/static` by `scripts/serve-static.mjs` at `http://localhost:4321` |
-| **Date of automated testing** | 6 November 2026; run again the same day after the content batch and the switch to usted (decisions D25 and D38 to D42). The numbers below are from that second run. |
+| **Date of automated testing** | 6 November 2026; run again the same day after the content batch and the switch to usted (decisions D25 and D38 to D42). Run again on 7 November 2026 after the programs and Aryah's bio were published (D44); the numbers below are from that run. |
 | **Tested by** | Automated suite set up during the rebuild. Manual passes: Aryah Certain (section 8, not yet run) |
 | **Conformance status** | **Automated testing: zero violations.** A WCAG 2.1 AA conformance claim should be made only after the manual passes in section 8 are complete. |
 
@@ -20,7 +20,7 @@ No accessibility overlay, widget or plug-in is used.
 
 Every page is tested in both languages. The page list is read from the built `sitemap.xml`, so a new page is tested automatically.
 
-**Production build** (real content only, 20 pages, 10 per language). This is what ships. It also tests the empty states: no programs, no news, no people, no mission, and Donate unavailable.
+**Production build** (real content only, 26 pages, 13 per language). This is what ships: the 10 fixed pages and the 3 published programs in each language. It also tests the states that are still empty: no news posts, no EIN, contact details or social links, and Donate unavailable.
 
 | Page | English | Spanish |
 |---|---|---|
@@ -36,11 +36,11 @@ Every page is tested in both languages. The page list is read from the built `si
 | Privacy policy | `/privacy/` | `/es/privacidad/` |
 | Not found (bilingual) | any unknown address (`404.html`) | |
 
-**Template build** (`SHOW_DRAFTS=true`, 31 pages, 15 of them Spanish). It adds the draft entries, so the remaining templates are tested before anything is published: the labeled examples (decision D28), plus the three real programs and Aryah's People entry from the content batch, which are still drafts:
+**Template build** (`SHOW_DRAFTS=true`, 31 pages, 15 of them Spanish). It adds the draft entries, so the remaining templates are tested before anything is published: the labeled examples (decision D28), plus the published programs and Aryah's People entry:
 
 | Template | Pages |
 |---|---|
-| Program page | `/programs/example-program/` (with image), `/es/programas/programa-de-ejemplo/` (without image), and the three draft programs in each language (UNLV Food Tasting Club, Biweekly Volunteering, Mobile Food Pantry) |
+| Program page | `/programs/example-program/` (with image), `/es/programas/programa-de-ejemplo/` (without image), and the three published programs in each language (UNLV Food Tasting Club, Biweekly Volunteering, Mobile Food Pantry) |
 | News post page | `/news/example-news-post/`, `/es/noticias/noticia-de-ejemplo/` (paired), `/news/example-post-without-translation/` (no translation) |
 | Lists with entries, home page with programs and news | `/programs/`, `/news/`, `/`, and the Spanish equivalents |
 | People (About) | two example people, one with a photo and one with the initials placeholder |
@@ -76,14 +76,14 @@ All of these run in GitHub Actions on every pull request and every push to `main
 
 | Check | Production build | Template build | Pass condition | Result |
 |---|---|---|---|---|
-| axe scans (pages × 2 widths, menu open, 404, form states) | 67 scans | 89 scans | 0 violations | **0 violations** |
-| Playwright tests (axe, structure, keyboard, forms, content) | 199 passed, 0 failed | 283 passed, 0 failed | all pass | **Pass** |
-| pa11y-ci (axe + HTML_CodeSniffer, WCAG2AA) | 20/20 pages, 0 errors | 31/31 pages, 0 errors | 0 errors | **Pass** |
+| axe scans (pages × 2 widths, menu open, 404, form states) | 79 scans | 89 scans | 0 violations | **0 violations** |
+| Playwright tests (axe, structure, keyboard, forms, content) | 241 passed, 0 failed | 283 passed, 0 failed | all pass | **Pass** |
+| pa11y-ci (axe + HTML_CodeSniffer, WCAG2AA) | 26/26 pages, 0 errors | 31/31 pages, 0 errors | 0 errors | **Pass** |
 | Lighthouse accessibility | 100 on every page | 100 on every page | ≥ 95 | **Pass** |
 | Lighthouse performance | 100 on every page | 100 on every page | ≥ 95 | **Pass** |
 | Lighthouse best practices | 100 on every page | 100 on every page | ≥ 95 | **Pass** |
 | Lighthouse SEO | 100 on every page | 100 on every page | 100 | **Pass** |
-| Broken links, internal (fragments checked, redirects count as broken) | 26 checked, 0 broken | 57 checked, 0 broken | 0 broken | **Pass** |
+| Broken links, internal (fragments checked, redirects count as broken) | 32 checked, 0 broken | 57 checked, 0 broken | 0 broken | **Pass** |
 | Broken links, external | 6 checked, 0 failed | 6 checked, 0 failed | reported | **Pass** |
 | Contrast pairs | 20 of 20 pass | same tokens | all pass | **Pass** |
 | Type check | 0 errors | | 0 errors | **Pass** |
@@ -147,7 +147,7 @@ Saffron (1.74:1 on cream) is used on light backgrounds only as decoration, never
 
 ### 5.4 Broken-link check
 
-linkinator started from every sitemap page and followed every same-site link, checking `#fragment` targets and treating any redirect as broken (so a link missing its trailing slash would fail). On 6 November 2026, after the content batch: production build, 26 internal links, 0 broken; template build, 57 internal links, 0 broken. All six external links returned 200: the four Get Help resources (Nevada 211, Three Square, the UNLV food pantry and Access Nevada; addresses in `docs/OPEN_ITEMS.md`, item 14) and Formspree's and Vercel's privacy policies. `example.org` links exist only in the template build's fake settings and are skipped.
+linkinator started from every sitemap page and followed every same-site link, checking `#fragment` targets and treating any redirect as broken (so a link missing its trailing slash would fail). On 7 November 2026: production build, 32 internal links, 0 broken; template build, 57 internal links, 0 broken. All six external links returned 200: the four Get Help resources (Nevada 211, Three Square, the UNLV food pantry and Access Nevada; addresses in `docs/OPEN_ITEMS.md`, item 14) and Formspree's and Vercel's privacy policies. `example.org` links exist only in the template build's fake settings and are skipped.
 
 ## 6. WCAG 2.1 Level A and AA success criteria
 
@@ -250,7 +250,7 @@ Run these yourself. Automated tools catch roughly a third to a half of accessibi
 3. Or use a deployed Vercel preview address instead of `localhost`.
 4. For each failure, note the page, what you did, what happened and what you expected, and add a row to the defect log (section 7).
 
-**Pages to cover:** the 20 pages in section 3; the three draft programs in each language (`/programs/unlv-food-tasting-club/`, `/programs/biweekly-volunteering/`, `/programs/mobile-food-pantry/` and their Spanish versions); `/programs/example-program/`, `/news/example-news-post/` and `/es/programas/programa-de-ejemplo/`; and one wrong address (`/es/no-existe/`).
+**Pages to cover:** the 20 pages in section 3; the three programs in each language (`/programs/unlv-food-tasting-club/`, `/programs/biweekly-volunteering/`, `/programs/mobile-food-pantry/` and their Spanish versions); `/programs/example-program/`, `/news/example-news-post/` and `/es/programas/programa-de-ejemplo/`; and one wrong address (`/es/no-existe/`).
 
 ### 8.1 Full keyboard walk of every page
 
@@ -277,7 +277,7 @@ Then these specific checks:
 - [ ] `/about/` and `/es/acerca-de/`
 - [ ] `/programs/` and `/es/programas/`
 - [ ] `/programs/example-program/` and `/es/programas/programa-de-ejemplo/`
-- [ ] The three draft programs, in both languages
+- [ ] The three programs, in both languages
 - [ ] `/get-help/` and `/es/obtener-ayuda/` (including step 7)
 - [ ] `/volunteer/` and `/es/voluntariado/` (including step 7)
 - [ ] `/donate/` and `/es/donar/` (including step 8)

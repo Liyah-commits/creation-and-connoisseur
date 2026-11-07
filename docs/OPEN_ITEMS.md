@@ -6,7 +6,7 @@ Every fact or asset the site needs that could not be found or hasn't been suppli
 
 "Where to enter it" points to the Keystatic admin (`/keystatic`). In local development that's `http://127.0.0.1:4321/keystatic`.
 
-Item numbers stay fixed so other documents can refer to them. **Supplied** items are loaded, and the note says what's left before they go live. Programs and people were loaded as drafts. Pages and Site settings have no draft state, so their new text is in the build now but not yet deployed (D38).
+Item numbers stay fixed so other documents can refer to them. **Supplied** items are loaded, and the note says what's left before they go live. Programs and Aryah's bio were loaded as drafts and published on 7 November 2026, before the first deploy (D44). Pages and Site settings have no draft state, so their text has been in the build since it was loaded.
 
 *(Updated 6 November 2026 after the content batch.)*
 
@@ -14,7 +14,7 @@ Item numbers stay fixed so other documents can refer to them. **Supplied** items
 
 1. **Mission statement and tagline.** **Supplied.** The mission (content batch, rewritten so the pantry reads as planned for 2027, D38) is in Site settings > Mission statement and shows on About. The tagline ("Fighting food insecurity at UNLV and across Las Vegas." / "Combatimos la inseguridad alimentaria en UNLV y en todo Las Vegas.") is in Site settings > Tagline. It shows in every footer, in the home page title and in search-engine data (D43).
 2. **The story for the About page.** **Supplied**, in Pages > about > Main text, both languages, with the student figures removed and the pantry as planned.
-3. **Aryah Certain's title, short bio and photo.** Title ("Founder and President" / "Fundadora y Presidenta") and bio **supplied** (last sentence revised 6 November 2026 to "and the planned mobile food pantry"), in Shared > People > Aryah Certain, as a draft. Still needed: confirm the title matches the bylaws, and supply a photo with permission and a description in both languages. Untick **Hide from the live site** when ready.
+3. **Aryah Certain's title, short bio and photo.** Title ("Founder and President" / "Fundadora y Presidenta") and bio **supplied** (last sentence revised 6 November 2026 to "and the planned mobile food pantry"), in Shared > People > Aryah Certain, **published** 7 November 2026. Still needed: confirm the title matches the bylaws, and supply a photo with permission and a description in both languages. Until then, the About page shows her initials.
 4. **Board members and other people** to list, with roles, bios and photos. Where: Shared > People.
 5. **EIN.** Where: Site settings > EIN. Shows in the footer and on Donate.
 6. **Exact legal name**, as registered with the IRS. Where: Site settings > Legal name.
@@ -26,7 +26,7 @@ Item numbers stay fixed so other documents can refer to them. **Supplied** items
 
 ## Programs and help
 
-12. **Programs.** **Supplied**, three drafts in each language: UNLV Food Tasting Club, Biweekly Volunteering, and Mobile Food Pantry (planned for 2027). Untick **Hide from the live site** on each, in both languages, after reading them.
+12. **Programs.** **Supplied** and **published** 7 November 2026, three in each language: UNLV Food Tasting Club, Biweekly Volunteering, and Mobile Food Pantry (planned for 2027).
 13. **Get Help details.** **Supplied**, in Pages > getHelp, both languages, with a request form added (D40). The response time is two business days.
 14. **Community resources on Get Help.** **Supplied**: four links, verified on 6 November 2026 (D41):
 

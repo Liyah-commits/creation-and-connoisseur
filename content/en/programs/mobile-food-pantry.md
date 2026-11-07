@@ -1,6 +1,6 @@
 ---
 title: Mobile Food Pantry (planned for 2027)
-draft: true
+draft: false
 summary: >-
   A mobile food pantry we are planning for 2027, to bring free groceries to UNLV
   students and Las Vegas neighborhoods where reaching a food bank is hard.

@@ -1,6 +1,6 @@
 ---
 title: Despensa Móvil de Alimentos (prevista para 2027)
-draft: true
+draft: false
 englishVersion: mobile-food-pantry
 summary: >-
   Una despensa móvil que planeamos para 2027, para llevar alimentos gratuitos a

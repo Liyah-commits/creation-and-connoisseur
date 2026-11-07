@@ -1,6 +1,6 @@
 ---
 title: UNLV Food Tasting Club
-draft: true
+draft: false
 englishVersion: unlv-food-tasting-club
 summary: >-
   Nuestro programa en el campus: noches culturales y eventos gastronómicos

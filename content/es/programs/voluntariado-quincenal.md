@@ -1,6 +1,6 @@
 ---
 title: Voluntariado Quincenal
-draft: true
+draft: false
 englishVersion: biweekly-volunteering
 summary: >-
   Cada dos semanas, nuestros voluntarios clasifican y empacan alimentos, sirven

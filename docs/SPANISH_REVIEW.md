@@ -13,7 +13,7 @@ Every file that contains Spanish the public will read. It needs review by a Span
 - **Names stay in English:** "Creation and Connoisseur", "UNLV Food Tasting Club", "Three Square Food Bank", "Nevada 211", "Access Nevada".
 - **The pantry is planned, not running.** Every Spanish mention of the despensa móvil must say it's planned or expected for 2027 ("prevista para 2027", "que planeamos", "llevaría"), never that it already operates or is guaranteed, and must not mention Rotary or partners. Check this in the mission, the About story, the club and pantry programs, Get Help, the Pantry team role and Aryah's bio.
 - **Same facts as the English:** the Spanish must say no more and no less than the English version of each page.
-- **How to see it:** run `pnpm build:templates && pnpm serve` and open `http://localhost:4321/es/`. The template build shows the draft programs and Aryah's bio. Spanish pages are under `/es/`.
+- **How to see it:** run `pnpm build:test && pnpm serve` and open `http://localhost:4321/es/`. Spanish pages are under `/es/`. The programs and Aryah's bio were published on 7 November 2026, so they're live content: review them first.
 
 ### Key terms to confirm
 
@@ -56,7 +56,7 @@ Each file holds the page title, the search result description, the introduction 
 - [ ] `content/es/pages/accessibility.md`: Declaración de accesibilidad (`/es/accesibilidad/`). **Changed:** new text from the batch.
 - [ ] `content/es/pages/privacy.md`: Política de privacidad (`/es/privacidad/`). **Changed:** new text from the batch. Needs legal review too (`docs/OPEN_ITEMS.md`, item 18).
 
-## Programs (`content/es/programs/`, drafts)
+## Programs (`content/es/programs/`, published 7 November 2026)
 
 - [ ] `content/es/programs/unlv-food-tasting-club.md`: UNLV Food Tasting Club. **Changed (new).**
 - [ ] `content/es/programs/voluntariado-quincenal.md`: Voluntariado Quincenal. **Changed (new).**
@@ -64,7 +64,7 @@ Each file holds the page title, the search result description, the introduction 
 
 ## People
 
-- [ ] `content/people/aryah-certain.yaml`: `roleEs` and `bioEs`. **Changed (new, draft).** The last sentence of the bio was revised to "…y la despensa móvil de alimentos que está en planificación".
+- [ ] `content/people/aryah-certain.yaml`: `roleEs` and `bioEs`. **Changed (new; published 7 November 2026).** The last sentence of the bio was revised to "…y la despensa móvil de alimentos que está en planificación".
 
 ## Interface text
 

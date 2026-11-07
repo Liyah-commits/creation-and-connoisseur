@@ -14,19 +14,20 @@ const isTemplateBuild = PAGES.includes('/programs/example-program/');
 test.describe('production build', () => {
   test.skip(isTemplateBuild, 'Production build only.');
 
-  test('drafts are not published', async ({ page }) => {
-    expect(PAGES.some((path) => path.includes('example'))).toBe(false);
+  test('drafts are not published; published entries are', async ({ page }) => {
+    // The labeled examples are drafts and must never ship.
+    expect(PAGES.some((path) => path.includes('example') || path.includes('ejemplo'))).toBe(false);
     const response = await page.goto('/programs/example-program/');
     expect(response?.status()).toBe(404);
     await page.goto(routes.programs.en);
-    await expect(page.getByText(ui['programs.empty'].en)).toBeVisible();
+    await expect(page.getByText(ui['draft.badge'].en, { exact: true })).toHaveCount(0);
+    // News has no published posts yet, so its empty state shows.
     await page.goto(routes.news.es);
     await expect(page.getByText(ui['news.empty'].es)).toBeVisible();
   });
 
-  test('empty facts render nothing: no EIN line, no published people, no social links', async ({ page }) => {
+  test('empty facts render nothing: no EIN line, no social links', async ({ page }) => {
     await page.goto(routes.about.en);
-    await expect(page.getByRole('heading', { name: ui['about.peopleHeading'].en })).toHaveCount(0);
     await expect(page.locator('footer')).not.toContainText('EIN');
     await expect(page.getByRole('heading', { name: ui['footer.socialHeading'].en })).toHaveCount(0);
   });

@@ -1,6 +1,6 @@
 ---
 title: Biweekly Volunteering
-draft: true
+draft: false
 summary: >-
   Every other week, volunteers sort and pack food, serve meals and help at
   distributions with partner organizations. No experience needed.
