@@ -22,5 +22,5 @@ The table stays here so that anything found later goes through the same process:
    - **revise**: move it and rewrite it;
    - **consolidate**: merge it into another page;
    - **remove**: drop it.
-3. For every old URL that served a page, add a line to `docs/REDIRECTS.md` and to the `redirects` list in `vercel.json`. Use `"permanent": true`, which sends a 301 (Vercel sends 308 for permanent redirects unless `statusCode` is set; this repo sets `statusCode: 301` explicitly).
+3. For every old URL that served a page, add a line to `docs/REDIRECTS.md` and an entry with `status: 301` to `redirects` in `astro.config.mjs` (see `docs/REDIRECTS.md` for the format and why it isn't `vercel.json`; D23 in `docs/DECISIONS.md`).
 4. Move any organization fact found in the old material out of `docs/OPEN_ITEMS.md` and into the site settings in Keystatic.

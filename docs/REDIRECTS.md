@@ -4,8 +4,6 @@
 
 **No old site exists, so there are no old URLs to redirect.** See `docs/CONTENT_INVENTORY.md` and `docs/PLAN.md`, section 1.
 
-`vercel.json` contains an empty `redirects` list, so adding a redirect is a one-line change once an old URL surfaces.
-
 ## Map
 
 | Old URL | New URL | Status | Reason |
@@ -14,16 +12,26 @@
 
 ## How to add a redirect
 
-Add the row above, then the matching entry in `vercel.json`:
+1. Add the row above.
+2. Add the matching entry to `redirects` in `astro.config.mjs`:
 
-```json
-{
-  "redirects": [
-    { "source": "/old-page", "destination": "/about/", "statusCode": 301 }
-  ]
-}
-```
+   ```js
+   export default defineConfig({
+     // ...
+     redirects: {
+       '/old-page': { status: 301, destination: '/about/' },
+     },
+   });
+   ```
 
-- Use `statusCode: 301` rather than `permanent: true`. Vercel's `permanent: true` sends 308.
-- Redirect the Spanish equivalent too if the old site had one.
-- After deploying, check each old URL returns 301 with `curl -sI https://<domain>/old-page`.
+3. Redirect the Spanish equivalent too if the old site had one.
+4. Build (`pnpm build`) and confirm the redirect is in `.vercel/output/config.json` as a route with `"status": 301` and the right `Location`.
+5. After deploying, check each old URL with `curl -sI https://<domain>/old-page/`. The response must be `301` with `location: /about/`.
+
+### Why `astro.config.mjs` and not `vercel.json`
+
+The brief named `vercel.json`. The Vercel adapter, though, writes the site's routing itself (Vercel's Build Output API, `.vercel/output/config.json`). Redirects in `astro.config.mjs` are compiled into that file as 301 routes. That was checked on 6 November 2026 with a test entry, and it can be checked again on every build. Whether Vercel also applies a `vercel.json` `redirects` list on top of an adapter's output could not be confirmed from Vercel's documentation, so the site doesn't depend on it. See D23 in `docs/DECISIONS.md`.
+
+### Trailing slashes
+
+The site uses addresses that end in `/` (`trailingSlash: 'always'`). The adapter matches redirect sources with the slash added, so a request for `/old-page` first gets Vercel's trailing-slash redirect (308) to `/old-page/`, then the 301. Search engines follow the two steps and pass the 301 on. When adding a redirect, test both `/old-page` and `/old-page/`.

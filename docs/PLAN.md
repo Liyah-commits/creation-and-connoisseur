@@ -17,7 +17,7 @@ A search on 6 November 2026 found no existing Creation and Connoisseur repo, sit
 Because nothing exists:
 
 - `docs/CONTENT_INVENTORY.md` records the empty inventory and the method, so the same process can be repeated if old material turns up.
-- `docs/REDIRECTS.md` records that there are no old URLs to redirect. `vercel.json` carries an empty `redirects` list ready for any that surface.
+- `docs/REDIRECTS.md` records that there are no old URLs to redirect, and how to add one (in `astro.config.mjs`, which the Vercel adapter turns into a 301; see D23).
 
 ## 2. Facts about the organization
 
@@ -102,3 +102,19 @@ Two builds are tested. The **production build** contains only real content, whic
 - Analytics and cookies. None are added; the privacy policy says so.
 - The Keystatic admin's own interface, which is third-party code. Testing covers every public page. The admin is noted as outside the conformance claim.
 - Deploying or pushing, per the ruling above. `docs/ADMIN_GUIDE.md` gives the exact steps.
+
+## 9. Phase 2 design (carried over from the Phase 0 handoff)
+
+Decided before Phase 1 and recorded in `docs/DECISIONS.md` as each part is built.
+
+**Forms (Volunteer and Contact).**
+- One `FORMSPREE_FORM_ID` for both forms, told apart by `_subject` (and by language). Read through `astro:env` (server, public, optional).
+- `novalidate` plus custom JavaScript: visible labels with "(required)" in text, `aria-invalid`, inline errors linked with `aria-describedby`, focus moved to the first invalid field, and a `role="status"` live region present in the page from the start for the success message.
+- Progressive enhancement: without JavaScript the form posts to Formspree directly. A `_gotcha` honeypot hidden with `display:none`. `autocomplete` tokens on personal fields (WCAG 1.3.5).
+- Formspree ID not set: the form renders fully with a plain-text notice that it isn't connected yet. On a valid submit, the live region says nothing was sent because the form isn't connected.
+
+**Program and news templates.** One page per entry in each language (`/programs/<slug>/`, `/es/programas/<slug>/`, `/news/<slug>/`, `/es/noticias/<slug>/`), with the language switch paired through the "English version" field. One clearly labeled example program and one example news post per language, saved as drafts, so the template build can test the templates.
+
+**Tests to add with them.** axe on both forms in their error and success states, at both widths; behavior tests for focus moving to the first error, the error text being linked by `aria-describedby`, the live region announcing success, the not-connected message, and the language switch on paired and unpaired entries.
+
+**Phase 4 documents.** `docs/ACCESSIBILITY_TEST_REPORT.md`, `docs/EDITOR_GUIDE.md`, `docs/ADMIN_GUIDE.md`, `docs/SPANISH_REVIEW.md` and the final `docs/OPEN_ITEMS.md`, in the structures the brief gives (`docs/BRIEF.md`).

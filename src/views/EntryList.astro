@@ -1,0 +1,36 @@
+---
+/** The Programs and News list pages. Shows a plain message while the list is empty. */
+import Base from '../layouts/Base.astro';
+import EntryCard from '../components/EntryCard.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import { alternatesFor, type Lang } from '../i18n/routes';
+import { t } from '../i18n/ui';
+import { getNews, getPage, getPrograms, type Section } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+  section: Section;
+}
+const { lang, section } = Astro.props;
+const page = await getPage(lang, section);
+const entries = section === 'programs' ? await getPrograms(lang) : await getNews(lang);
+---
+
+<Base lang={lang} title={page.data.title} description={page.data.metaDescription} alternates={alternatesFor(section)}>
+  <PageHeader title={page.data.title} intro={page.data.intro} />
+  <div class="container-page py-10 md:py-14">
+    <Prose entry={page} class="mb-10" />
+    {
+      entries.length > 0 ? (
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
+          {entries.map((entry) => (
+            <li><EntryCard lang={lang} section={section} entry={entry} /></li>
+          ))}
+        </ul>
+      ) : (
+        <p class="rounded-lg border border-ink/15 bg-white p-6 text-lg">{t(lang, section === 'programs' ? 'programs.empty' : 'news.empty')}</p>
+      )
+    }
+  </div>
+</Base>

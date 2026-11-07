@@ -1,0 +1,53 @@
+---
+/** About: mission (from Site settings), story (the page text) and people. Each section hides while empty. */
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import PersonCard from '../components/PersonCard.astro';
+import Prose from '../components/Prose.astro';
+import { alternatesFor, type Lang } from '../i18n/routes';
+import { t } from '../i18n/ui';
+import { getPage, getPeople, getSettings, hasBody } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const page = await getPage(lang, 'about');
+const settings = await getSettings();
+const people = await getPeople();
+const mission = lang === 'en' ? settings.missionEn : settings.missionEs;
+---
+
+<Base lang={lang} title={page.data.title} description={page.data.metaDescription} alternates={alternatesFor('about')}>
+  <PageHeader title={page.data.title} intro={page.data.intro} />
+  <div class="container-page space-y-14 py-10 md:py-14">
+    {
+      mission && (
+        <section aria-labelledby="mission-heading" class="max-w-[68ch]">
+          <h2 id="mission-heading">{t(lang, 'about.missionHeading')}</h2>
+          <blockquote class="mt-4 border-l-4 border-herb pl-5 font-serif text-xl">{mission}</blockquote>
+        </section>
+      )
+    }
+    {
+      hasBody(page) && (
+        <section aria-labelledby="story-heading">
+          <h2 id="story-heading">{t(lang, 'about.storyHeading')}</h2>
+          <Prose entry={page} class="mt-4" />
+        </section>
+      )
+    }
+    {
+      people.length > 0 && (
+        <section aria-labelledby="people-heading">
+          <h2 id="people-heading">{t(lang, 'about.peopleHeading')}</h2>
+          <ul class="mt-6 grid gap-5 md:grid-cols-2" role="list">
+            {people.map((person) => (
+              <li><PersonCard lang={lang} person={person} /></li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </div>
+</Base>

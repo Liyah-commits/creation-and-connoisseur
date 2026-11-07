@@ -1,0 +1,38 @@
+---
+/** One person on the About page. Without a photo, a decorative initials block stands in. */
+import { Picture } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  person: CollectionEntry<'people'>;
+}
+const { lang, person } = Astro.props;
+const { name, photo } = person.data;
+const role = lang === 'en' ? person.data.roleEn : person.data.roleEs;
+const bio = lang === 'en' ? person.data.bioEn : person.data.bioEs;
+const initials = name
+  .split(/\s+/)
+  .filter(Boolean)
+  .map((part) => part[0]?.toUpperCase() ?? '')
+  .slice(0, 2)
+  .join('');
+---
+
+<article class="flex gap-5 rounded-lg border border-ink/15 bg-white p-5">
+  {
+    photo.discriminant ? (
+      <Picture src={photo.value.image} alt={lang === 'en' ? photo.value.altEn : photo.value.altEs} widths={[120, 240]} sizes="7.5rem" formats={['avif', 'webp']} class="size-28 shrink-0 rounded-full object-cover" />
+    ) : (
+      <div class="placeholder-pattern flex size-28 shrink-0 items-center justify-center rounded-full border border-ink/15" aria-hidden="true">
+        <span class="rounded bg-white px-2 font-serif text-2xl font-bold text-ink">{initials}</span>
+      </div>
+    )
+  }
+  <div>
+    <h3>{name}</h3>
+    {role && <p class="mt-1 font-semibold text-ink-muted">{role}</p>}
+    {bio && <p class="mt-2">{bio}</p>}
+  </div>
+</article>

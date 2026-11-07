@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import EntryCard from '../components/EntryCard.astro';
+import Prose from '../components/Prose.astro';
+import { alternatesFor, routes, type Lang } from '../i18n/routes';
+import { t, type UIKey } from '../i18n/ui';
+import { getNews, getPage, getPrograms } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const page = await getPage(lang, 'home');
+const programs = (await getPrograms(lang)).slice(0, 3);
+const news = (await getNews(lang)).slice(0, 3);
+
+const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UIKey }[] = [
+  { key: 'getHelp', title: 'home.getHelpTitle', text: 'home.getHelpText' },
+  { key: 'volunteer', title: 'home.volunteerTitle', text: 'home.volunteerText' },
+  { key: 'donate', title: 'home.donateTitle', text: 'home.donateText' },
+];
+---
+
+<Base lang={lang} title={page.data.title} description={page.data.metaDescription} alternates={alternatesFor('home')} isHome>
+  <div class="border-b border-ink/10 bg-white">
+    <div class="container-page grid items-center gap-10 py-12 md:grid-cols-[3fr_2fr] md:py-20">
+      <div>
+        <h1>{page.data.title}</h1>
+        {page.data.intro && <p class="lead mt-5 text-ink-muted">{page.data.intro}</p>}
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={routes.getHelp[lang]} class="btn btn-primary">{t(lang, 'home.getHelpTitle')}</a>
+          <a href={routes.volunteer[lang]} class="btn btn-secondary">{t(lang, 'home.volunteerTitle')}</a>
+        </div>
+      </div>
+      <div class="placeholder-pattern hidden aspect-[4/3] rounded-lg border border-ink/10 md:block" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  {
+    page.body?.trim() && (
+      <div class="container-page pt-12">
+        <Prose entry={page} />
+      </div>
+    )
+  }
+
+  <section class="container-page py-12" aria-labelledby="actions-heading">
+    <h2 id="actions-heading">{t(lang, 'home.actionsHeading')}</h2>
+    <ul class="mt-6 grid gap-5 md:grid-cols-3" role="list">
+      {
+        actions.map((action) => (
+          <li class="rounded-lg border border-ink/15 bg-white p-6">
+            <h3>
+              <a href={routes[action.key][lang]} class="text-ink">{t(lang, action.title)}</a>
+            </h3>
+            <p class="mt-2">{t(lang, action.text)}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  {
+    programs.length > 0 && (
+      <section class="container-page py-12" aria-labelledby="programs-heading">
+        <h2 id="programs-heading">{t(lang, 'home.programsHeading')}</h2>
+        <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" role="list">
+          {programs.map((entry) => (
+            <li><EntryCard lang={lang} section="programs" entry={entry} headingLevel="h3" /></li>
+          ))}
+        </ul>
+        <p class="mt-6"><a href={routes.programs[lang]}>{t(lang, 'home.allPrograms')}</a></p>
+      </section>
+    )
+  }
+
+  {
+    news.length > 0 && (
+      <section class="container-page py-12" aria-labelledby="news-heading">
+        <h2 id="news-heading">{t(lang, 'home.newsHeading')}</h2>
+        <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" role="list">
+          {news.map((entry) => (
+            <li><EntryCard lang={lang} section="news" entry={entry} headingLevel="h3" /></li>
+          ))}
+        </ul>
+        <p class="mt-6"><a href={routes.news[lang]}>{t(lang, 'home.allNews')}</a></p>
+      </section>
+    )
+  }
+</Base>

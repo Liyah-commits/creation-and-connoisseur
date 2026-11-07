@@ -1,0 +1,10 @@
+# pnpm settings (pnpm 10 reads these from this file).
+
+# Hold back any package version published less than 7 days ago (10080 minutes).
+# A compromised release is usually caught and pulled within days. See D7.
+minimumReleaseAge: 10080
+
+# pnpm 10 blocks dependency install scripts by default. Allow only these.
+onlyBuiltDependencies:
+  - esbuild
+  - sharp

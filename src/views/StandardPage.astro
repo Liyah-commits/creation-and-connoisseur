@@ -1,0 +1,29 @@
+---
+/**
+ * A fixed page with no special parts: title, introduction and main text from
+ * the CMS. Used for Get Help, the accessibility statement and the privacy policy.
+ * Other views wrap it and add their own sections through the slot.
+ */
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import { alternatesFor, type Lang, type RouteKey } from '../i18n/routes';
+import { getPage } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+  pageKey: RouteKey;
+}
+const { lang, pageKey } = Astro.props;
+const page = await getPage(lang, pageKey);
+---
+
+<Base lang={lang} title={page.data.title} description={page.data.metaDescription} alternates={alternatesFor(pageKey)} isHome={pageKey === 'home'}>
+  <PageHeader title={page.data.title} intro={page.data.intro}>
+    <slot name="header" />
+  </PageHeader>
+  <div class="container-page py-10 md:py-14">
+    <Prose entry={page} />
+    <slot />
+  </div>
+</Base>

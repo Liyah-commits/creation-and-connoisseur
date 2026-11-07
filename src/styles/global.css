@@ -1,0 +1,272 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens. Tailwind's default palette is switched off (--color-*: initial)
+ * so only these colors can be used, and every pair the site uses is listed and
+ * checked by scripts/contrast.mjs. Ratios are recorded in docs/DECISIONS.md.
+ */
+@theme {
+  --color-*: initial;
+  --color-cream: #fff8ee;
+  --color-white: #ffffff;
+  --color-ink: #2b1d16;
+  --color-ink-muted: #5e4a3e;
+  --color-tomato: #b23a1e;
+  --color-tomato-dark: #8f2c14;
+  --color-herb: #2e5e3e;
+  --color-saffron: #f2b544;
+  --color-focus: #1a4fbf;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-*: initial;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif;
+  --font-serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Cambria, 'Times New Roman', serif;
+
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.0625rem;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  /* Links are always underlined, so they never rely on color alone (WCAG 1.4.1). */
+  a {
+    color: var(--color-tomato-dark);
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  a:hover {
+    text-decoration-thickness: 3px;
+  }
+
+  /*
+   * Focus indicator: a 3px outline with a 3px gap, in focus blue on light
+   * surfaces (6.83:1 on cream, 7.21:1 on white) and saffron on dark ones
+   * (8.89:1 on ink). Shown for keyboard focus on every interactive element.
+   */
+  :focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+  }
+
+  .surface-dark :focus-visible {
+    outline-color: var(--color-saffron);
+  }
+
+  /* The main landmark receives focus from the skip link; it is not a control, so no ring. */
+  main:focus {
+    outline: none;
+  }
+
+  ::selection {
+    background-color: var(--color-saffron);
+    color: var(--color-ink);
+  }
+
+  /* Motion only for people who have not asked for less of it. */
+  @media (prefers-reduced-motion: no-preference) {
+    html:focus-within {
+      scroll-behavior: smooth;
+    }
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 48rem) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* The skip link: hidden until focused, then the first thing on screen. */
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 0.75rem;
+    z-index: 50;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-ink);
+    color: var(--color-cream);
+    font-weight: 700;
+    border-radius: 0.375rem;
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus {
+    transform: none;
+  }
+
+  /* Buttons and button-styled links: at least 44 by 44 CSS pixels. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    min-width: 2.75rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.375rem;
+    border: 2px solid transparent;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background-color: var(--color-tomato);
+    color: var(--color-white);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-tomato-dark);
+    text-decoration: underline;
+  }
+
+  .btn-secondary {
+    background-color: var(--color-white);
+    color: var(--color-ink);
+    border-color: var(--color-ink);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-cream);
+    text-decoration: underline;
+  }
+
+  /* An unavailable button: still focusable and announced as unavailable (aria-disabled). */
+  .btn[aria-disabled='true'] {
+    background-color: var(--color-white);
+    color: var(--color-ink-muted);
+    border-color: var(--color-ink-muted);
+    border-style: dashed;
+    cursor: not-allowed;
+    text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .btn {
+      transition: background-color 150ms ease;
+    }
+  }
+
+  /* Decorative placeholder used where a photo is still missing. Always aria-hidden. */
+  .placeholder-pattern {
+    background-color: var(--color-cream);
+    background-image:
+      radial-gradient(circle at 25% 25%, var(--color-saffron) 0 14%, transparent 15%),
+      radial-gradient(circle at 75% 75%, var(--color-saffron) 0 14%, transparent 15%),
+      linear-gradient(135deg, transparent 46%, rgb(178 58 30 / 0.18) 47% 53%, transparent 54%);
+    background-size: 2.5rem 2.5rem;
+  }
+
+  /* Text from the CMS (Markdown). Headings in it are h2 and h3 only. */
+  .prose {
+    max-width: 68ch;
+  }
+
+  .prose > * + * {
+    margin-top: 1em;
+  }
+
+  .prose > :first-child {
+    margin-top: 0;
+  }
+
+  .prose h2 {
+    margin-top: 2em;
+  }
+
+  .prose h3 {
+    margin-top: 1.5em;
+  }
+
+  .prose h2 + *,
+  .prose h3 + * {
+    margin-top: 0.5em;
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: 1.5em;
+  }
+
+  .prose ul {
+    list-style: disc;
+  }
+
+  .prose ol {
+    list-style: decimal;
+  }
+
+  .prose li + li {
+    margin-top: 0.4em;
+  }
+
+  .prose blockquote {
+    border-left: 4px solid var(--color-herb);
+    padding-left: 1em;
+    font-style: italic;
+  }
+
+  .prose strong {
+    font-weight: 700;
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    line-height: 1.55;
+    max-width: 60ch;
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "creation-and-connoisseur",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Bilingual (English and Spanish) website for Creation and Connoisseur, built with Astro and Keystatic.",
+  "packageManager": "pnpm@10.34.9",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "build:test": "SITE_URL=http://localhost:4321 SHOW_DRAFTS=false astro build",
+    "build:templates": "SITE_URL=http://localhost:4321 SHOW_DRAFTS=true astro build",
+    "serve": "node scripts/serve-static.mjs",
+    "check": "astro check",
+    "images": "node scripts/make-images.mjs",
+    "test:contrast": "node scripts/contrast.mjs",
+    "test:e2e": "playwright test",
+    "test:pa11y": "node scripts/with-server.mjs pa11y-ci --config .pa11yci.cjs",
+    "test:links": "node scripts/with-server.mjs node scripts/check-links.mjs",
+    "test:lhci": "lhci autorun --config=lighthouserc.cjs",
+    "test": "pnpm test:contrast && pnpm test:e2e && pnpm test:pa11y && pnpm test:links && pnpm test:lhci",
+    "test:production": "pnpm build:test && BUILD_NAME=production pnpm test",
+    "test:templates": "pnpm build:templates && BUILD_NAME=templates pnpm test",
+    "test:all": "pnpm check && pnpm test:production && pnpm test:templates"
+  },
+  "dependencies": {
+    "@astrojs/react": "^7.1.2",
+    "@astrojs/vercel": "^11.0.17",
+    "@keystatic/astro": "^6.0.0",
+    "@keystatic/core": "^0.6.9",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.4.4",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@axe-core/playwright": "^4.14.0",
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "linkinator": "^8.1.0",
+    "pa11y-ci": "^5.0.0",
+    "playwright": "^1.64.1",
+    "typescript": "~5.9.3"
+  }
+}

@@ -1,0 +1,92 @@
+---
+/**
+ * The page shell: <head> metadata, header, main landmark and footer.
+ * Every page on the site uses it.
+ */
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { htmlLang, langs, ogLocale, otherLang, type Alternates, type Lang } from '../i18n/routes';
+import { getSettings } from '../lib/content';
+import { SITE_NAME, absoluteUrl, documentTitle, jsonLdString, organizationJsonLd } from '../lib/seo';
+
+interface Props {
+  lang: Lang;
+  /** The page's own title: the same text as its h1. */
+  title: string;
+  description: string;
+  /** Where the language switch goes: this page in each language. */
+  alternates: Alternates;
+  /** False when the page has no translation, so no hreflang pair is claimed. */
+  translated?: boolean;
+  isHome?: boolean;
+  noindex?: boolean;
+  ogType?: 'website' | 'article';
+  /** An absolute or root-relative image for social sharing. Defaults to the typographic card. */
+  ogImage?: string;
+  ogImageAlt?: string;
+}
+
+const {
+  lang,
+  title,
+  description,
+  alternates,
+  translated = true,
+  isHome = false,
+  noindex = false,
+  ogType = 'website',
+  ogImage = '/og-image.png',
+  ogImageAlt = SITE_NAME,
+} = Astro.props;
+
+const settings = await getSettings();
+const site = Astro.site;
+const canonical = absoluteUrl(alternates[lang], site);
+const fullTitle = documentTitle(title, isHome);
+const imageUrl = absoluteUrl(ogImage, site);
+const jsonLd = isHome ? organizationJsonLd(settings, lang, site) : null;
+---
+
+<!doctype html>
+<html lang={htmlLang[lang]} dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {!noindex && <link rel="canonical" href={canonical} />}
+    {
+      !noindex && translated &&
+        langs.map((code) => <link rel="alternate" hreflang={htmlLang[code]} href={absoluteUrl(alternates[code], site)} />)
+    }
+    {!noindex && translated && <link rel="alternate" hreflang="x-default" href={absoluteUrl(alternates.en, site)} />}
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale[lang]} />
+    {translated && <meta property="og:locale:alternate" content={ogLocale[otherLang(lang)]} />}
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#fff8ee" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    {jsonLd && <script type="application/ld+json" set:html={jsonLdString(jsonLd)} />}
+  </head>
+  <body>
+    <Header lang={lang} alternates={alternates} />
+    <main id="main" tabindex="-1" class="flex-1">
+      <slot />
+    </main>
+    <Footer lang={lang} settings={settings} />
+  </body>
+</html>

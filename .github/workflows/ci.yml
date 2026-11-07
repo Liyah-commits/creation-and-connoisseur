@@ -1,0 +1,79 @@
+# Accessibility, quality and link checks on every pull request and every push to main.
+#
+# Runs the full suite twice, once per build:
+#   production - the real content only, exactly what ships (empty states included)
+#   templates  - adds the draft example entries, so the program and news
+#                templates are tested before any real ones exist
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test (${{ matrix.build }} build)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        build: [production, templates]
+    env:
+      BUILD_NAME: ${{ matrix.build }}
+      # pa11y and Lighthouse use Playwright's Chromium; Puppeteer must not download its own.
+      PUPPETEER_SKIP_DOWNLOAD: 'true'
+    steps:
+      - uses: actions/checkout@v5
+
+      # Reads the pnpm version from package.json "packageManager".
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Install Chromium for Playwright, pa11y and Lighthouse
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Type check
+        run: pnpm check
+
+      - name: Contrast check
+        run: pnpm test:contrast
+
+      - name: Build (${{ matrix.build }})
+        run: pnpm build:${{ matrix.build == 'production' && 'test' || 'templates' }}
+
+      - name: axe and behavior tests (Playwright)
+        run: pnpm test:e2e
+
+      - name: pa11y-ci (axe and HTML_CodeSniffer, WCAG2AA)
+        run: pnpm test:pa11y
+
+      - name: Broken link check (linkinator)
+        run: pnpm test:links
+
+      - name: Lighthouse CI
+        run: pnpm test:lhci
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports-${{ matrix.build }}
+          path: |
+            reports/
+            test-results/
+          retention-days: 30

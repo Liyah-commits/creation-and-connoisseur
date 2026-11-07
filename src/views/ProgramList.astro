@@ -1,0 +1,8 @@
+---
+import EntryList from './EntryList.astro';
+import type { Lang } from '../i18n/routes';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+
+<EntryList lang={lang} section="programs" />

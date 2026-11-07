@@ -1,0 +1,39 @@
+---
+/**
+ * A program or news post in a list. The whole card is not a link: only the
+ * heading is, so screen reader users hear a short link name.
+ */
+import { Picture } from 'astro:assets';
+import { entryPath, type Lang } from '../i18n/routes';
+import { formatDate, t } from '../i18n/ui';
+import type { NewsEntry, ProgramEntry, Section } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+  section: Section;
+  entry: ProgramEntry | NewsEntry;
+  headingLevel?: 'h2' | 'h3';
+}
+const { lang, section, entry, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
+const image = entry.data.image.discriminant ? entry.data.image.value : null;
+const date = 'date' in entry.data ? entry.data.date : null;
+---
+
+<article class="flex h-full flex-col overflow-hidden rounded-lg border border-ink/15 bg-white">
+  {
+    image ? (
+      <Picture src={image.image} alt={image.alt} widths={[400, 800]} sizes="(min-width: 64rem) 22rem, (min-width: 40rem) 45vw, 100vw" formats={['avif', 'webp']} class="aspect-[3/2] w-full object-cover" />
+    ) : (
+      <div class="placeholder-pattern aspect-[3/2] w-full" aria-hidden="true" />
+    )
+  }
+  <div class="flex flex-1 flex-col gap-2 p-5">
+    <Heading class="text-xl">
+      <a href={entryPath(section, lang, entry.id)} class="text-ink">{entry.data.title}</a>
+    </Heading>
+    {date && <p class="text-sm text-ink-muted"><time datetime={date.toISOString().slice(0, 10)}>{formatDate(lang, date)}</time></p>}
+    <p>{entry.data.summary}</p>
+    {entry.data.draft && <p class="mt-auto inline-block self-start rounded bg-saffron px-2 py-0.5 text-sm font-semibold text-ink">{t(lang, 'draft.badge')}</p>}
+  </div>
+</article>

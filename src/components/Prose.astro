@@ -1,0 +1,21 @@
+---
+/** Renders the Markdown body of a content entry. Renders nothing when the body is empty. */
+import { render } from 'astro:content';
+import { hasBody, type NewsEntry, type PageEntry, type ProgramEntry } from '../lib/content';
+
+interface Props {
+  entry: PageEntry | ProgramEntry | NewsEntry;
+  class?: string;
+}
+const { entry, class: className } = Astro.props;
+const show = hasBody(entry);
+const { Content } = show ? await render(entry) : { Content: null };
+---
+
+{
+  Content && (
+    <div class:list={['prose', className]}>
+      <Content />
+    </div>
+  )
+}

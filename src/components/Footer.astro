@@ -1,0 +1,103 @@
+---
+/**
+ * Site footer: the organization line (with the EIN once supplied), contact
+ * details that have been supplied, social links if any, and the links to the
+ * accessibility statement and privacy policy. Empty fields render nothing.
+ */
+import { routes, type Lang } from '../i18n/routes';
+import { t } from '../i18n/ui';
+import type { Settings } from '../lib/content';
+import { SITE_NAME } from '../lib/seo';
+
+interface Props {
+  lang: Lang;
+  settings: Settings;
+}
+
+const { lang, settings } = Astro.props;
+const year = new Date().getFullYear();
+const addressLines = settings.mailingAddress.split('\n').map((line) => line.trim()).filter(Boolean);
+---
+
+<footer class="surface-dark mt-16 bg-ink text-cream" aria-label={t(lang, 'footer.label')}>
+  <div class="container-page grid gap-10 py-12 md:grid-cols-3">
+    <div>
+      <p class="font-serif text-2xl font-bold text-cream">{SITE_NAME}</p>
+      <p class="mt-3">{t(lang, 'footer.nonprofit')}</p>
+      {settings.ein && <p class="mt-2">{t(lang, 'footer.ein')}: {settings.ein}</p>}
+    </div>
+
+    <div>
+      <h2 class="font-serif text-xl font-bold text-cream">{t(lang, 'footer.contactHeading')}</h2>
+      <ul class="mt-3 space-y-2" role="list">
+        <li><a href={routes.contact[lang]} class="footer-link">{t(lang, 'footer.contactForm')}</a></li>
+        {
+          settings.email && (
+            <li>
+              <span class="sr-only">{t(lang, 'contact.email')}: </span>
+              <a href={`mailto:${settings.email}`} class="footer-link">{settings.email}</a>
+            </li>
+          )
+        }
+        {
+          settings.phone && (
+            <li>
+              <span class="sr-only">{t(lang, 'contact.phone')}: </span>
+              <a href={`tel:${settings.phone.replace(/[^\d+]/g, '')}`} class="footer-link">{settings.phone}</a>
+            </li>
+          )
+        }
+        {
+          addressLines.length > 0 && (
+            <li>
+              <span class="sr-only">{t(lang, 'contact.address')}: </span>
+              <address class="not-italic">
+                {addressLines.map((line, i) => (
+                  <>
+                    {line}
+                    {i < addressLines.length - 1 && <br />}
+                  </>
+                ))}
+              </address>
+            </li>
+          )
+        }
+      </ul>
+
+      {
+        settings.socialLinks.length > 0 && (
+          <>
+            <h2 class="mt-8 font-serif text-xl font-bold text-cream">{t(lang, 'footer.socialHeading')}</h2>
+            <ul class="mt-3 space-y-2" role="list">
+              {settings.socialLinks.map((link) => (
+                <li>
+                  <a href={link.url} class="footer-link" rel="me noopener">{link.label}</a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+    </div>
+
+    <div>
+      <h2 class="font-serif text-xl font-bold text-cream">{t(lang, 'footer.siteHeading')}</h2>
+      <ul class="mt-3 space-y-2" role="list">
+        <li><a href={routes.accessibility[lang]} class="footer-link">{t(lang, 'nav.accessibility')}</a></li>
+        <li><a href={routes.privacy[lang]} class="footer-link">{t(lang, 'nav.privacy')}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-cream/20">
+    <p class="container-page py-5 text-sm">© {year} {SITE_NAME}. {t(lang, 'footer.copyright')}</p>
+  </div>
+</footer>
+
+<style>
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.5rem;
+    color: var(--color-saffron);
+  }
+</style>
