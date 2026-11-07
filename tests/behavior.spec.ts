@@ -42,6 +42,36 @@ test.describe('every page', () => {
       expect(overflow, 'page is wider than the viewport').toBeLessThanOrEqual(0);
     });
 
+    test(`text spacing (WCAG 1.4.12) loses nothing: ${path}`, async ({ page }) => {
+      // The WCAG 1.4.12 test values: line height 1.5, paragraph spacing 2em, letter spacing 0.12em, word spacing 0.16em.
+      for (const viewport of Object.values(VIEWPORTS)) {
+        await page.setViewportSize(viewport);
+        await page.goto(path);
+        await page.addStyleTag({
+          content: '* { line-height: 1.5 !important; letter-spacing: 0.12em !important; word-spacing: 0.16em !important; } p { margin-bottom: 2em !important; }',
+        });
+        const result = await page.evaluate(() => {
+          const root = document.documentElement;
+          const clipped = [...document.querySelectorAll<HTMLElement>('body *')].filter((el) => {
+            const style = getComputedStyle(el);
+            const hides = ['hidden', 'clip'].includes(style.overflowX) || ['hidden', 'clip'].includes(style.overflowY);
+            return hides && el.offsetParent !== null && !el.matches('.sr-only, .skip-link') && (el.scrollWidth > el.clientWidth + 1 || el.scrollHeight > el.clientHeight + 1);
+          });
+          return { overflow: root.scrollWidth - root.clientWidth, clipped: clipped.map((el) => el.outerHTML.slice(0, 80)) };
+        });
+        expect(result.overflow, `horizontal overflow at ${viewport.width}px`).toBeLessThanOrEqual(0);
+        expect(result.clipped, `clipped content at ${viewport.width}px`).toEqual([]);
+      }
+    });
+
+    test(`text resized to 200% (WCAG 1.4.4) still fits: ${path}`, async ({ page }) => {
+      await page.setViewportSize(VIEWPORTS.desktop);
+      await page.goto(path);
+      await page.addStyleTag({ content: 'html { font-size: 200% !important; }' });
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      expect(overflow, 'page is wider than the viewport').toBeLessThanOrEqual(0);
+    });
+
     test(`metadata: ${path}`, async ({ page }) => {
       await page.goto(path);
       const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
@@ -161,20 +191,52 @@ test.describe('targets and focus', () => {
     }
   });
 
-  test('focus is visible: every focusable element in the header gets an outline', async ({ page }) => {
-    await page.setViewportSize(VIEWPORTS.desktop);
-    await page.goto('/');
-    for (let i = 0; i < 10; i++) {
-      await page.keyboard.press('Tab');
-      const outline = await page.evaluate(() => {
-        const el = document.activeElement as HTMLElement;
-        const style = getComputedStyle(el);
-        return { tag: el.tagName, width: parseFloat(style.outlineWidth), style: style.outlineStyle };
-      });
-      expect(outline.style, `${outline.tag} outline style`).not.toBe('none');
-      expect(outline.width, `${outline.tag} outline width`).toBeGreaterThanOrEqual(2);
-    }
-  });
+  for (const path of ['/', '/es/contacto/', '/volunteer/', '/about/']) {
+    test(`keyboard walk of ${path}: every stop has a visible, unobscured focus indicator`, async ({ page }) => {
+      for (const viewport of Object.values(VIEWPORTS)) {
+        await page.setViewportSize(viewport);
+        await page.goto(path);
+        // Open the menu on small screens so its links are part of the walk.
+        if (await page.locator('[data-menu-button]').isVisible()) {
+          await page.locator('[data-menu-button]').click();
+          await page.locator('body').click({ position: { x: 1, y: 1 } });
+        }
+        const seen: string[] = [];
+        for (let i = 0; i < 80; i++) {
+          await page.keyboard.press('Tab');
+          const info = await page.evaluate(() => {
+            const el = document.activeElement as HTMLElement | null;
+            if (!el || el === document.body) return null;
+            const style = getComputedStyle(el);
+            const rect = el.getBoundingClientRect();
+            // What is drawn at the centre of the element's first line box? It must be the element itself (not covered).
+            // (The first line box, not the bounding box, so a link that wraps onto two lines is measured on its text.)
+            const box = el.getClientRects()[0] ?? rect;
+            const hit = document.elementFromPoint(box.left + box.width / 2, box.top + box.height / 2);
+            return {
+              key: `${el.tagName}#${el.id}.${el.className}:${el.textContent?.trim().slice(0, 30)}`,
+              outlineStyle: style.outlineStyle,
+              outlineWidth: parseFloat(style.outlineWidth),
+              outlineColor: style.outlineColor,
+              inFooter: Boolean(el.closest('footer')),
+              inViewport: rect.bottom > 0 && rect.top < window.innerHeight && rect.right > 0 && rect.left < window.innerWidth,
+              covered: hit !== null && hit !== el && !el.contains(hit),
+            };
+          });
+          if (!info) break;
+          if (seen.includes(info.key)) break; // wrapped around
+          seen.push(info.key);
+          expect(info.outlineStyle, `${info.key} outline`).not.toBe('none');
+          expect(info.outlineWidth, `${info.key} outline width`).toBeGreaterThanOrEqual(2);
+          expect(info.inViewport, `${info.key} scrolled into view`).toBe(true);
+          expect(info.covered, `${info.key} not covered by other content`).toBe(false);
+          // Saffron ring (8.89:1) on the dark footer, focus blue (6.83:1 or more) elsewhere.
+          expect(info.outlineColor, `${info.key} ring color`).toBe(info.inFooter ? 'rgb(242, 181, 68)' : 'rgb(26, 79, 191)');
+        }
+        expect(seen.length, 'number of focus stops').toBeGreaterThan(8);
+      }
+    });
+  }
 });
 
 test('404 returns status 404 and is bilingual', async ({ page }) => {

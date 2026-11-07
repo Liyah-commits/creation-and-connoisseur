@@ -103,13 +103,6 @@
     color: var(--color-ink);
   }
 
-  /* Motion only for people who have not asked for less of it. */
-  @media (prefers-reduced-motion: no-preference) {
-    html:focus-within {
-      scroll-behavior: smooth;
-    }
-  }
-
   [hidden] {
     display: none !important;
   }

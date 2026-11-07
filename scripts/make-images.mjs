@@ -61,10 +61,13 @@ try {
 <div style="width:${width}px;height:${height}px;display:flex;align-items:center;justify-content:center;background-color:${colors.cream};background-image:radial-gradient(circle at 25% 25%, ${colors.saffron} 0 14%, transparent 15%),radial-gradient(circle at 75% 75%, ${colors.saffron} 0 14%, transparent 15%);background-size:80px 80px">
   <div style="background:${colors.ink};color:${colors.cream};font:700 ${Math.round(width / 18)}px ${serif};padding:0.4em 0.8em;border-radius:12px;text-align:center">${label}</div>
 </div></body></html>`;
-  await mkdir('content/images/programs/example-program', { recursive: true });
-  await mkdir('content/images/people/example-person-with-photo', { recursive: true });
-  await writeFile('content/images/programs/example-program/image.png', await render(example('Example image', 1200, 800), 1200, 800));
-  await writeFile('content/images/people/example-person-with-photo/image.png', await render(example('Example', 600, 600), 600, 600));
+  // Paths follow the layout Keystatic itself uses: <directory>/<slug>/<field path>/image.png
+  const programImage = 'content/images/programs/en/example-program/image/value';
+  const personImage = 'content/images/people/example-person-with-photo/photo/value';
+  await mkdir(programImage, { recursive: true });
+  await mkdir(personImage, { recursive: true });
+  await writeFile(`${programImage}/image.png`, await render(example('Example image', 1200, 800), 1200, 800));
+  await writeFile(`${personImage}/image.png`, await render(example('Example', 600, 600), 600, 600));
   console.log('Wrote example images in content/images/ (used only by draft example entries)');
 } finally {
   await browser.close();

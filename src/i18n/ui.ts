@@ -20,7 +20,7 @@ export const ui = {
   'nav.label': { en: 'Main', es: 'Principal' },
   'nav.menu': { en: 'Menu', es: 'Menú' },
   'nav.home': { en: 'Home', es: 'Inicio' },
-  'nav.about': { en: 'About', es: 'Acerca de' },
+  'nav.about': { en: 'About', es: 'Quiénes somos' },
   'nav.programs': { en: 'Programs', es: 'Programas' },
   'nav.getHelp': { en: 'Get help', es: 'Obtener ayuda' },
   'nav.volunteer': { en: 'Volunteer', es: 'Voluntariado' },

@@ -61,6 +61,7 @@ const optionalImageField = (folder: string, publicPath: string) =>
         image: fields.image({
           label: 'Image',
           description: 'A JPG or PNG photo, at least 1200 pixels wide. Only use photos you have permission to use.',
+          // Each language has its own folder, so an English and a Spanish entry with the same web address can't overwrite each other's images.
           directory: `content/images/${folder}`,
           publicPath,
           validation: { isRequired: true },
@@ -179,7 +180,7 @@ const programsCollection = (lang: 'en' | 'es') =>
         label: 'Where',
         description: 'The place, in plain words, with a building and room if there is one. Leave empty if it does not apply.',
       }),
-      image: optionalImageField('programs', '../../images/programs/'),
+      image: optionalImageField(`programs/${lang}`, `../../images/programs/${lang}/`),
       body: bodyField(),
     },
   });
@@ -223,7 +224,7 @@ const newsCollection = (lang: 'en' | 'es') =>
         validation: { isRequired: true },
       }),
       summary: summaryField('post'),
-      image: optionalImageField('news', '../../images/news/'),
+      image: optionalImageField(`news/${lang}`, `../../images/news/${lang}/`),
       body: bodyField(),
     },
   });

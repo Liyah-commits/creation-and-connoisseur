@@ -131,7 +131,7 @@ A running record of every choice made in the rebuild and why. Newest entries go 
 - On small screens the navigation is a disclosure (`aria-expanded`, `aria-controls`). Escape closes it and returns focus to the button, and there's no focus trap. It's progressively enhanced: without JavaScript there's no button and the links are simply shown. An inline script adds a `js` class before first paint, so the menu doesn't flash open.
 - Buttons, navigation links and the language switch are at least 44px tall; every target is at least 24px.
 - Links are underlined everywhere, so they never rely on color.
-- Transitions and smooth scrolling run only under `prefers-reduced-motion: no-preference`.
+- Button color transitions run only under `prefers-reduced-motion: no-preference`. There is no smooth scrolling: it was removed in Phase 3 because it only animated the skip-link jump and delayed focused elements coming into view.
 - The language switch says "Español" (or "English") in that language, with `lang` and `hreflang` set, and a visually hidden "Ver esta página en español" so its purpose is clear to screen reader users.
 - Missing photos get a decorative CSS pattern (`aria-hidden`). No stock photos.
 
@@ -188,3 +188,19 @@ A running record of every choice made in the rebuild and why. Newest entries go 
 **D29. The English and Spanish home pages have different browser titles.** Both pages' h1 is the organization's name. The browser title adds a short description in the page's language ("Creation and Connoisseur | Nonprofit focused on food insecurity at UNLV"), because the brief asks for unique titles per page per language. A test now checks that every title and every meta description on the site is unique.
 
 **D30. The test server survives abandoned requests.** Fast test runs sometimes close a page while a file is still being sent. The first version of `scripts/serve-static.mjs` crashed on that, which failed the rest of the run. It now checks the connection before writing and catches the error.
+
+## Phase 3: findings and fixes
+
+**D31. The editor workflow was tested end to end in the real admin.** On 6 November 2026 a script drove the Keystatic admin in `pnpm dev`. It created a program, ticked "Add an image", uploaded a file and tried to save without a description. Keystatic refused ("Image description (alt text) must not be empty"). With a description it saved, and the new entry then built and rendered in Astro. That confirmed three things the guides rely on: alt text can't be skipped, Keystatic's files match Astro's schema, and its image path (`content/images/<collection>/<slug>/image/value/image.png`) resolves.
+- **Fix that came out of it:** English and Spanish programs (and news posts) shared one image folder keyed by the web address, so an English and a Spanish entry with the same address would have overwritten each other's images. Each language now has its own folder (`content/images/programs/en/`, `.../es/`). The example images moved to Keystatic's real folder layout.
+
+**D32. More automated checks for what rule engines can't see.**
+- **Text spacing (WCAG 1.4.12):** every page, at both widths, with the WCAG test values (line height 1.5, paragraph spacing 2em, letter spacing 0.12em, word spacing 0.16em). Pass condition: no horizontal overflow and no clipped content.
+- **Text resized to 200% (WCAG 1.4.4):** every page at 1280px with the root font size doubled. Pass condition: no horizontal overflow.
+- **Full keyboard walk (WCAG 2.1.1, 2.4.3, 2.4.7, 2.4.11):** four representative pages (home, Spanish contact form, volunteer form, About), at both widths with the mobile menu open. Every focus stop must have an outline at least 2px wide, be scrolled into view, not be covered by other content, and use the right ring color (saffron in the footer, blue elsewhere).
+
+**D33. Smooth scrolling removed.** It only animated the skip-link jump, and the keyboard walk showed focused elements arriving in view late while it ran. Less motion is the better default.
+
+**D34. Windows High Contrast (forced colors) checked.** Screenshots in Chromium with `forced-colors: active` showed buttons keeping a visible border (the transparent border becomes a system-color border), focus rings in the system highlight color, the unavailable Donate button keeping its dashed border, and form errors still readable as text. No change was needed. Aryah's manual passes should repeat this on Windows (`docs/ACCESSIBILITY_TEST_REPORT.md`).
+
+**D35. Spanish About page: "Quiénes somos".** The navigation label "Acerca de" read as unfinished on its own. "Quiénes somos" is the usual Latin American label for an About page, and the page title now matches it (consistent identification, WCAG 3.2.4). The address stays `/es/acerca-de/`, so no link changes.

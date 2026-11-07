@@ -1,6 +1,6 @@
 ---
 internalName: about
-title: Acerca de nosotros
+title: Quiénes somos
 metaDescription: >-
   Conoce Creation and Connoisseur, organización sin fines de lucro 501(c)(3)
   enfocada en la inseguridad alimentaria en UNLV y dirigida por Aryah Certain.

@@ -11,7 +11,7 @@ bioEs: >-
 photo:
   discriminant: true
   value:
-    image: ../images/people/example-person-with-photo/image.png
+    image: ../images/people/example-person-with-photo/photo/value/image.png
     altEn: 'Example photo: the word "Example" on a pattern of yellow dots.'
     altEs: 'Foto de ejemplo: la palabra "Example" sobre un patrón de puntos amarillos.'
 order: 10
