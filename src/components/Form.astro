@@ -1,6 +1,6 @@
 ---
 /**
- * The Contact and Volunteer forms.
+ * The Contact, Volunteer and Get Help forms.
  *
  * Accessible by design (WCAG 1.3.1, 1.3.5, 3.3.1, 3.3.2, 4.1.3):
  * - every field has a visible label, and required fields say "(required)" in text;
@@ -25,7 +25,7 @@ import { t, type UIKey } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
-  kind: 'contact' | 'volunteer';
+  kind: 'contact' | 'volunteer' | 'help';
 }
 const { lang, kind } = Astro.props;
 
@@ -41,27 +41,35 @@ type Field = {
   rows?: number;
 };
 
-const fields: Field[] =
-  kind === 'contact'
-    ? [
-        { name: 'name', label: 'form.name', type: 'text', required: true, autocomplete: 'name', missing: 'form.errorNameMissing' },
-        { name: 'email', label: 'form.email', type: 'email', required: true, autocomplete: 'email', hint: 'form.emailHint', missing: 'form.errorEmailMissing' },
-        { name: 'message', label: 'form.message', type: 'textarea', required: true, missing: 'form.errorMessageMissing', rows: 7 },
-      ]
-    : [
-        { name: 'name', label: 'form.name', type: 'text', required: true, autocomplete: 'name', missing: 'form.errorNameMissing' },
-        { name: 'email', label: 'form.email', type: 'email', required: true, autocomplete: 'email', hint: 'form.emailHint', missing: 'form.errorEmailMissing' },
-        { name: 'phone', label: 'form.phone', type: 'tel', required: false, autocomplete: 'tel' },
-        { name: 'interests', label: 'form.interests', type: 'textarea', required: true, hint: 'form.interestsHint', missing: 'form.errorInterestsMissing', rows: 5 },
-        { name: 'availability', label: 'form.availability', type: 'textarea', required: false, hint: 'form.availabilityHint', rows: 3 },
-      ];
+const name: Field = { name: 'name', label: 'form.name', type: 'text', required: true, autocomplete: 'name', missing: 'form.errorNameMissing' };
+const email: Field = { name: 'email', label: 'form.email', type: 'email', required: true, autocomplete: 'email', hint: 'form.emailHint', missing: 'form.errorEmailMissing' };
+const phone: Field = { name: 'phone', label: 'form.phone', type: 'tel', required: false, autocomplete: 'tel' };
+
+const fieldsByKind: Record<Props['kind'], Field[]> = {
+  contact: [name, email, { name: 'message', label: 'form.message', type: 'textarea', required: true, missing: 'form.errorMessageMissing', rows: 7 }],
+  help: [name, email, phone, { name: 'message', label: 'form.helpMessage', type: 'textarea', required: true, hint: 'form.helpMessageHint', missing: 'form.errorHelpMissing', rows: 6 }],
+  volunteer: [
+    name,
+    email,
+    phone,
+    { name: 'interests', label: 'form.interests', type: 'textarea', required: true, hint: 'form.interestsHint', missing: 'form.errorInterestsMissing', rows: 5 },
+    { name: 'availability', label: 'form.availability', type: 'textarea', required: false, hint: 'form.availabilityHint', rows: 3 },
+  ],
+};
+const fields = fieldsByKind[kind];
 
 const formId = FORMSPREE_FORM_ID?.trim();
 const connected = Boolean(formId);
-const action = connected ? `https://formspree.io/f/${encodeURIComponent(formId!)}` : routes[kind][lang];
+const routeKey = kind === 'help' ? 'getHelp' : kind;
+const action = connected ? `https://formspree.io/f/${encodeURIComponent(formId!)}` : routes[routeKey][lang];
 const id = (name: string) => `${kind}-${name}`;
-const subject = t(lang, kind === 'contact' ? 'form.subjectContact' : 'form.subjectVolunteer');
-const success = t(lang, kind === 'contact' ? 'form.successContact' : 'form.successVolunteer');
+const text = {
+  contact: { subject: 'form.subjectContact', success: 'form.successContact', submit: 'form.submitContact' },
+  volunteer: { subject: 'form.subjectVolunteer', success: 'form.successVolunteer', submit: 'form.submitVolunteer' },
+  help: { subject: 'form.subjectHelp', success: 'form.successHelp', submit: 'form.submitHelp' },
+} as const satisfies Record<Props['kind'], Record<string, UIKey>>;
+const subject = t(lang, text[kind].subject);
+const success = t(lang, text[kind].success);
 
 // Messages the script needs, in this page's language.
 const messages = {
@@ -136,7 +144,7 @@ const messages = {
 
     <div class="flex flex-wrap items-center gap-4">
       <button type="submit" class="btn btn-primary" data-submit>
-        {t(lang, kind === 'contact' ? 'form.submitContact' : 'form.submitVolunteer')}
+        {t(lang, text[kind].submit)}
       </button>
     </div>
 

@@ -17,10 +17,13 @@ export function absoluteUrl(path: string, site: URL | undefined): string {
 /**
  * "Page title | Creation and Connoisseur". The home page gets
  * "Creation and Connoisseur | <short description>" in its own language, so
- * the English and Spanish home pages don't share a title.
+ * the English and Spanish home pages don't share a title. Program and news
+ * pages add their section ("… | Programs | …", "… | Programas | …"), so an
+ * entry whose name is the same in both languages still gets a unique title.
  */
-export function documentTitle(title: string, isHome: boolean, lang: Lang): string {
+export function documentTitle(title: string, isHome: boolean, lang: Lang, section?: string): string {
   if (isHome) return `${SITE_NAME} | ${t(lang, 'site.homeTitleSuffix')}`;
+  if (section) return `${title} | ${section} | ${SITE_NAME}`;
   return `${title} | ${SITE_NAME}`;
 }
 

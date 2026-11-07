@@ -1,0 +1,15 @@
+---
+/** Get Help: the page text (resources available now), then the request form. */
+import StandardPage from './StandardPage.astro';
+import Form from '../components/Form.astro';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<StandardPage lang={lang} pageKey="getHelp">
+  <Form lang={lang} kind="help" />
+</StandardPage>

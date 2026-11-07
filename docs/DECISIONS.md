@@ -161,9 +161,12 @@ A running record of every choice made in the rebuild and why. Newest entries go 
 
 **D24. Share image and icons are typographic.** `public/og-image.png` (1200 by 630) shows the name as a wordmark, and the icons show "C&C" on tomato. No logo has been supplied, so none was invented. `pnpm images` (`scripts/make-images.mjs`) regenerates them from HTML in Playwright's Chromium. Replace them once real logo files exist (`docs/OPEN_ITEMS.md`).
 
-**D25. Spanish register and gender.**
-- Neutral US Latin American Spanish in the "tú" register throughout. To be confirmed by the Spanish reviewer (`docs/SPANISH_REVIEW.md`).
-- Where Spanish would otherwise force a gender, the copy uses a neutral phrasing: "Haz voluntariado" rather than "Hazte voluntario", and "Pertenece a Aryah Certain, quien también la dirige" for "owned and run by Aryah Certain".
+**D25. Spanish register and gender.** Revised 6 November 2026: usted replaces tú. Ruled by Aryah.
+- **Usted throughout.** The site was first written in neutral US Latin American Spanish in the tú register. It now uses usted everywhere: interface strings, form labels, hints, errors and success messages, button labels, and every page.
+- **Why:** Aryah's content batch (6 November 2026, D38) is written in usted, and a page can't mix the two registers. Usted also suits the wider audience the new content speaks to. Get Help and the planned pantry address families and neighborhoods, not only students, and usted is the conventional register for public-service information in US Spanish.
+- **How:** a find and replace of the tú forms (imperatives, *tu/tus*, *te*, verb endings), not a rewrite. A search of every Spanish file for tú forms came back clean. The 404 page had no tú forms, so it didn't change.
+- **Gender:** where Spanish would otherwise force a gender, the copy uses a neutral phrasing: "Haga voluntariado", "Pertenece a Aryah Certain, quien también la dirige", "Persona anfitriona de Noche Cultural", "la persona coordinadora de voluntarios". The exception is Aryah's title, "Fundadora y Presidenta", as supplied.
+- The Spanish reviewer still signs off every file (`docs/SPANISH_REVIEW.md`).
 
 ## Phase 2: pages, templates and forms
 
@@ -211,3 +214,30 @@ A running record of every choice made in the rebuild and why. Newest entries go 
 **D36. The test report doesn't claim conformance yet.** Every automated check passes with zero violations, but tools can't judge everything: whether descriptions make sense, how a screen reader sounds, real zoom behavior. The report marks those criteria "manual pending" and gives step-by-step passes (section 8). A WCAG 2.1 AA claim should be made after they're done, which is also what public-sector evaluators expect to see.
 
 **D37. Guides are written from the real screens.** Button names and messages in `docs/EDITOR_GUIDE.md` ("Add", "Create", "Save", "Choose file", the alt-text error) and the setup screen in `docs/ADMIN_GUIDE.md` ("Keystatic Setup", "Create GitHub App") were taken from the running admin during the build, not from memory.
+
+## Content batch (6 November 2026)
+
+**D38. Aryah's content batch is loaded, with three edits.**
+- **Source:** "Creation and Connoisseur: Website Content Batch (English and Spanish)", by Aryah, 6 November 2026, received as `~/Downloads/CONTENT_BATCH.md`. It isn't committed to the repo: it contains the text before the edits below, which shouldn't be published.
+- **What it changes:** D5 limited the site to four facts. The batch, written by Aryah, now supplies the mission, story, programs, volunteer roles, Get Help resources, privacy answers, the accessibility contact, the UNLV relationship wording, and Aryah's title and bio. Those are now facts the site states. Everything the batch says it can't supply (EIN, legal name, address, email, phone, donation link, social links, year founded, Formspree ID, domain, photos, board roster) still ships empty.
+- **Edit 1, the pantry:** every mention of the mobile food pantry, including the mission statement, describes it as planned and targeted for 2027, never as existing or committed. "Launching 2027", "In 2027 we take the next step", "we run monthly distributions" and "the launch of the mobile food pantry" became "planned for 2027", "Our next step is planned for 2027", "the plan is for monthly distributions" and "planning for a mobile food pantry". Every mention of Rotary and of partners was removed from the pantry text in both languages, so the pantry reads as Creation and Connoisseur's own plan. Mentions outside the pantry text stay as written: partner organizations in Biweekly Volunteering and the Service volunteer role, and "a Rotarian" and "partnerships" in Aryah's bio.
+- **Edit 2, the figures:** "more than 200" and "hundreds of" were removed. The text says "student members" with no number, in both languages.
+- **Edit 3, the register:** see D25.
+- **Kept as written:** "campus program" for the UNLV Food Tasting Club, and the accessibility statement's "manual testing… is in progress" paragraph (until the manual passes are complete).
+- **Drafts:** programs and Aryah's People entry are saved with **Hide from the live site** ticked. Pages and Site settings have no draft state in Keystatic. The new About story, Get Help, Volunteer, Privacy and Accessibility text, the mission and the UNLV statement are therefore in the production build now. Nothing has been deployed (D2), so none of it is public. Read it on a local build before the first deploy.
+- **Choices made while loading:**
+  - Programs need a required "Short summary" (shown in lists and search results). The batch has none, so each was written from the batch's own sentences, under 160 characters. "Who it is for" has no field, so it's a bold line in the main text.
+  - The batch gives Spanish role descriptions but not Spanish role names or commitments. Those were translated: "Voluntariado de servicio", "Persona anfitriona de Noche Cultural", "Equipo de eventos", "Equipo de la despensa (previsto para 2027)", "Voluntariado de habilidades profesionales".
+  - In the privacy policy, the bold run-in labels ("What we collect.") became headings, with the same words. That follows the editor guide's own rule and makes the policy navigable. The existing hosting paragraph (Vercel processes IP addresses) and the "last updated" date were kept, because the batch doesn't cover them.
+  - In the accessibility statement, the existing sentence saying `/keystatic` is out of scope, and the review date, were kept. The test report depends on the statement saying so.
+  - On Spanish pages, links to English-only sites are marked "(sitio en inglés)" or "(en inglés)", as elsewhere on the site.
+  - The short-form mission ("for social bios and the site tagline") wasn't loaded: the batch names no Keystatic location for it, and the site has no tagline field. Its wording also describes the pantry as existing, so it would need edit 1 before use.
+  - The forms' privacy line now matches the supplied policy: "We only use what you send us to reply to you and to run our programs."
+
+**D39. The UNLV relationship statement is a Site settings field, shown in the footer.** The batch puts it "wherever the disclaimer field sits", and there wasn't one. Site settings now has "Relationship to UNLV (English / Spanish)". When filled, it replaces the footer's general "501(c)(3) nonprofit" line on every page, since its first sentence says the same and more. The batch asks for the wording to be confirmed with UNLV Student Involvement before publishing (`docs/OPEN_ITEMS.md`, item 10).
+
+**D40. Get Help has a request form.** The batch's Get Help text says "Use the form below", and the page had no form. It now has a third form, built from the same component: name, email, phone (optional), and "What do you need?" with the batch's prompt as the hint ("Tell us what you need, how many people are in your household, and the best way to reach you."). It goes to the same Formspree form, with the subject "Get Help request". Email is required, as on the other forms. If people without email need to use it, the next step is to accept either an email or a phone number.
+
+**D41. The four Get Help resource links were verified on 6 November 2026.** Each was requested and its page title checked. Final addresses are used, so no link goes through a redirect. Three Square answers 200 even for pages that don't exist, so its page was confirmed by its title. The addresses are recorded in `docs/OPEN_ITEMS.md`, and the link checker requests them on every test run.
+
+**D42. Program and news pages put their section in the browser title.** "UNLV Food Tasting Club" is the club's name in both languages, so its English and Spanish pages had the same title, and the uniqueness test (D29) failed. Rather than change the name, entry pages are now titled "<name> | Programs | Creation and Connoisseur" (or "Programas", "News", "Noticias"). That keeps every title unique, and it also tells people which part of the site they're on.

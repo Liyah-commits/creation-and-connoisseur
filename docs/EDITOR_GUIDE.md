@@ -117,6 +117,7 @@ Choose **Site settings** (under Shared). Fill in a field only when the informati
 | Donation link | The Donate page button starts working (until then it reads "Donation link coming soon") |
 | Social media links | Footer |
 | Mission statement (English and Spanish) | About page |
+| Relationship to UNLV (English and Spanish) | Footer of every page, in place of the general nonprofit line. Change it only with wording confirmed by UNLV Student Involvement. |
 | Short description (English and Spanish) | Search results and social media previews |
 
 ## Add a person

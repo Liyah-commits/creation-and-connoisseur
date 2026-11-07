@@ -19,6 +19,11 @@ missionEn: >-
 missionEs: >-
   Declaración de misión de ejemplo, usada solo para probar la plantilla de la
   página Acerca de. No es la misión de la organización.
+unlvStatementEn: >-
+  Example relationship statement, used only to test the footer template.
+unlvStatementEs: >-
+  Declaración de relación de ejemplo, usada solo para probar la plantilla del pie
+  de página.
 descriptionEn: >-
   Creation and Connoisseur is a 501(c)(3) nonprofit focused on food insecurity
   at UNLV, owned and run by Aryah Certain.

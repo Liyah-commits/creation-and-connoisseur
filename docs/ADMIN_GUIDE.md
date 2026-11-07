@@ -101,9 +101,9 @@ Editors sign in with GitHub, and Keystatic saves their changes as commits. This 
 ### 4.5 Connect the forms (Formspree)
 
 1. Create a free account at `https://formspree.io` with the email address that should receive messages.
-2. Create one form. Both the Contact and Volunteer forms use it; the subject line says which form, and which language, each message came from.
+2. Create one form. The Contact, Volunteer and Get Help forms all use it; the subject line says which form, and which language, each message came from. Get Help requests arrive with the subject "Get Help request", and the site promises a reply within two business days.
 3. Copy the form ID: the part after `/f/` in the endpoint (`https://formspree.io/f/abcdwxyz` gives `abcdwxyz`).
-4. Add `FORMSPREE_FORM_ID` in Vercel and redeploy. The "not connected yet" notice disappears from both forms.
+4. Add `FORMSPREE_FORM_ID` in Vercel and redeploy. The "not connected yet" notice disappears from all three forms.
 5. Send a test message from each form, in each language, and confirm it arrives.
 6. Optional, in Formspree's form settings: restrict submissions to your domain.
 7. Update the privacy policy if anything about how messages are handled changes (`docs/OPEN_ITEMS.md`, item 18).
@@ -135,7 +135,7 @@ Set in Vercel (Project > Settings > Environment Variables) for Production and Pr
 | Variable | Needed | What it does |
 |---|---|---|
 | `SITE_URL` | Once the domain is known | The public address, like `https://example.org`. Until set, Vercel's production address is used. Never guessed. |
-| `FORMSPREE_FORM_ID` | To make the forms send | The Formspree form ID. Empty: the forms show a "not connected yet" notice. |
+| `FORMSPREE_FORM_ID` | To make the forms send | The Formspree form ID, shared by the Contact, Volunteer and Get Help forms. Empty: the forms show a "not connected yet" notice. |
 | `PUBLIC_KEYSTATIC_GITHUB_REPO` | For editing in production | `owner/name` of the repository |
 | `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | For editing in production | Written by Keystatic setup (section 4.4) |
 | `KEYSTATIC_GITHUB_CLIENT_ID` | For editing in production | Written by Keystatic setup. Secret. |

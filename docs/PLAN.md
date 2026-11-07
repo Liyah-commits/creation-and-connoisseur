@@ -28,6 +28,8 @@ The brief is the only source. These are the only organization facts the site may
 3. It focuses on food insecurity at UNLV.
 4. It is owned and run by Aryah Certain.
 
+Superseded on 6 November 2026: Aryah's content batch now supplies most of the remaining organization text (D38 in `docs/DECISIONS.md`).
+
 Everything else the site needs is a numbered entry in `docs/OPEN_ITEMS.md`. Each such field ships empty, and the template hides an empty section instead of showing filler. No mission wording, program, date, location, schedule, person, logo, photo, donation link, social link or EIN has been made up.
 
 ## 3. Stack

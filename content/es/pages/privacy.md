@@ -8,28 +8,28 @@ intro: >-
   Esta página explica qué información recopila este sitio web y qué pasa con
   ella.
 ---
-## Qué información recopilamos
+## Qué recopilamos
 
-Solo recopilamos lo que decides escribir en nuestro formulario de contacto o de voluntariado, como tu nombre, tu correo electrónico y tu mensaje.
+Cuando usa un formulario en este sitio, recibimos lo que usted escribe: normalmente su nombre, correo electrónico o número de teléfono, y su mensaje. No usamos cookies de rastreo ni herramientas publicitarias.
 
-Lo usamos solo para responderte. No lo vendemos.
+## Cómo lo usamos
 
-## Quién procesa los mensajes de los formularios
+Usamos su información solo para responderle y para operar nuestros programas. Si solicita alimentos, usamos lo que nos cuenta para organizar la ayuda. Nunca vendemos su información y nunca la compartimos con nadie fuera de la organización, excepto el servicio de formularios ([Formspree](https://formspree.io/legal/privacy-policy/), sitio en inglés) que nos entrega su mensaje.
 
-Nuestros formularios se envían a través de Formspree, un servicio de formularios. Cuando envías un formulario, Formspree recibe lo que escribiste y nos lo hace llegar. Puedes leer la [política de privacidad de Formspree](https://formspree.io/legal/privacy-policy/) (en inglés).
+## Cuánto tiempo la conservamos
 
-## Cookies y rastreo
+Los mensajes de los formularios se conservan durante 12 meses y luego se eliminan. Si desea que el suyo se elimine antes, escríbanos y lo haremos en un plazo de 10 días hábiles.
 
-Este sitio web no usa cookies, herramientas de análisis ni rastreadores publicitarios.
+## Quién puede verla
+
+Solo los miembros de nuestra junta directiva y la persona coordinadora de voluntarios pueden leer los mensajes de los formularios.
 
 ## Alojamiento
 
-Este sitio web está alojado en Vercel. Como cualquier servicio de alojamiento web, Vercel procesa información técnica, como tu dirección IP, para mostrar las páginas y mantener el sitio seguro. Puedes leer la [política de privacidad de Vercel](https://vercel.com/legal/privacy-policy) (en inglés).
+Este sitio web está alojado en Vercel. Como cualquier servicio de alojamiento web, Vercel procesa información técnica, como su dirección IP, para mostrar las páginas y mantener el sitio seguro. Puede leer la [política de privacidad de Vercel](https://vercel.com/legal/privacy-policy) (en inglés).
 
 ## Preguntas
 
-Si tienes alguna pregunta sobre tu información, o quieres que borremos un mensaje que nos enviaste, usa nuestra [página de contacto](/es/contacto/).
+Escriba al correo electrónico de nuestra [página de Contacto](/es/contacto/). Respondemos en un plazo de dos días hábiles.
 
-## Cambios
-
-Si esta política cambia, actualizaremos esta página. Última actualización: 6 de noviembre de 2026.
+Última actualización: 6 de noviembre de 2026.

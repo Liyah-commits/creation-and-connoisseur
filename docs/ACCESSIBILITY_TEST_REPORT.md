@@ -6,7 +6,7 @@
 |---|---|
 | **Site** | Creation and Connoisseur website (English and Spanish) |
 | **Build tested** | Local production and template builds of this repository, served from `.vercel/output/static` by `scripts/serve-static.mjs` at `http://localhost:4321` |
-| **Date of automated testing** | 6 November 2026 |
+| **Date of automated testing** | 6 November 2026; run again the same day after the content batch and the switch to usted (decisions D25 and D38 to D42). The numbers below are from that second run. |
 | **Tested by** | Automated suite set up during the rebuild. Manual passes: Aryah Certain (section 8, not yet run) |
 | **Conformance status** | **Automated testing: zero violations.** A WCAG 2.1 AA conformance claim should be made only after the manual passes in section 8 are complete. |
 
@@ -36,18 +36,18 @@ Every page is tested in both languages. The page list is read from the built `si
 | Privacy policy | `/privacy/` | `/es/privacidad/` |
 | Not found (bilingual) | any unknown address (`404.html`) | |
 
-**Template build** (`SHOW_DRAFTS=true`, 25 pages). It adds labeled draft examples so the remaining templates are tested before real entries exist (decision D28):
+**Template build** (`SHOW_DRAFTS=true`, 31 pages, 15 of them Spanish). It adds the draft entries, so the remaining templates are tested before anything is published: the labeled examples (decision D28), plus the three real programs and Aryah's People entry from the content batch, which are still drafts:
 
 | Template | Pages |
 |---|---|
-| Program page | `/programs/example-program/` (with image), `/es/programas/programa-de-ejemplo/` (without image) |
+| Program page | `/programs/example-program/` (with image), `/es/programas/programa-de-ejemplo/` (without image), and the three draft programs in each language (UNLV Food Tasting Club, Biweekly Volunteering, Mobile Food Pantry) |
 | News post page | `/news/example-news-post/`, `/es/noticias/noticia-de-ejemplo/` (paired), `/news/example-post-without-translation/` (no translation) |
 | Lists with entries, home page with programs and news | `/programs/`, `/news/`, `/`, and the Spanish equivalents |
 | People (About) | two example people, one with a photo and one with the initials placeholder |
 | Filled-in settings | fake EIN, contact details, social link, mission and a working Donate link (`tests/fixtures/settings.template.yaml`) |
 | Forms, connected | Formspree success and failure states, with the request intercepted in the test browser |
 
-**Interactive states tested:** mobile menu open; both forms in their error state and after a valid submit, in both languages and at both widths; the not-connected form notice; the unavailable Donate button.
+**Interactive states tested:** mobile menu open; all three forms (Contact, Volunteer, Get Help) in their error state and after a valid submit, in both languages and at both widths; the not-connected form notice; the unavailable Donate button.
 
 **Out of scope:** the Keystatic editing screens at `/keystatic` (third-party software used only by editors; the accessibility statement says so), Formspree's own pages, and the external donation site once one is linked.
 
@@ -76,19 +76,19 @@ All of these run in GitHub Actions on every pull request and every push to `main
 
 | Check | Production build | Template build | Pass condition | Result |
 |---|---|---|---|---|
-| axe scans (pages × 2 widths, menu open, 404, form states) | 59 scans | 69 scans | 0 violations | **0 violations** |
-| Playwright tests (axe, structure, keyboard, forms, content) | 189 passed, 0 failed | 229 passed, 0 failed | all pass | **Pass** |
-| pa11y-ci (axe + HTML_CodeSniffer, WCAG2AA) | 20/20 pages, 0 errors | 25/25 pages, 0 errors | 0 errors | **Pass** |
+| axe scans (pages × 2 widths, menu open, 404, form states) | 67 scans | 89 scans | 0 violations | **0 violations** |
+| Playwright tests (axe, structure, keyboard, forms, content) | 199 passed, 0 failed | 283 passed, 0 failed | all pass | **Pass** |
+| pa11y-ci (axe + HTML_CodeSniffer, WCAG2AA) | 20/20 pages, 0 errors | 31/31 pages, 0 errors | 0 errors | **Pass** |
 | Lighthouse accessibility | 100 on every page | 100 on every page | ≥ 95 | **Pass** |
 | Lighthouse performance | 100 on every page | 100 on every page | ≥ 95 | **Pass** |
 | Lighthouse best practices | 100 on every page | 100 on every page | ≥ 95 | **Pass** |
 | Lighthouse SEO | 100 on every page | 100 on every page | 100 | **Pass** |
-| Broken links, internal (fragments checked, redirects count as broken) | 26 checked, 0 broken | 51 checked, 0 broken | 0 broken | **Pass** |
-| Broken links, external | 2 checked, 0 failed | 2 checked, 0 failed | reported | **Pass** |
+| Broken links, internal (fragments checked, redirects count as broken) | 26 checked, 0 broken | 57 checked, 0 broken | 0 broken | **Pass** |
+| Broken links, external | 6 checked, 0 failed | 6 checked, 0 failed | reported | **Pass** |
 | Contrast pairs | 20 of 20 pass | same tokens | all pass | **Pass** |
 | Type check | 0 errors | | 0 errors | **Pass** |
 
-Skipped tests are the ones that only apply to the other build: 9 template-only tests skipped in the production build, 4 production-only tests skipped in the template build.
+Skipped tests are the ones that only apply to the other build: 11 template-only tests skipped in the production build, 4 production-only tests skipped in the template build.
 
 Run it again with `pnpm test:all`. Detailed output goes to `reports/production/` and `reports/templates/`: `playwright.json`, `pa11y.json`, `links.json` and `lighthouse/` (one HTML and JSON report per page).
 
@@ -113,7 +113,7 @@ And across the site:
 - Buttons, navigation links and the language switch are at least 44px tall.
 - Reduced motion: no transitions run.
 - The 404 page returns status 404, is bilingual and is `noindex`.
-- Forms, in both languages: visible labels; "(required)" and "(optional)" in text; `autocomplete` tokens; the live region is present and empty on load; the honeypot is hidden. Submitting empty marks every required field `aria-invalid`, shows "Error: …" text linked by `aria-describedby`, and moves focus to the first one. An invalid email gets its own message, and errors clear when fixed. A valid submit is announced in the live region (success when connected; "nothing was sent" when not, with no request made). A failed send is announced and keeps what was typed. Without JavaScript the form uses native validation and a real POST.
+- The three forms (Contact, Volunteer, Get Help), in both languages: visible labels; "(required)" and "(optional)" in text; `autocomplete` tokens; the live region is present and empty on load; the honeypot is hidden. Submitting empty marks every required field `aria-invalid`, shows "Error: …" text linked by `aria-describedby`, and moves focus to the first one. An invalid email gets its own message, and errors clear when fixed. A valid submit is announced in the live region (success when connected; "nothing was sent" when not, with no request made). A failed send is announced and keeps what was typed. Without JavaScript the form uses native validation and a real POST.
 - Content states: drafts are absent from the production build and return 404. Empty facts render nothing. The unavailable Donate button is focusable, explained by `aria-describedby`, and does nothing when activated. In the template build, the filled-in settings (EIN, contact details, social links, Donate link) appear.
 
 ### 5.3 Contrast ratios
@@ -147,7 +147,7 @@ Saffron (1.74:1 on cream) is used on light backgrounds only as decoration, never
 
 ### 5.4 Broken-link check
 
-linkinator started from every sitemap page and followed every same-site link, checking `#fragment` targets and treating any redirect as broken (so a link missing its trailing slash would fail). On 6 November 2026: production build, 26 internal links, 0 broken; template build, 51 internal links, 0 broken. Both external links (Formspree's and Vercel's privacy policies, linked from the privacy policy) returned 200. `example.org` links exist only in the template build's fake settings and are skipped.
+linkinator started from every sitemap page and followed every same-site link, checking `#fragment` targets and treating any redirect as broken (so a link missing its trailing slash would fail). On 6 November 2026, after the content batch: production build, 26 internal links, 0 broken; template build, 57 internal links, 0 broken. All six external links returned 200: the four Get Help resources (Nevada 211, Three Square, the UNLV food pantry and Access Nevada; addresses in `docs/OPEN_ITEMS.md`, item 14) and Formspree's and Vercel's privacy policies. `example.org` links exist only in the template build's fake settings and are skipped.
 
 ## 6. WCAG 2.1 Level A and AA success criteria
 
@@ -200,7 +200,7 @@ linkinator started from every sitemap page and followed every same-site link, ch
 | 3.2.2 On Input | A | Both | Pass | Typing never submits or navigates. The language switch is a link the user chooses. |
 | 3.2.3 Consistent Navigation | AA | Both | Pass | One layout component gives every page the same header, navigation order and footer. |
 | 3.2.4 Consistent Identification | AA | Manual | Pass | The same label is used for the same function everywhere. The Spanish About label matches its page title (D35). |
-| 3.3.1 Error Identification | A | Automated | Pass | Invalid fields are named in text, with `aria-invalid` and `aria-describedby` (tested in both forms and languages). |
+| 3.3.1 Error Identification | A | Automated | Pass | Invalid fields are named in text, with `aria-invalid` and `aria-describedby` (tested in all three forms, in both languages). |
 | 3.3.2 Labels or Instructions | A | Automated | Pass | Visible labels, "(required)" and "(optional)" in text, hints, and a note on required fields (tested). |
 | 3.3.3 Error Suggestion | AA | Automated | Pass | Messages say how to fix the error ("Enter an email address in the format name@example.com."). |
 | 3.3.4 Error Prevention (Legal, Financial, Data) | AA | Manual | Not applicable | No legal, financial or data-changing transactions. Donations happen on an external site. |
@@ -233,6 +233,9 @@ Every defect found during the build. All are fixed, and the full suite passes af
 | 7 | End-to-end editor test | Moderate | Programs and news, both languages | English and Spanish entries shared an image folder, so entries with the same web address would overwrite each other's images | A separate image folder per language (D31) | Fixed (Phase 3) |
 | 8 | Keyboard-walk test | Low | All | Smooth scrolling delayed focused elements coming into view | Smooth scrolling removed (D33) | Fixed (Phase 3) |
 | 9 | Spanish review during the build | Low | Spanish navigation | "Acerca de" read as unfinished, and didn't match the page title | "Quiénes somos" for both (D35) | Fixed (Phase 3) |
+| 10 | Loading the content batch | Moderate | `/get-help/`, `/es/obtener-ayuda/` | The new Get Help text says "use the form below", but the page had no form | Added a Get Help request form, with the same accessible pattern and tests as the others (D40) | Fixed (content batch) |
+| 11 | Uniqueness test | Low | UNLV Food Tasting Club, both languages (template build) | The club's name is the same in both languages, so its two pages shared a browser title | Program and news titles now include their section (D42) | Fixed (content batch) |
+| 12 | Broader search for tú forms | Low | `/es/contacto/` | The usted switch first missed "Contáctanos" (page title) and "Comunícate" (search description) | Changed to "Contáctenos" and "Comuníquese" (D25) | Fixed (content batch) |
 
 Test-harness problems found and fixed along the way (not site defects): the static test server crashed on abandoned requests (D30), and two test assertions were wrong (a description regex, and Playwright refusing to click an `aria-disabled` button without `force`).
 
@@ -247,7 +250,7 @@ Run these yourself. Automated tools catch roughly a third to a half of accessibi
 3. Or use a deployed Vercel preview address instead of `localhost`.
 4. For each failure, note the page, what you did, what happened and what you expected, and add a row to the defect log (section 7).
 
-**Pages to cover:** the 20 pages in section 3, plus `/programs/example-program/`, `/news/example-news-post/`, `/es/programas/programa-de-ejemplo/` and one wrong address (`/es/no-existe/`).
+**Pages to cover:** the 20 pages in section 3; the three draft programs in each language (`/programs/unlv-food-tasting-club/`, `/programs/biweekly-volunteering/`, `/programs/mobile-food-pantry/` and their Spanish versions); `/programs/example-program/`, `/news/example-news-post/` and `/es/programas/programa-de-ejemplo/`; and one wrong address (`/es/no-existe/`).
 
 ### 8.1 Full keyboard walk of every page
 
@@ -267,14 +270,15 @@ Then these specific checks:
 
 5. **Language switch:** on any page, Tab to "Español" (or "English") and press Enter. You should land on the same page in the other language.
 6. **Mobile menu:** make the window narrow (about 400px wide) or zoom to 400%. Tab to "Menu" and press Enter: the links appear. Tab through them. Press **Escape**: the menu closes and focus is back on "Menu". Open it again with **Space** and Tab past the last link: focus should leave the menu.
-7. **Forms (`/contact/`, `/volunteer/`, `/es/contacto/`, `/es/voluntariado/`):** Tab to the submit button without filling anything in and press Enter. Focus should jump to "Your name" (or "Tu nombre"), with a red "Error: …" message above it. Fill in every field (use a made-up email such as `test@example.org`), submit, and check the message under the button.
+7. **Forms (`/contact/`, `/volunteer/`, `/get-help/` and their Spanish versions):** Tab to the submit button without filling anything in and press Enter. Focus should jump to "Your name" (or "Su nombre"), with a red "Error: …" message above it. Fill in every field (use a made-up email such as `test@example.org`), submit, and check the message under the button.
 8. **Donate (production build):** Tab to "Donation link coming soon". It should take focus and do nothing when you press Enter.
 
 - [ ] `/` and `/es/`
 - [ ] `/about/` and `/es/acerca-de/`
 - [ ] `/programs/` and `/es/programas/`
 - [ ] `/programs/example-program/` and `/es/programas/programa-de-ejemplo/`
-- [ ] `/get-help/` and `/es/obtener-ayuda/`
+- [ ] The three draft programs, in both languages
+- [ ] `/get-help/` and `/es/obtener-ayuda/` (including step 7)
 - [ ] `/volunteer/` and `/es/voluntariado/` (including step 7)
 - [ ] `/donate/` and `/es/donar/` (including step 8)
 - [ ] `/news/` and `/es/noticias/`

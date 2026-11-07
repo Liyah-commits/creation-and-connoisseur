@@ -24,9 +24,8 @@ test.describe('production build', () => {
     await expect(page.getByText(ui['news.empty'].es)).toBeVisible();
   });
 
-  test('empty facts render nothing: no EIN line, no mission, no people, no social links', async ({ page }) => {
+  test('empty facts render nothing: no EIN line, no published people, no social links', async ({ page }) => {
     await page.goto(routes.about.en);
-    await expect(page.getByRole('heading', { name: ui['about.missionHeading'].en })).toHaveCount(0);
     await expect(page.getByRole('heading', { name: ui['about.peopleHeading'].en })).toHaveCount(0);
     await expect(page.locator('footer')).not.toContainText('EIN');
     await expect(page.getByRole('heading', { name: ui['footer.socialHeading'].en })).toHaveCount(0);

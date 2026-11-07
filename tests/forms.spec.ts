@@ -1,5 +1,5 @@
 /**
- * The Contact and Volunteer forms, in both languages: labels, required text,
+ * The Contact, Volunteer and Get Help forms, in both languages: labels, required text,
  * inline errors tied with aria-describedby, focus on the first error, the live
  * region, and axe in the error and success states.
  *
@@ -17,7 +17,12 @@ const forms = [
   { kind: 'contact', lang: 'es', path: routes.contact.es },
   { kind: 'volunteer', lang: 'en', path: routes.volunteer.en },
   { kind: 'volunteer', lang: 'es', path: routes.volunteer.es },
+  { kind: 'help', lang: 'en', path: routes.getHelp.en },
+  { kind: 'help', lang: 'es', path: routes.getHelp.es },
 ] as const;
+
+const subjectKey = { contact: 'form.subjectContact', volunteer: 'form.subjectVolunteer', help: 'form.subjectHelp' } as const;
+const successKey = { contact: 'form.successContact', volunteer: 'form.successVolunteer', help: 'form.successHelp' } as const;
 
 const validValues: Record<string, string> = {
   name: 'Test Person',
@@ -52,7 +57,7 @@ for (const { kind, lang, path } of forms) {
       await expect(form.locator('input[name="name"]')).toHaveAttribute('autocomplete', 'name');
       await expect(form.locator('input[name="email"]')).toHaveAttribute('autocomplete', 'email');
       await expect(form.locator('input[name="email"]')).toHaveAttribute('type', 'email');
-      if (kind === 'volunteer') await expect(form.locator('input[name="phone"]')).toHaveAttribute('autocomplete', 'tel');
+      if (kind !== 'contact') await expect(form.locator('input[name="phone"]')).toHaveAttribute('autocomplete', 'tel');
 
       // The live region is in the page, empty, before anything happens.
       const status = form.locator('[role="status"]');
@@ -61,7 +66,7 @@ for (const { kind, lang, path } of forms) {
 
       // The honeypot is not visible and not reachable by keyboard.
       await expect(form.locator('input[name="_gotcha"]')).toBeHidden();
-      await expect(form.locator('input[name="_subject"]')).toHaveValue(kind === 'contact' ? ui['form.subjectContact'][lang] : ui['form.subjectVolunteer'][lang]);
+      await expect(form.locator('input[name="_subject"]')).toHaveValue(ui[subjectKey[kind]][lang]);
 
       // JavaScript has taken over validation.
       expect(await form.evaluate((el: HTMLFormElement) => el.noValidate)).toBe(true);
@@ -125,7 +130,7 @@ for (const { kind, lang, path } of forms) {
         });
         await fillValid(page);
         await form.locator('[data-submit]').click();
-        await expect(status).toHaveText(kind === 'contact' ? ui['form.successContact'][lang] : ui['form.successVolunteer'][lang]);
+        await expect(status).toHaveText(ui[successKey[kind]][lang]);
         expect(body).toContain('_subject');
         // The form is cleared after a successful send.
         await expect(form.locator('input[name="name"]')).toHaveValue('');

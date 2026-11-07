@@ -10,17 +10,19 @@ intro: >-
 ---
 ## What we collect
 
-We only collect what you choose to type into our contact form or volunteer form, such as your name, email address and message.
+When you use a form on this site, we receive what you type: usually your name, email address or phone number, and your message. We do not use tracking cookies or advertising tools.
 
-We use it only to reply to you. We do not sell it.
+## How we use it
 
-## Who processes form messages
+We use your information only to reply to you and to run our programs. If you ask for food, we use what you tell us to arrange help. We never sell your information and never share it with anyone outside the organization, except the form service ([Formspree](https://formspree.io/legal/privacy-policy/)) that delivers your message to us.
 
-Our forms are delivered by Formspree, a form service. When you send a form, Formspree receives what you typed and passes it on to us. You can read [Formspree's privacy policy](https://formspree.io/legal/privacy-policy/).
+## How long we keep it
 
-## Cookies and tracking
+Form messages are kept for 12 months and then deleted. If you want yours deleted sooner, email us and we will do it within 10 business days.
 
-This website does not use cookies, analytics or advertising trackers.
+## Who can see it
+
+Only our board members and volunteer coordinator can read form messages.
 
 ## Hosting
 
@@ -28,8 +30,6 @@ This website is hosted by Vercel. Like any web host, Vercel processes technical 
 
 ## Questions
 
-If you have a question about your information, or want us to delete a message you sent, please use our [contact page](/contact/).
+Email the address on our [Contact page](/contact/). We reply within two business days.
 
-## Changes
-
-If this policy changes, we will update this page. Last updated 6 November 2026.
+Last updated 6 November 2026.

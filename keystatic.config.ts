@@ -387,6 +387,17 @@ export default config({
           description: 'The approved Spanish translation of the mission statement.',
           multiline: true,
         }),
+        unlvStatementEn: fields.text({
+          label: 'Relationship to UNLV (English)',
+          description:
+            'The statement about how the organization relates to the university. It appears in the footer of every page, in place of the general nonprofit line. Use only wording confirmed with UNLV Student Involvement.',
+          multiline: true,
+        }),
+        unlvStatementEs: fields.text({
+          label: 'Relationship to UNLV (Spanish)',
+          description: 'The same statement, in Spanish.',
+          multiline: true,
+        }),
         descriptionEn: fields.text({
           label: 'Short description (English)',
           description: 'One sentence about the organization. It is used in search results and when the site is shared on social media.',

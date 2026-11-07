@@ -1,8 +1,8 @@
 ---
 internalName: contact
-title: Contáctanos
+title: Contáctenos
 metaDescription: >-
-  Comunícate con Creation and Connoisseur, organización sin fines de lucro
+  Comuníquese con Creation and Connoisseur, organización sin fines de lucro
   501(c)(3) enfocada en la inseguridad alimentaria en UNLV.
-intro: ¿Tienes alguna pregunta? Envíanos un mensaje con el formulario de abajo.
+intro: ¿Tiene alguna pregunta? Envíenos un mensaje con el formulario de abajo.
 ---

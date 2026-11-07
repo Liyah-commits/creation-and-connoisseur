@@ -25,6 +25,8 @@ interface Props {
   /** An absolute or root-relative image for social sharing. Defaults to the typographic card. */
   ogImage?: string;
   ogImageAlt?: string;
+  /** The section a program or news page belongs to, added to its browser title. */
+  section?: string;
 }
 
 const {
@@ -38,12 +40,13 @@ const {
   ogType = 'website',
   ogImage = '/og-image.png',
   ogImageAlt = SITE_NAME,
+  section,
 } = Astro.props;
 
 const settings = await getSettings();
 const site = Astro.site;
 const canonical = absoluteUrl(alternates[lang], site);
-const fullTitle = documentTitle(title, isHome, lang);
+const fullTitle = documentTitle(title, isHome, lang, section);
 const imageUrl = absoluteUrl(ogImage, site);
 const jsonLd = isHome ? organizationJsonLd(settings, lang, site) : null;
 ---

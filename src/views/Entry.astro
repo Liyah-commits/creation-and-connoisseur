@@ -8,7 +8,7 @@ import { getImage, Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Prose from '../components/Prose.astro';
 import { routes, type Lang } from '../i18n/routes';
-import { formatDate, t } from '../i18n/ui';
+import { formatDate, navLabel, t } from '../i18n/ui';
 import { entryAlternates, hasTranslation, type NewsEntry, type ProgramEntry, type Section } from '../lib/content';
 
 interface Props {
@@ -33,6 +33,7 @@ const location = 'location' in entry.data ? entry.data.location : '';
   alternates={alternates}
   translated={translated}
   ogType={section === 'news' ? 'article' : 'website'}
+  section={navLabel(lang, section)}
   {...ogImage ? { ogImage, ogImageAlt: image!.alt } : {}}
 >
   <article>
