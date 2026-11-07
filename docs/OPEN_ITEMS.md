@@ -12,15 +12,15 @@ Item numbers stay fixed so other documents can refer to them. **Supplied** items
 
 ## Organization facts
 
-1. **Mission statement.** **Supplied** (content batch), and rewritten so the pantry reads as planned for 2027 (D38). In Site settings > Mission statement, both languages; it shows on About. The batch's short form (for social bios and a tagline) wasn't loaded: no location was named, and it describes the pantry as existing.
+1. **Mission statement and tagline.** **Supplied.** The mission (content batch, rewritten so the pantry reads as planned for 2027, D38) is in Site settings > Mission statement and shows on About. The tagline ("Fighting food insecurity at UNLV and across Las Vegas." / "Combatimos la inseguridad alimentaria en UNLV y en todo Las Vegas.") is in Site settings > Tagline. It shows in every footer, in the home page title and in search-engine data (D43).
 2. **The story for the About page.** **Supplied**, in Pages > about > Main text, both languages, with the student figures removed and the pantry as planned.
-3. **Aryah Certain's title, short bio and photo.** Title ("Founder and President" / "Fundadora y Presidenta") and bio **supplied**, in Shared > People > Aryah Certain, as a draft. Still needed: confirm the title matches the bylaws, and supply a photo with permission and a description in both languages. Untick **Hide from the live site** when ready.
+3. **Aryah Certain's title, short bio and photo.** Title ("Founder and President" / "Fundadora y Presidenta") and bio **supplied** (last sentence revised 6 November 2026 to "and the planned mobile food pantry"), in Shared > People > Aryah Certain, as a draft. Still needed: confirm the title matches the bylaws, and supply a photo with permission and a description in both languages. Untick **Hide from the live site** when ready.
 4. **Board members and other people** to list, with roles, bios and photos. Where: Shared > People.
 5. **EIN.** Where: Site settings > EIN. Shows in the footer and on Donate.
 6. **Exact legal name**, as registered with the IRS. Where: Site settings > Legal name.
 7. **Mailing address, public email and phone.** Where: Site settings. Shows in the footer and on Contact. The privacy policy, accessibility statement and Get Help page all point people to "the email on our Contact page", so this matters more now.
 8. **Donation link** and any other ways to give. Where: Site settings > Donation link. Until then the Donate button reads "Donation link coming soon".
-9. **Social media links.** Where: Site settings > Social media links. The pantry program page says sites will be announced "on our social channels".
+9. **Social media links.** Where: Site settings > Social media links. The pantry program page says sites will be announced "on our social channels". For each profile's bio, use the tagline (item 1), in English or Spanish.
 10. **Relationship to UNLV.** Wording **supplied**, in Site settings > Relationship to UNLV, both languages. It shows in every page's footer (D39). Still needed, as the batch says: confirm the exact phrasing with UNLV Student Involvement before deploying.
 11. **Founding year** (optional). Where: Site settings > Year founded. Once known, the batch suggests adding it to the first sentence of the About story.
 

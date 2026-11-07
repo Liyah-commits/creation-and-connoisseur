@@ -19,6 +19,8 @@ missionEn: >-
 missionEs: >-
   Declaración de misión de ejemplo, usada solo para probar la plantilla de la
   página Acerca de. No es la misión de la organización.
+taglineEn: Example tagline (template test).
+taglineEs: Lema de ejemplo (prueba de plantilla).
 unlvStatementEn: >-
   Example relationship statement, used only to test the footer template.
 unlvStatementEs: >-

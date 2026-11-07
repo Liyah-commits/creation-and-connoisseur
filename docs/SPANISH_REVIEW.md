@@ -64,7 +64,7 @@ Each file holds the page title, the search result description, the introduction 
 
 ## People
 
-- [ ] `content/people/aryah-certain.yaml`: `roleEs` and `bioEs`. **Changed (new, draft).**
+- [ ] `content/people/aryah-certain.yaml`: `roleEs` and `bioEs`. **Changed (new, draft).** The last sentence of the bio was revised to "…y la despensa móvil de alimentos que está en planificación".
 
 ## Interface text
 
@@ -74,7 +74,7 @@ Each file holds the page title, the search result description, the introduction 
 
 ## Organization text
 
-- [ ] `content/settings.yaml`: `missionEs` (the mission, rewritten so the pantry is planned), `unlvStatementEs` (the relationship to UNLV, shown in every footer) and `descriptionEs` (search results and social previews). **Changed.**
+- [ ] `content/settings.yaml`: `missionEs` (the mission, rewritten so the pantry is planned), `taglineEs` (the tagline, also used for social bios), `unlvStatementEs` (the relationship to UNLV, shown in every footer) and `descriptionEs` (search results and social previews). **Changed.**
 
 ## Template examples (never published)
 
@@ -83,7 +83,7 @@ These are drafts used only by the test build, but they show editors what good Sp
 - [ ] `content/es/programs/programa-de-ejemplo.md`
 - [ ] `content/es/news/noticia-de-ejemplo.md`
 - [ ] `content/people/example-person-with-photo.yaml` and `content/people/example-person-without-photo.yaml` (the `roleEs`, `bioEs` and `altEs` fields)
-- [ ] `tests/fixtures/settings.template.yaml`: `missionEs` and `unlvStatementEs` (fake text for tests). **Changed.**
+- [ ] `tests/fixtures/settings.template.yaml`: `missionEs`, `taglineEs` and `unlvStatementEs` (fake text for tests). **Changed.**
 
 ## Editor screens (optional)
 

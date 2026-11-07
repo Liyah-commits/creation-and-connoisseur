@@ -106,6 +106,8 @@ const settingsSchema = z.object({
       .transform((links) => links ?? []),
     missionEn: optionalText,
     missionEs: optionalText,
+    taglineEn: optionalText,
+    taglineEs: optionalText,
     unlvStatementEn: optionalText,
     unlvStatementEs: optionalText,
     descriptionEn: z.string().trim().min(1),

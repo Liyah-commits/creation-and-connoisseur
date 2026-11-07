@@ -387,6 +387,17 @@ export default config({
           description: 'The approved Spanish translation of the mission statement.',
           multiline: true,
         }),
+        taglineEn: fields.text({
+          label: 'Tagline (English)',
+          description:
+            'One short line, under 100 characters, about what the organization does today. It appears under the name in the footer and in the home page title in search results. Use the same words for social media bios.',
+          validation: { length: { max: 100 } },
+        }),
+        taglineEs: fields.text({
+          label: 'Tagline (Spanish)',
+          description: 'The same line, in Spanish.',
+          validation: { length: { max: 100 } },
+        }),
         unlvStatementEn: fields.text({
           label: 'Relationship to UNLV (English)',
           description:

@@ -16,13 +16,14 @@ export function absoluteUrl(path: string, site: URL | undefined): string {
 
 /**
  * "Page title | Creation and Connoisseur". The home page gets
- * "Creation and Connoisseur | <short description>" in its own language, so
+ * "Creation and Connoisseur | <tagline>" (from Site settings, or a fallback
+ * description) in its own language, so
  * the English and Spanish home pages don't share a title. Program and news
  * pages add their section ("… | Programs | …", "… | Programas | …"), so an
  * entry whose name is the same in both languages still gets a unique title.
  */
-export function documentTitle(title: string, isHome: boolean, lang: Lang, section?: string): string {
-  if (isHome) return `${SITE_NAME} | ${t(lang, 'site.homeTitleSuffix')}`;
+export function documentTitle(title: string, isHome: boolean, lang: Lang, section?: string, tagline?: string): string {
+  if (isHome) return `${SITE_NAME} | ${tagline?.replace(/\.$/, '') || t(lang, 'site.homeTitleSuffix')}`;
   if (section) return `${title} | ${section} | ${SITE_NAME}`;
   return `${title} | ${SITE_NAME}`;
 }
@@ -43,6 +44,8 @@ export function organizationJsonLd(settings: Settings, lang: Lang, site: URL | u
     description: lang === 'en' ? settings.descriptionEn : settings.descriptionEs,
     nonprofitStatus: 'Nonprofit501c3',
   };
+  const tagline = lang === 'en' ? settings.taglineEn : settings.taglineEs;
+  if (tagline) data.slogan = tagline;
   if (settings.legalName) data.legalName = settings.legalName;
   if (settings.ein) data.taxID = settings.ein;
   if (settings.email) data.email = settings.email;
