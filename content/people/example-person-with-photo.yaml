@@ -1,0 +1,17 @@
+name: Example Person With Photo
+draft: true
+roleEn: Example role (template preview)
+roleEs: Cargo de ejemplo (vista previa de plantilla)
+bioEn: >-
+  An example person used to test the People section. Not a real person; never
+  shown on the live site.
+bioEs: >-
+  Una persona de ejemplo para probar la sección del equipo. No es una persona
+  real y nunca aparece en el sitio público.
+photo:
+  discriminant: true
+  value:
+    image: ../images/people/example-person-with-photo/image.png
+    altEn: 'Example photo: the word "Example" on a pattern of yellow dots.'
+    altEs: 'Foto de ejemplo: la palabra "Example" sobre un patrón de puntos amarillos.'
+order: 10

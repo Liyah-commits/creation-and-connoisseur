@@ -9,6 +9,12 @@
 import { routes, type Lang, type RouteKey } from './routes';
 
 export const ui = {
+  // Site
+  'site.homeTitleSuffix': {
+    en: 'Nonprofit focused on food insecurity at UNLV',
+    es: 'Organización sin fines de lucro enfocada en la inseguridad alimentaria en UNLV',
+  },
+
   // Header and navigation
   'skip.toMain': { en: 'Skip to main content', es: 'Saltar al contenido principal' },
   'nav.label': { en: 'Main', es: 'Principal' },
@@ -150,9 +156,10 @@ export const ui = {
     es: 'Lo sentimos, no se pudo enviar tu mensaje. Inténtalo de nuevo en unos minutos.',
   },
   'form.privacy': {
-    en: 'We only use what you send to reply to you. Read our privacy policy.',
-    es: 'Solo usamos lo que nos envías para responderte. Lee nuestra política de privacidad.',
+    en: 'We only use what you send us to reply to you.',
+    es: 'Solo usamos lo que nos envías para responderte.',
   },
+  'form.privacyLink': { en: 'Read our privacy policy', es: 'Lee nuestra política de privacidad' },
   'form.subjectContact': {
     en: 'Contact form: Creation and Connoisseur website',
     es: 'Formulario de contacto (español): sitio web de Creation and Connoisseur',

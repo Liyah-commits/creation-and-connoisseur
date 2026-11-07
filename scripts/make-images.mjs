@@ -6,7 +6,7 @@
  * These use the organization's name as a wordmark only. No logo has been
  * supplied (docs/OPEN_ITEMS.md), so none is invented.
  */
-import { writeFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 
 const colors = { cream: '#FFF8EE', ink: '#2B1D16', inkMuted: '#5E4A3E', tomato: '#B23A1E', tomatoDark: '#8F2C14', saffron: '#F2B544' };
@@ -55,6 +55,17 @@ try {
   await writeFile('public/apple-touch-icon.png', await render(iconHtml(180), 180, 180));
   await writeFile('public/favicon.ico', pngToIco(await render(iconHtml(32), 32, 32), 32));
   console.log('Wrote public/og-image.png, public/apple-touch-icon.png, public/favicon.ico');
+
+  // Clearly labeled example images for the draft example entries (template test build only).
+  const example = (label, width, height) => `<!doctype html><html><body style="margin:0">
+<div style="width:${width}px;height:${height}px;display:flex;align-items:center;justify-content:center;background-color:${colors.cream};background-image:radial-gradient(circle at 25% 25%, ${colors.saffron} 0 14%, transparent 15%),radial-gradient(circle at 75% 75%, ${colors.saffron} 0 14%, transparent 15%);background-size:80px 80px">
+  <div style="background:${colors.ink};color:${colors.cream};font:700 ${Math.round(width / 18)}px ${serif};padding:0.4em 0.8em;border-radius:12px;text-align:center">${label}</div>
+</div></body></html>`;
+  await mkdir('content/images/programs/example-program', { recursive: true });
+  await mkdir('content/images/people/example-person-with-photo', { recursive: true });
+  await writeFile('content/images/programs/example-program/image.png', await render(example('Example image', 1200, 800), 1200, 800));
+  await writeFile('content/images/people/example-person-with-photo/image.png', await render(example('Example', 600, 600), 600, 600));
+  console.log('Wrote example images in content/images/ (used only by draft example entries)');
 } finally {
   await browser.close();
 }

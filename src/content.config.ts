@@ -71,6 +71,7 @@ const people = defineCollection({
   schema: ({ image }) =>
     z.object({
       name: z.string().trim().min(1),
+      draft: z.boolean().default(false),
       roleEn: optionalText,
       roleEs: optionalText,
       bioEn: optionalText,
@@ -92,9 +93,7 @@ const people = defineCollection({
     }),
 });
 
-const settings = defineCollection({
-  loader: files('settings.yaml', './content'),
-  schema: z.object({
+const settingsSchema = z.object({
     legalName: optionalText,
     ein: optionalText,
     email: optionalText,
@@ -110,8 +109,16 @@ const settings = defineCollection({
     descriptionEn: z.string().trim().min(1),
     descriptionEs: z.string().trim().min(1),
     foundingYear: z.number().int().nullish(),
-  }),
 });
+
+const settings = defineCollection({ loader: files('settings.yaml', './content'), schema: settingsSchema });
+
+/**
+ * Obviously fake settings used only by the template test build (SHOW_DRAFTS=true),
+ * so the footer contact details, EIN line, social links, mission and working
+ * Donate link are tested before the real values exist. Never used in production.
+ */
+const settingsTemplate = defineCollection({ loader: files('settings.template.yaml', './tests/fixtures'), schema: settingsSchema });
 
 export const collections = {
   pagesEn: pages('en'),
@@ -122,4 +129,5 @@ export const collections = {
   newsEs: defineCollection({ loader: files('*.md', './content/es/news'), schema: newsSchema }),
   people,
   settings,
+  settingsTemplate,
 };

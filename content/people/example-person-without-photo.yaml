@@ -1,0 +1,13 @@
+name: Example Person Without Photo
+draft: true
+roleEn: Example role (template preview)
+roleEs: Cargo de ejemplo (vista previa de plantilla)
+bioEn: >-
+  An example person with no photo, to test the initials placeholder. Never shown
+  on the live site.
+bioEs: >-
+  Una persona de ejemplo sin foto, para probar el marcador con iniciales. Nunca
+  aparece en el sitio público.
+photo:
+  discriminant: false
+order: 20

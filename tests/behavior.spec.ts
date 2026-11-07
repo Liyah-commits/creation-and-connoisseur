@@ -46,9 +46,23 @@ test.describe('every page', () => {
       await page.goto(path);
       const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
       expect(canonical && new URL(canonical).pathname).toBe(path);
-      await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /\S{10,}/);
+      await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /^.{20,}$/s);
       await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute('content', path.startsWith('/es/') ? 'es_US' : 'en_US');
     });
+  }
+});
+
+test('every page has a unique title and meta description', async ({ page }) => {
+  const titles = new Map<string, string>();
+  const descriptions = new Map<string, string>();
+  for (const path of PAGES) {
+    await page.goto(path);
+    const title = await page.title();
+    const description = (await page.locator('meta[name="description"]').getAttribute('content')) ?? '';
+    expect(titles.get(title), `title "${title}" on ${path}`).toBeUndefined();
+    expect(descriptions.get(description), `description on ${path}`).toBeUndefined();
+    titles.set(title, path);
+    descriptions.set(description, path);
   }
 });
 

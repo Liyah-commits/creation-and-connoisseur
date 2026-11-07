@@ -1,0 +1,92 @@
+---
+/**
+ * One program or news post. The language switch goes to the paired entry
+ * (through the Spanish entry's "English version" field) or, if there is no
+ * translation, to the other language's list page.
+ */
+import { getImage, Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Prose from '../components/Prose.astro';
+import { routes, type Lang } from '../i18n/routes';
+import { formatDate, t } from '../i18n/ui';
+import { entryAlternates, hasTranslation, type NewsEntry, type ProgramEntry, type Section } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+  section: Section;
+  entry: ProgramEntry | NewsEntry;
+}
+const { lang, section, entry } = Astro.props;
+const alternates = await entryAlternates(section, lang, entry);
+const translated = hasTranslation(section, lang, alternates);
+const image = entry.data.image.discriminant ? entry.data.image.value : null;
+const ogImage = image ? (await getImage({ src: image.image, width: 1200, format: 'jpg' })).src : undefined;
+const date = 'date' in entry.data ? entry.data.date : null;
+const schedule = 'schedule' in entry.data ? entry.data.schedule : '';
+const location = 'location' in entry.data ? entry.data.location : '';
+---
+
+<Base
+  lang={lang}
+  title={entry.data.title}
+  description={entry.data.summary}
+  alternates={alternates}
+  translated={translated}
+  ogType={section === 'news' ? 'article' : 'website'}
+  {...ogImage ? { ogImage, ogImageAlt: image!.alt } : {}}
+>
+  <article>
+    <div class="border-b border-ink/10 bg-white">
+      <div class="container-page py-10 md:py-14">
+        <p>
+          <a href={routes[section][lang]} class="inline-flex min-h-6 items-center gap-1">
+            <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 8H3M7 4L3 8l4 4"></path>
+            </svg>
+            {t(lang, section === 'programs' ? 'programs.back' : 'news.back')}
+          </a>
+        </p>
+        {
+          entry.data.draft && (
+            <p class="mt-4 max-w-[68ch] rounded border-2 border-ink bg-saffron px-3 py-2 font-semibold text-ink">{t(lang, 'draft.notice')}</p>
+          )
+        }
+        <h1 class="mt-4 max-w-[30ch]">{entry.data.title}</h1>
+        {
+          date && (
+            <p class="mt-3 text-ink-muted">
+              {t(lang, 'news.published')} <time datetime={date.toISOString().slice(0, 10)}>{formatDate(lang, date)}</time>
+            </p>
+          )
+        }
+        <p class="lead mt-4 text-ink-muted">{entry.data.summary}</p>
+        {
+          (schedule || location) && (
+            <dl class="mt-6 grid max-w-[40rem] gap-x-6 gap-y-2 sm:grid-cols-[auto_1fr]">
+              {schedule && (<><dt class="font-semibold">{t(lang, 'programs.when')}</dt><dd>{schedule}</dd></>)}
+              {location && (<><dt class="font-semibold">{t(lang, 'programs.where')}</dt><dd>{location}</dd></>)}
+            </dl>
+          )
+        }
+      </div>
+    </div>
+
+    <div class="container-page grid gap-10 py-10 md:py-14 lg:grid-cols-[minmax(0,68ch)_1fr]">
+      {
+        image && (
+          <figure class="lg:order-2">
+            <Picture
+              src={image.image}
+              alt={image.alt}
+              widths={[480, 800, 1200]}
+              sizes="(min-width: 64rem) 28rem, 100vw"
+              formats={['avif', 'webp']}
+              class="w-full rounded-lg border border-ink/10"
+            />
+          </figure>
+        )
+      }
+      <Prose entry={entry} />
+    </div>
+  </article>
+</Base>

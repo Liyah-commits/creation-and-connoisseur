@@ -1,5 +1,6 @@
 ---
 import StandardPage from './StandardPage.astro';
+import Form from '../components/Form.astro';
 import type { Lang } from '../i18n/routes';
 
 interface Props {
@@ -8,4 +9,6 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<StandardPage lang={lang} pageKey="volunteer" />
+<StandardPage lang={lang} pageKey="volunteer">
+  <Form lang={lang} kind="volunteer" />
+</StandardPage>

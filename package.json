@@ -11,8 +11,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "build:test": "SITE_URL=http://localhost:4321 SHOW_DRAFTS=false astro build",
-    "build:templates": "SITE_URL=http://localhost:4321 SHOW_DRAFTS=true astro build",
+    "build:test": "SITE_URL=http://localhost:4321 SHOW_DRAFTS=false FORMSPREE_FORM_ID= astro build",
+    "build:templates": "SITE_URL=http://localhost:4321 SHOW_DRAFTS=true FORMSPREE_FORM_ID=template-test astro build",
     "serve": "node scripts/serve-static.mjs",
     "check": "astro check",
     "images": "node scripts/make-images.mjs",

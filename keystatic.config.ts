@@ -250,7 +250,7 @@ export default config({
       path: 'content/people/*',
       slugField: 'name',
       format: { data: 'yaml' },
-      columns: ['name', 'order'],
+      columns: ['name', 'order', 'draft'],
       schema: {
         name: fields.slug({
           name: {
@@ -258,7 +258,12 @@ export default config({
             description: 'Full name, as the person wants it shown.',
             validation: { length: { min: 1, max: 80 } },
           },
+          slug: {
+            label: 'File name',
+            description: 'Made from the name automatically. You do not need to change it.',
+          },
         }),
+        draft: draftField(),
         roleEn: fields.text({
           label: 'Role (English)',
           description: 'Their role, in English. For example: "Board member".',

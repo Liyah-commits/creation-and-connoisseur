@@ -43,7 +43,7 @@ const {
 const settings = await getSettings();
 const site = Astro.site;
 const canonical = absoluteUrl(alternates[lang], site);
-const fullTitle = documentTitle(title, isHome);
+const fullTitle = documentTitle(title, isHome, lang);
 const imageUrl = absoluteUrl(ogImage, site);
 const jsonLd = isHome ? organizationJsonLd(settings, lang, site) : null;
 ---

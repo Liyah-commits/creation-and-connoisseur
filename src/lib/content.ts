@@ -83,8 +83,9 @@ export function hasTranslation(section: Section, lang: Lang, alternates: Alterna
   return alternates[otherLang(lang)] !== routes[section][otherLang(lang)];
 }
 
+/** Site settings. The template test build uses the fake values in tests/fixtures/settings.template.yaml instead. */
 export async function getSettings() {
-  const entry = await getEntry('settings', 'settings');
+  const entry = SHOW_DRAFTS ? await getEntry('settingsTemplate', 'settings.template') : await getEntry('settings', 'settings');
   if (!entry) throw new Error('Missing content/settings.yaml. Restore it from git or save Site settings in Keystatic.');
   return entry.data;
 }
@@ -92,7 +93,7 @@ export async function getSettings() {
 export type Settings = Awaited<ReturnType<typeof getSettings>>;
 
 export async function getPeople() {
-  const people = await getCollection('people');
+  const people = await getCollection('people', isPublished);
   return people.sort((a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name));
 }
 

@@ -1,0 +1,29 @@
+# FAKE VALUES FOR THE TEMPLATE TEST BUILD ONLY (SHOW_DRAFTS=true).
+# They exist so the filled-in states of the footer, Contact, Donate and About
+# pages are tested before the real values are known. They are never used in
+# the production build. Real values go in content/settings.yaml through Keystatic.
+legalName: Example Legal Name (template test)
+ein: 00-0000000
+email: template-test@example.org
+phone: (000) 000-0000
+mailingAddress: |-
+  Example Street 1
+  Example City, NV 00000
+donationUrl: https://example.org/donate-template-test
+socialLinks:
+  - label: Example profile (template test)
+    url: https://example.org/profile-template-test
+missionEn: >-
+  Example mission statement, used only to test the About page template. It is
+  not the organization's mission.
+missionEs: >-
+  Declaración de misión de ejemplo, usada solo para probar la plantilla de la
+  página Acerca de. No es la misión de la organización.
+descriptionEn: >-
+  Creation and Connoisseur is a 501(c)(3) nonprofit focused on food insecurity
+  at UNLV, owned and run by Aryah Certain.
+descriptionEs: >-
+  Creation and Connoisseur es una organización sin fines de lucro 501(c)(3)
+  enfocada en la inseguridad alimentaria en UNLV. Pertenece a Aryah Certain,
+  quien también la dirige.
+foundingYear: null

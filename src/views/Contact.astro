@@ -1,6 +1,7 @@
 ---
-/** Contact: the page text, then any contact details entered in Site settings. */
+/** Contact: the page text, the contact form, then any contact details entered in Site settings. */
 import StandardPage from './StandardPage.astro';
+import Form from '../components/Form.astro';
 import type { Lang } from '../i18n/routes';
 import { t } from '../i18n/ui';
 import { getSettings } from '../lib/content';
@@ -15,6 +16,7 @@ const hasDetails = Boolean(settings.email || settings.phone || addressLines.leng
 ---
 
 <StandardPage lang={lang} pageKey="contact">
+  <Form lang={lang} kind="contact" />
   {
     hasDetails && (
       <section aria-labelledby="details-heading" class="mt-12 max-w-[68ch]">

@@ -3,6 +3,7 @@
  * Organization / NGO structured data.
  */
 import type { Lang } from '../i18n/routes';
+import { t } from '../i18n/ui';
 import { routes } from '../i18n/routes';
 import type { Settings } from './content';
 
@@ -13,9 +14,13 @@ export function absoluteUrl(path: string, site: URL | undefined): string {
   return new URL(path, site).href;
 }
 
-/** "Page title | Creation and Connoisseur", or just the name on the home page. */
-export function documentTitle(title: string, isHome: boolean): string {
-  if (isHome || title === SITE_NAME) return SITE_NAME;
+/**
+ * "Page title | Creation and Connoisseur". The home page gets
+ * "Creation and Connoisseur | <short description>" in its own language, so
+ * the English and Spanish home pages don't share a title.
+ */
+export function documentTitle(title: string, isHome: boolean, lang: Lang): string {
+  if (isHome) return `${SITE_NAME} | ${t(lang, 'site.homeTitleSuffix')}`;
   return `${title} | ${SITE_NAME}`;
 }
 

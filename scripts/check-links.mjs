@@ -29,6 +29,8 @@ const internal = await check({
   linksToSkip: async (link) => {
     if (!/^https?:/i.test(link)) return true;
     if (isInternal(link)) return false;
+    // example.org and example.com are reserved for documentation (RFC 2606); only the template build's fake settings use them.
+    if (/^https?:\/\/([^/]+\.)?example\.(org|com)(\/|$)/i.test(link)) return true;
     if (!external.has(link)) external.set(link, null);
     return true;
   },

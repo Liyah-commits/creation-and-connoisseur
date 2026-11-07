@@ -1,0 +1,16 @@
+---
+import Entry from '../../views/Entry.astro';
+import { getPrograms, type ProgramEntry } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const entries = await getPrograms('en');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+interface Props {
+  entry: ProgramEntry;
+}
+const { entry } = Astro.props;
+---
+
+<Entry lang="en" section="programs" entry={entry} />

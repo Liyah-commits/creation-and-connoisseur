@@ -68,11 +68,17 @@ function send(req, res, status, file, extraHeaders = {}) {
       headers['Content-Encoding'] = 'gzip';
     }
   }
+  // The browser may already have given up on this request (tests navigate fast).
+  if (res.destroyed || res.writableEnded) return;
   res.writeHead(status, headers);
   if (req.method === 'HEAD') return res.end();
   const stream = createReadStream(file);
-  if (encoder) pipeline(stream, encoder, res, () => {});
-  else pipeline(stream, res, () => {});
+  try {
+    if (encoder) pipeline(stream, encoder, res, () => {});
+    else pipeline(stream, res, () => {});
+  } catch {
+    stream.destroy();
+  }
 }
 
 const server = createServer(async (req, res) => {
@@ -106,6 +112,9 @@ const server = createServer(async (req, res) => {
   if (notFound) return send(req, res, 404, notFound);
   res.writeHead(404, { 'Content-Type': 'text/plain' }).end('Not found');
 });
+
+// A broken connection must never take the server down mid-run.
+server.on('clientError', (_error, socket) => socket.destroy());
 
 server.listen(port, '127.0.0.1', () => {
   console.log(`Serving ${root} at http://localhost:${port}/`);

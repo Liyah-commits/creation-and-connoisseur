@@ -1,0 +1,16 @@
+---
+import Entry from '../../../views/Entry.astro';
+import { getNews, type NewsEntry } from '../../../lib/content';
+
+export async function getStaticPaths() {
+  const entries = await getNews('es');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+interface Props {
+  entry: NewsEntry;
+}
+const { entry } = Astro.props;
+---
+
+<Entry lang="es" section="news" entry={entry} />
