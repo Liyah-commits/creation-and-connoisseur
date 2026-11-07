@@ -64,6 +64,7 @@ A running record of every choice made in the rebuild and why. Newest entries go 
 - **What:** `pnpm dev` saves edits straight to `content/`. A production build uses GitHub mode with the repo from `PUBLIC_KEYSTATIC_GITHUB_REPO` (`owner/name`).
 - **Why not fall back to local mode when the variable is missing:** local mode on a live site would expose a write API. Instead the admin shows a "not configured" repository until the variable is set. `docs/ADMIN_GUIDE.md` lists the variables.
 - **Navigation:** groups named English, Español and Shared, with plain-language help text on every field.
+- **One-time setup:** Keystatic creates its GitHub App through a setup screen that only runs in development with GitHub storage. `PUBLIC_KEYSTATIC_STORAGE=github` forces GitHub mode in `pnpm dev` for that step (added in Phase 4 while writing `docs/ADMIN_GUIDE.md`).
 
 **D14. Drafts: new entries start hidden; the template build shows them.**
 - **What:** programs and news posts have a "Hide from the live site" checkbox, ticked by default, so a half-written entry never goes live by accident. The production build excludes drafts. `SHOW_DRAFTS=true` (the template build) includes them, with a visible "Draft" label.
@@ -204,3 +205,9 @@ A running record of every choice made in the rebuild and why. Newest entries go 
 **D34. Windows High Contrast (forced colors) checked.** Screenshots in Chromium with `forced-colors: active` showed buttons keeping a visible border (the transparent border becomes a system-color border), focus rings in the system highlight color, the unavailable Donate button keeping its dashed border, and form errors still readable as text. No change was needed. Aryah's manual passes should repeat this on Windows (`docs/ACCESSIBILITY_TEST_REPORT.md`).
 
 **D35. Spanish About page: "Quiénes somos".** The navigation label "Acerca de" read as unfinished on its own. "Quiénes somos" is the usual Latin American label for an About page, and the page title now matches it (consistent identification, WCAG 3.2.4). The address stays `/es/acerca-de/`, so no link changes.
+
+## Phase 4: documents
+
+**D36. The test report doesn't claim conformance yet.** Every automated check passes with zero violations, but tools can't judge everything: whether descriptions make sense, how a screen reader sounds, real zoom behavior. The report marks those criteria "manual pending" and gives step-by-step passes (section 8). A WCAG 2.1 AA claim should be made after they're done, which is also what public-sector evaluators expect to see.
+
+**D37. Guides are written from the real screens.** Button names and messages in `docs/EDITOR_GUIDE.md` ("Add", "Create", "Save", "Choose file", the alt-text error) and the setup screen in `docs/ADMIN_GUIDE.md` ("Keystatic Setup", "Create GitHub App") were taken from the running admin during the build, not from memory.

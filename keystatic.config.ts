@@ -15,12 +15,16 @@ import { collection, config, fields, singleton } from '@keystatic/core';
 // The repository comes from PUBLIC_KEYSTATIC_GITHUB_REPO ("owner/name"). If it
 // isn't set, the admin shows a "not configured" repository rather than falling
 // back to local mode, which would expose a write API on the live site.
+//
+// PUBLIC_KEYSTATIC_STORAGE=github forces GitHub mode in development too. It's
+// only needed once, to run Keystatic's "create GitHub App" setup locally
+// (docs/ADMIN_GUIDE.md).
 const githubRepo = (import.meta.env.PUBLIC_KEYSTATIC_GITHUB_REPO ||
   'not-configured/set-PUBLIC_KEYSTATIC_GITHUB_REPO') as `${string}/${string}`;
 
-const storage = import.meta.env.DEV
-  ? ({ kind: 'local' } as const)
-  : ({ kind: 'github', repo: githubRepo } as const);
+const useLocalFiles = import.meta.env.DEV && import.meta.env.PUBLIC_KEYSTATIC_STORAGE !== 'github';
+
+const storage = useLocalFiles ? ({ kind: 'local' } as const) : ({ kind: 'github', repo: githubRepo } as const);
 
 // ---------------------------------------------------------------------------
 // Shared field builders

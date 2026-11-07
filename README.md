@@ -30,7 +30,11 @@ pnpm test:all   # type check, then the full suite on the production and template
 
 ## Documents
 
-- `docs/PLAN.md`: the plan and site map
-- `docs/DECISIONS.md`: every decision and why
+- `docs/EDITOR_GUIDE.md`: for volunteers updating content
+- `docs/ADMIN_GUIDE.md`: deploys, users, environment variables, backups, rollback
+- `docs/ACCESSIBILITY_TEST_REPORT.md`: WCAG 2.1 AA results and the manual test plan
+- `docs/SPANISH_REVIEW.md`: every Spanish file, for review before launch
 - `docs/OPEN_ITEMS.md`: facts and assets still needed
-- `docs/REDIRECTS.md` and `docs/CONTENT_INVENTORY.md`: migration records
+- `docs/DECISIONS.md`: every decision and why
+- `docs/PLAN.md`, `docs/BRIEF.md`: the plan and the original brief
+- `docs/REDIRECTS.md`, `docs/CONTENT_INVENTORY.md`: migration records

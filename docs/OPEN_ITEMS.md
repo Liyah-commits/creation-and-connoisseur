@@ -6,7 +6,7 @@ The site states only four facts, all from the brief: the name, the 501(c)(3) sta
 
 "Where to enter it" points to the Keystatic admin (`/keystatic`). In local development that's `http://127.0.0.1:4321/keystatic`.
 
-*(Working list from Phase 1. Phase 4 completes it.)*
+*(Final list, Phase 4, 6 November 2026. When an item is supplied, enter it, then delete it from this list.)*
 
 ## Organization facts
 
@@ -43,8 +43,9 @@ The site states only four facts, all from the brief: the name, the 501(c)(3) sta
 
 ## Launch
 
-22. **Production domain** (`SITE_URL`).
-23. **GitHub repository and the Keystatic GitHub App** for editing in production.
+22. **Production domain** (`SITE_URL`). Until it's set, canonical links and the sitemap use Vercel's production address.
+23. **GitHub repository and the Keystatic GitHub App** for editing in production, including whether the repository is public (a visible portfolio piece) or private. Nothing has been pushed or deployed (ruling D2); `docs/ADMIN_GUIDE.md` section 4 has the steps.
 24. **A Spanish-speaking reviewer**, and their sign-off on every file in `docs/SPANISH_REVIEW.md`.
 25. **Confirmation of the "tú" register** for the Spanish text (D25).
-26. **Aryah's manual accessibility passes:** keyboard, VoiceOver, NVDA, 200 percent zoom and color-blindness simulation, as listed in `docs/ACCESSIBILITY_TEST_REPORT.md`.
+26. **Aryah's manual accessibility passes:** keyboard, VoiceOver (macOS and iOS), NVDA, 200 percent zoom and color-blindness simulation, as listed in `docs/ACCESSIBILITY_TEST_REPORT.md` section 8. A WCAG 2.1 AA conformance claim waits on these.
+27. **Editors:** who will edit the site, and their GitHub accounts, so they can be given access (`docs/ADMIN_GUIDE.md` section 5).
