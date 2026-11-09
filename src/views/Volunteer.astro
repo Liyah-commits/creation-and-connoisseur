@@ -1,18 +1,15 @@
 ---
-/** Volunteer: the volunteering photo in the page header (from "Photos and stats" in Keystatic), the roles, and the volunteer form. */
+/** Volunteer: the roles and the volunteer form. The header photo comes from "Photos and stats" through StandardPage. */
 import StandardPage from './StandardPage.astro';
 import Form from '../components/Form.astro';
 import type { Lang } from '../i18n/routes';
-import { getHighlights } from '../lib/content';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
-const photo = (await getHighlights()).volunteerPhoto;
-const headerImage = photo.discriminant ? { src: photo.value.image, alt: lang === 'en' ? photo.value.altEn : photo.value.altEs } : null;
 ---
 
-<StandardPage lang={lang} pageKey="volunteer" headerImage={headerImage}>
+<StandardPage lang={lang} pageKey="volunteer">
   <Form lang={lang} kind="volunteer" />
 </StandardPage>

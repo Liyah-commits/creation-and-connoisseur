@@ -14,9 +14,9 @@
  * @fontsource files, so the images match the site. The mark is drawn the
  * same way as src/components/LogoMark.astro.
  *
- * `pnpm images -- --examples` also redraws the labeled example images used by
- * the draft example entries (template test build only). They keep their
- * original look, which their alt text describes.
+ * `pnpm images -- --examples` also redraws the labeled example image used by
+ * the draft example program (template test build only). It keeps its
+ * original look, which its alt text describes.
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -112,8 +112,8 @@ try {
   console.log('Wrote public/favicon.svg, public/favicon.ico (32 and 16), public/apple-touch-icon.png, public/og-image.png');
 
   if (process.argv.includes('--examples')) {
-    // Clearly labeled example images for the draft example entries. Their original colors are kept,
-    // because their alt text describes "a pattern of yellow dots".
+    // A clearly labeled example image for the draft example program. Its original colors are kept,
+    // because its alt text describes "a pattern of yellow dots". (People cards show initials only, D58.)
     const exampleColors = { background: '#FFF8EE', dots: '#F2B544', label: '#2B1D16', labelText: '#FFF8EE' };
     const serif = "Georgia, 'Iowan Old Style', 'Times New Roman', serif";
     const example = (label, width, height) => `<!doctype html><html><body style="margin:0">
@@ -122,12 +122,9 @@ try {
 </div></body></html>`;
     // Paths follow the layout Keystatic itself uses: <directory>/<slug>/<field path>/image.png
     const programImage = 'content/images/programs/en/example-program/image/value';
-    const personImage = 'content/images/people/example-person-with-photo/photo/value';
     await mkdir(programImage, { recursive: true });
-    await mkdir(personImage, { recursive: true });
     await writeFile(`${programImage}/image.png`, await render(example('Example image', 1200, 800), 1200, 800));
-    await writeFile(`${personImage}/image.png`, await render(example('Example', 600, 600), 600, 600));
-    console.log('Wrote example images in content/images/ (used only by draft example entries)');
+    console.log('Wrote the example image in content/images/ (used only by the draft example program)');
   }
 } finally {
   await browser.close();

@@ -13,7 +13,7 @@ import Prose from '../components/Prose.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import { alternatesFor, type Lang } from '../i18n/routes';
 import { t } from '../i18n/ui';
-import { getPage, getSettings, hasBody } from '../lib/content';
+import { getHeaderPhoto, getPage, getSettings, hasBody } from '../lib/content';
 
 interface Props {
   lang: Lang;
@@ -21,6 +21,7 @@ interface Props {
 const { lang } = Astro.props;
 const page = await getPage(lang, 'contact');
 const settings = await getSettings();
+const headerImage = await getHeaderPhoto(lang, 'contact');
 const addressLines = settings.mailingAddress.split('\n').map((line) => line.trim()).filter(Boolean);
 const hasSettingsDetails = Boolean(settings.email || settings.phone || addressLines.length);
 const hasSocial = settings.socialLinks.length > 0;
@@ -28,7 +29,7 @@ const hasDetails = hasSettingsDetails || hasBody(page) || hasSocial;
 ---
 
 <Base lang={lang} title={page.data.title} description={page.data.metaDescription} alternates={alternatesFor('contact')}>
-  <PageHeader title={page.data.title} intro={page.data.intro} />
+  <PageHeader title={page.data.title} intro={page.data.intro} image={headerImage} />
   <div class="container-page py-10 md:py-14">
     <Form lang={lang} kind="contact" />
     {

@@ -5,10 +5,4 @@ roleEn: Vice President and Social Media
 roleEs: Vicepresidenta y Encargada de Redes Sociales
 bioEn: "Favorite food: chicken tikka masala."
 bioEs: "Comida favorita: pollo tikka masala."
-photo:
-  discriminant: true
-  value:
-    image: ../images/people/mya/photo/value/image.webp
-    altEn: "Mya, Vice President and Social Media, holds a pool cue at a pool table."
-    altEs: "Mya, vicepresidenta y encargada de redes sociales, sostiene un taco de billar junto a una mesa de billar."
 order: 20

@@ -1,14 +1,18 @@
 ---
 /**
- * Home: the hero line as the page's one h1 (the Home page's Introduction
- * field; the Page title, the organization's name, stays the browser title and
- * search title, and the header wordmark already shows the name, D57) beside
- * the main photo, with one primary and one secondary button; the stats
- * strip on a sand band; the page text; the three ways to take part (the
- * Volunteer card shows the volunteering photo, D56); and the latest programs
- * and news. The photos and stats come from "Photos and stats (Home, About,
- * Volunteer)" in Keystatic. The main photo is the only image on the site that
- * is not lazy loaded: it is the likely largest paint, so it loads first.
+ * Home: the hero line as the page's one h1 (D57) beside the main photo, with
+ * one primary and one secondary button; the stats strip on a sand band; the
+ * page text; the three ways to take part, each card with a photo at the same
+ * 3:2 shape so the row is even; and the latest programs and news.
+ *
+ * No photo appears twice on the page (D58): photos are placed in page order,
+ * and a program or news photo already shown higher up is swapped for the next
+ * unused "Home page spare photo". Photos are compared by their alt text, which
+ * is the same for every copy of a photo in a language.
+ *
+ * Sections are 3rem apart on phones and 4rem on wider screens. The photos and
+ * stats come from "Photos and stats" in Keystatic. The main photo is the only
+ * image on the site that is not lazy loaded: it is the likely largest paint.
  */
 import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
@@ -16,7 +20,7 @@ import EntryCard from '../components/EntryCard.astro';
 import Prose from '../components/Prose.astro';
 import { alternatesFor, routes, type Lang } from '../i18n/routes';
 import { t, type UIKey } from '../i18n/ui';
-import { getHighlights, getNews, getPage, getPrograms } from '../lib/content';
+import { getHighlights, getNews, getPage, getPrograms, inLang, optionalInLang, type NewsEntry, type Photo, type ProgramEntry } from '../lib/content';
 
 interface Props {
   lang: Lang;
@@ -26,9 +30,8 @@ const page = await getPage(lang, 'home');
 const programs = (await getPrograms(lang)).slice(0, 3);
 const news = (await getNews(lang)).slice(0, 3);
 const highlights = await getHighlights();
-const hero = highlights.heroImage.discriminant ? highlights.heroImage.value : null;
+const hero = optionalInLang(highlights.heroImage, lang);
 const stats = highlights.stats;
-const volunteer = highlights.volunteerPhoto.discriminant ? highlights.volunteerPhoto.value : null;
 // The hero line is the h1. If it is ever left empty, the page title takes its place, so the page always has an h1.
 const heroHeading = page.data.intro || page.data.title;
 const statColumns = stats.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : stats.length === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2';
@@ -38,11 +41,29 @@ const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UI
   { key: 'volunteer', title: 'home.volunteerTitle', text: 'home.volunteerText' },
   { key: 'donate', title: 'home.donateTitle', text: 'home.donateText' },
 ];
+
+// No photo twice on this page: place photos in page order, swapping repeats for unused spares.
+const shown = new Set<string>();
+const spares = highlights.homeFallbackPhotos.map((photo) => inLang(photo, lang));
+function place(photo: Photo | null): Photo | null {
+  if (!photo) return null;
+  const chosen = shown.has(photo.alt) ? (spares.find((spare) => !shown.has(spare.alt)) ?? photo) : photo;
+  shown.add(chosen.alt);
+  return chosen;
+}
+const entryPhoto = (entry: ProgramEntry | NewsEntry): Photo | null => (entry.data.image.discriminant ? entry.data.image.value : null);
+
+place(hero);
+// The cards show photos only when all three have one, so the row stays even.
+const cardPhotoList = actions.map((action) => optionalInLang(highlights.homeCardPhotos[action.key], lang));
+const cardPhotos = cardPhotoList.every(Boolean) ? cardPhotoList.map(place) : actions.map(() => null);
+const programPhotos = programs.map((entry) => place(entryPhoto(entry)));
+const newsPhotos = news.map((entry) => place(entryPhoto(entry)));
 ---
 
 <Base lang={lang} title={page.data.title} description={page.data.metaDescription} alternates={alternatesFor('home')} isHome>
   <div class="border-b-2 border-sandstone bg-white">
-    <div class="container-page grid items-center gap-10 py-12 md:grid-cols-[3fr_2fr] md:py-20 lg:grid-cols-2">
+    <div class:list={['container-page grid items-center gap-10 py-12 md:py-16', hero && 'md:grid-cols-[3fr_2fr] lg:grid-cols-2']}>
       <div>
         <h1>{heroHeading}</h1>
         <div class="mt-8 flex flex-wrap gap-3">
@@ -54,7 +75,7 @@ const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UI
         hero ? (
           <Picture
             src={hero.image}
-            alt={lang === 'en' ? hero.altEn : hero.altEs}
+            alt={hero.alt}
             widths={[480, 800, 1200, 1600]}
             sizes="(min-width: 72rem) 33rem, (min-width: 64rem) 45vw, (min-width: 48rem) 36vw, 100vw"
             formats={['avif']}
@@ -63,9 +84,7 @@ const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UI
             fetchpriority="high"
             class="h-auto w-full rounded-xl border border-sandstone lg:aspect-[4/3] lg:object-cover"
           />
-        ) : (
-          <div class="placeholder-pattern hidden aspect-[4/3] rounded-xl border border-sandstone md:block" aria-hidden="true" />
-        )
+        ) : null
       }
     </div>
   </div>
@@ -90,68 +109,67 @@ const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UI
     )
   }
 
-  {
-    page.body?.trim() && (
-      <div class="container-page pt-12">
-        <Prose entry={page} />
-      </div>
-    )
-  }
+  <div class="container-page space-y-12 pt-12 md:space-y-16 md:pt-16">
+    {page.body?.trim() && <Prose entry={page} />}
 
-  <section class="container-page py-12" aria-labelledby="actions-heading">
-    <h2 id="actions-heading">{t(lang, 'home.actionsHeading')}</h2>
-    <ul class="mt-6 grid items-start gap-5 md:grid-cols-3" role="list">
-      {
-        actions.map((action) => (
-          <li class="card overflow-hidden">
-            {action.key === 'volunteer' && volunteer && (
-              <Picture
-                src={volunteer.image}
-                alt={lang === 'en' ? volunteer.altEn : volunteer.altEs}
-                widths={[400, 800]}
-                sizes="(min-width: 72rem) 22rem, (min-width: 48rem) 30vw, 100vw"
-                formats={['avif']}
-                fallbackFormat="webp"
-                class="h-auto w-full max-w-[900px] border-b border-sand"
-              />
-            )}
-            <div class="p-6">
-              <h3>
-                <a href={routes[action.key][lang]} class="text-ink">{t(lang, action.title)}</a>
-              </h3>
-              <p class="mt-2">{t(lang, action.text)}</p>
-            </div>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
+    <section aria-labelledby="actions-heading">
+      <h2 id="actions-heading">{t(lang, 'home.actionsHeading')}</h2>
+      <ul class="mt-6 grid gap-5 md:grid-cols-3" role="list">
+        {
+          actions.map((action, i) => {
+            const photo = cardPhotos[i];
+            return (
+              <li class="card flex flex-col overflow-hidden">
+                {photo && (
+                  <Picture
+                    src={photo.image}
+                    alt={photo.alt}
+                    widths={[400, 800]}
+                    sizes="(min-width: 72rem) 22rem, (min-width: 48rem) 30vw, 100vw"
+                    formats={['avif']}
+                    fallbackFormat="webp"
+                    class="aspect-[3/2] w-full border-b border-sand object-cover"
+                  />
+                )}
+                <div class="flex-1 p-6">
+                  <h3>
+                    <a href={routes[action.key][lang]} class="text-ink">{t(lang, action.title)}</a>
+                  </h3>
+                  <p class="mt-2">{t(lang, action.text)}</p>
+                </div>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </section>
 
-  {
-    programs.length > 0 && (
-      <section class="container-page py-12" aria-labelledby="programs-heading">
-        <h2 id="programs-heading">{t(lang, 'home.programsHeading')}</h2>
-        <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" role="list">
-          {programs.map((entry) => (
-            <li><EntryCard lang={lang} section="programs" entry={entry} headingLevel="h3" /></li>
-          ))}
-        </ul>
-        <p class="mt-6"><a href={routes.programs[lang]}>{t(lang, 'home.allPrograms')}</a></p>
-      </section>
-    )
-  }
+    {
+      programs.length > 0 && (
+        <section aria-labelledby="programs-heading">
+          <h2 id="programs-heading">{t(lang, 'home.programsHeading')}</h2>
+          <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" role="list">
+            {programs.map((entry, i) => (
+              <li><EntryCard lang={lang} section="programs" entry={entry} headingLevel="h3" photo={programPhotos[i]} /></li>
+            ))}
+          </ul>
+          <p class="mt-6"><a href={routes.programs[lang]}>{t(lang, 'home.allPrograms')}</a></p>
+        </section>
+      )
+    }
 
-  {
-    news.length > 0 && (
-      <section class="container-page py-12" aria-labelledby="news-heading">
-        <h2 id="news-heading">{t(lang, 'home.newsHeading')}</h2>
-        <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" role="list">
-          {news.map((entry) => (
-            <li><EntryCard lang={lang} section="news" entry={entry} headingLevel="h3" /></li>
-          ))}
-        </ul>
-        <p class="mt-6"><a href={routes.news[lang]}>{t(lang, 'home.allNews')}</a></p>
-      </section>
-    )
-  }
+    {
+      news.length > 0 && (
+        <section aria-labelledby="news-heading">
+          <h2 id="news-heading">{t(lang, 'home.newsHeading')}</h2>
+          <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" role="list">
+            {news.map((entry, i) => (
+              <li><EntryCard lang={lang} section="news" entry={entry} headingLevel="h3" photo={newsPhotos[i]} /></li>
+            ))}
+          </ul>
+          <p class="mt-6"><a href={routes.news[lang]}>{t(lang, 'home.allNews')}</a></p>
+        </section>
+      )
+    }
+  </div>
 </Base>

@@ -12,7 +12,7 @@ import PhotoGrid from '../components/PhotoGrid.astro';
 import Prose from '../components/Prose.astro';
 import { alternatesFor, type Lang } from '../i18n/routes';
 import { t } from '../i18n/ui';
-import { getHighlights, getPage, getPeople, getSettings, hasBody } from '../lib/content';
+import { getHeaderPhoto, getHighlights, getPage, getPeople, getSettings, hasBody, inLang } from '../lib/content';
 
 interface Props {
   lang: Lang;
@@ -23,12 +23,13 @@ const settings = await getSettings();
 const people = await getPeople();
 const nonprofitPeople = people.filter((person) => person.data.group === 'nonprofit');
 const clubBoard = people.filter((person) => person.data.group === 'clubBoard');
-const clubPhotos = (await getHighlights()).aboutPhotos.map((photo) => ({ image: photo.image, alt: lang === 'en' ? photo.altEn : photo.altEs }));
+const clubPhotos = (await getHighlights()).aboutPhotos.map((photo) => inLang(photo, lang));
+const headerImage = await getHeaderPhoto(lang, 'about');
 const mission = lang === 'en' ? settings.missionEn : settings.missionEs;
 ---
 
 <Base lang={lang} title={page.data.title} description={page.data.metaDescription} alternates={alternatesFor('about')}>
-  <PageHeader title={page.data.title} intro={page.data.intro} />
+  <PageHeader title={page.data.title} intro={page.data.intro} image={headerImage} />
   <div class="container-page space-y-14 py-10 md:py-14">
     {
       mission && (
@@ -74,7 +75,7 @@ const mission = lang === 'en' ? settings.missionEn : settings.missionEs;
       clubPhotos.length > 0 && (
         <section aria-labelledby="club-life-heading">
           <h2 id="club-life-heading">{t(lang, 'about.clubLifeHeading')}</h2>
-          <PhotoGrid photos={clubPhotos} class="mt-6" />
+          <PhotoGrid photos={clubPhotos} aspect="3/2" class="mt-6" />
         </section>
       )
     }

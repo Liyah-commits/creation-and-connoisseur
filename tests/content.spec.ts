@@ -122,16 +122,20 @@ test.describe('production build', () => {
       const board = headings.indexOf(ui['about.clubBoardHeading'][lang]);
       expect(people).toBeGreaterThanOrEqual(0);
       expect(board).toBe(people + 1);
-      // Aryah Certain's nonprofit card keeps its initials placeholder until a photo is chosen.
-      const founder = page.locator('section[aria-labelledby="people-heading"] article', { hasText: 'Aryah Certain' });
-      await expect(founder.locator('img')).toHaveCount(0);
-      // Nine board members, first names only, each with a described photo.
+      // Nine board members, first names only.
       const boardCards = page.locator('section[aria-labelledby="club-board-heading"] article');
       await expect(boardCards).toHaveCount(9);
-      for (const card of await boardCards.all()) {
-        await expect(card.locator('h3')).toHaveText(/^\S+$/);
-        await expect(card.locator('img')).toHaveAttribute('alt', /\S/);
+      for (const card of await boardCards.all()) await expect(card.locator('h3')).toHaveText(/^\S+$/);
+      // D58: every person card shows initials in a solid sage circle, never a photo.
+      const cards = page.locator('main article:has(h3)').filter({ has: page.locator('.initials') });
+      await expect(cards).toHaveCount(10);
+      for (const card of await cards.all()) {
+        await expect(card.locator('img')).toHaveCount(0);
+        await expect(card.locator('.initials')).toHaveCSS('background-color', 'rgb(63, 90, 71)');
+        await expect(card.locator('.initials span')).toHaveCSS('color', 'rgb(247, 243, 236)');
+        await expect(card.locator('.initials span')).toHaveText(/^[A-Z]{1,2}$/);
       }
+      await expect(page.locator('main article:has(h3)', { hasText: 'Aryah Certain' }).locator('.initials')).toHaveText('AC');
       await expect(page.locator('section[aria-labelledby="club-life-heading"] img')).toHaveCount(3);
     });
 
@@ -167,7 +171,7 @@ test.describe('production build', () => {
     }
   });
 
-  test('the volunteering photo: on Volunteer Days, the Volunteer page and the Home Volunteer card, never the hero, never wider than 900px', async ({ page }) => {
+  test('the volunteering photo: on Volunteer Days, the Volunteer page and the Home page, never the hero, never wider than 900px', async ({ page }) => {
     const placements = [
       [routes.home.en, /bag of groceries/],
       [routes.home.es, /bolsa de comestibles/],
@@ -191,12 +195,79 @@ test.describe('production build', () => {
         expect(found, path).toBeGreaterThan(0);
       }
     }
-    // The Volunteer page shows it in the page header; the Home Volunteer card shows it above its heading.
+    // The Volunteer page shows it in the page header (D58).
     await page.goto(routes.volunteer.en);
     await expect(page.locator('main > div').first().locator('img[alt*="bag of groceries"]')).toHaveCount(1);
-    await page.goto(routes.home.en);
-    const card = page.locator('section[aria-labelledby="actions-heading"] li', { hasText: ui['home.volunteerTitle'].en });
-    await expect(card.locator('img[alt*="bag of groceries"]')).toHaveCount(1);
+  });
+
+  test('no placeholder pattern or empty image slot anywhere, and no photo twice on any page', async ({ page }) => {
+    for (const path of PAGES) {
+      await page.goto(path);
+      await expect(page.locator('.placeholder-pattern'), path).toHaveCount(0);
+      const alts = await page.locator('main img').evaluateAll((imgs) => imgs.map((img) => (img as HTMLImageElement).alt));
+      for (const alt of alts) expect(alt.trim(), `${path}: an image without alt text`).not.toBe('');
+      const repeated = alts.filter((alt, i) => alts.indexOf(alt) !== i);
+      expect(repeated, `${path}: photos shown twice`).toEqual([]);
+    }
+  });
+
+  test('page header photos: 18rem and rounded on desktop, hidden on phones; none on Accessibility and Privacy', async ({ page }) => {
+    const withPhoto = (['about', 'programs', 'news', 'getHelp', 'donate', 'contact', 'volunteer'] as const).flatMap((key) => [routes[key].en, routes[key].es]);
+    const header = () => page.locator('main > div').first();
+    await page.setViewportSize({ width: 1280, height: 900 });
+    for (const path of withPhoto) {
+      await page.goto(path);
+      const img = header().locator('img');
+      await expect(img, path).toHaveCount(1);
+      await expect(img, path).toBeVisible();
+      await expect(img, path).toHaveAttribute('loading', 'lazy');
+      await expect(img, path).toHaveCSS('border-radius', '12px');
+      expect(Math.round((await img.boundingBox())!.width), path).toBe(288);
+    }
+    for (const path of [routes.accessibility.en, routes.accessibility.es, routes.privacy.en, routes.privacy.es]) {
+      await page.goto(path);
+      await expect(header().locator('img'), path).toHaveCount(0);
+      // The heading's column spans the full content width: no empty second column.
+      expect(await header().locator('.container-page').evaluate((el) => getComputedStyle(el).gridTemplateColumns.split(' ').length), path).toBe(1);
+    }
+    await page.setViewportSize({ width: 375, height: 812 });
+    for (const path of [routes.about.en, routes.volunteer.es]) {
+      await page.goto(path);
+      await expect(header().locator('img'), path).toBeHidden();
+    }
+  });
+
+  test('Home: the three "How you can take part" cards are an even row, each with a 3:2 photo', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    for (const lang of ['en', 'es'] as const) {
+      await page.goto(routes.home[lang]);
+      const cards = page.locator('section[aria-labelledby="actions-heading"] li');
+      await expect(cards).toHaveCount(3);
+      const boxes = await cards.evaluateAll((items) =>
+        items.map((li) => {
+          const img = li.querySelector('img')!.getBoundingClientRect();
+          return { height: li.getBoundingClientRect().height, ratio: img.width / img.height, headingTop: li.querySelector('h3')!.getBoundingClientRect().top };
+        }),
+      );
+      for (const box of boxes) {
+        expect(box.ratio).toBeCloseTo(1.5, 1);
+        expect(Math.abs(box.height - boxes[0]!.height)).toBeLessThan(1);
+        expect(Math.abs(box.headingTop - boxes[0]!.headingTop)).toBeLessThan(1);
+      }
+    }
+  });
+
+  test('Home: sections are at most 4rem apart on desktop and 3rem on phones', async ({ page }) => {
+    for (const [width, cap] of [[1280, 64], [375, 48]] as const) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto(routes.home.en);
+      const gaps = await page.locator('main section, footer').evaluateAll((els) => {
+        const out: number[] = [];
+        for (let i = 1; i < els.length; i++) out.push(Math.round(els[i]!.getBoundingClientRect().top - els[i - 1]!.getBoundingClientRect().bottom));
+        return out;
+      });
+      for (const gap of gaps) expect(gap, `gap at ${width}px: ${gaps.join(', ')}`).toBeLessThanOrEqual(cap);
+    }
   });
 
   test('images below the hero are lazy loaded', async ({ page }) => {
@@ -261,8 +332,8 @@ test.describe('template build', () => {
     await expect(page.getByRole('heading', { name: ui['home.newsHeading'].es })).toBeVisible();
     await page.goto(routes.about.es);
     await expect(page.getByRole('heading', { name: ui['about.missionHeading'].es })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Example Person With Photo' })).toBeVisible();
-    await expect(page.locator('main img[alt^="Foto de ejemplo"]')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Example Person Without Photo' })).toBeVisible();
+    await expect(page.locator('main article', { hasText: 'Example Person Without Photo' }).locator('.initials')).toHaveText('EP');
   });
 
   test('filled-in settings show: EIN, contact details, social links, working Donate link', async ({ page }) => {

@@ -23,7 +23,7 @@ const tagline = lang === 'en' ? settings.taglineEn : settings.taglineEs;
 const addressLines = settings.mailingAddress.split('\n').map((line) => line.trim()).filter(Boolean);
 ---
 
-<footer class="surface-dark mt-16 bg-sage-dark text-sand-50" aria-label={t(lang, 'footer.label')}>
+<footer class="surface-dark mt-12 bg-sage-dark text-sand-50 md:mt-16" aria-label={t(lang, 'footer.label')}>
   <div class="container-page grid gap-10 py-12 md:grid-cols-3">
     <div>
       <p class="flex items-center gap-2 font-serif text-2xl text-sand-50"><LogoMark size={24} tile />{SITE_NAME}</p>

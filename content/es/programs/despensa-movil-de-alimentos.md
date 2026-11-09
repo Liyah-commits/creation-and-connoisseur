@@ -8,7 +8,10 @@ summary: >-
 schedule: 'Previsto: distribuciones mensuales a partir de 2027'
 location: Los sitios se anunciarán aquí y en nuestras redes sociales cuando se confirmen
 image:
-  discriminant: false
+  discriminant: true
+  value:
+    image: ../../images/programs/es/despensa-movil-de-alimentos/image/value/image.webp
+    alt: "Dos asistentes sonríen y señalan a la cámara desde una mesa con platos y bebidas."
 ---
 Estamos planeando una despensa móvil de alimentos, prevista para 2027, que llevaría alimentos gratuitos directamente a los estudiantes de UNLV y a los vecindarios de Las Vegas donde llegar a un banco de alimentos es difícil. El plan es realizar distribuciones mensuales sin papeleo ni comprobante de ingresos, abiertas a cualquier persona que necesite alimentos.
 

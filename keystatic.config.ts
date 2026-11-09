@@ -110,7 +110,7 @@ const galleryField = (folder: string, publicPath: string) =>
     },
   );
 
-/** A photo used in both languages, with a description in each (People, Home and About photos). */
+/** A photo used in both languages, with a description in each (the shared "Photos and stats" screen). */
 const bilingualPhoto = (directory: string, publicPath: string, imageDescription: string) =>
   fields.object({
     image: fields.image({
@@ -131,6 +131,24 @@ const bilingualPhoto = (directory: string, publicPath: string, imageDescription:
       validation: { length: { min: 1, max: 250 } },
     }),
   });
+
+/** An optional photo in the shared "Photos and stats" screen, with descriptions in both languages. */
+const optionalPhoto = (label: string, where: string) =>
+  fields.conditional(
+    fields.checkbox({
+      label: `${label}: show a photo`,
+      description: `Tick this to add the ${where} photo.`,
+      defaultValue: false,
+    }),
+    {
+      true: bilingualPhoto(
+        'content/images/highlights',
+        './images/highlights/',
+        'A JPG, PNG or WebP photo, at least 1200 pixels wide. Only use photos you have permission to use.',
+      ),
+      false: fields.empty(),
+    },
+  );
 
 const draftField = () =>
   fields.checkbox({
@@ -350,35 +368,6 @@ export default config({
           description: 'The same bio, in Spanish. Optional.',
           multiline: true,
         }),
-        photo: fields.conditional(
-          fields.checkbox({
-            label: 'Add a photo',
-            description: 'Tick this to add a photo. Without one, the site shows the person\'s initials.',
-            defaultValue: false,
-          }),
-          {
-            true: fields.object({
-              image: fields.image({
-                label: 'Photo',
-                description: 'A square photo works best, at least 600 pixels wide. Only use a photo the person has agreed to.',
-                directory: 'content/images/people',
-                publicPath: '../images/people/',
-                validation: { isRequired: true },
-              }),
-              altEn: fields.text({
-                label: 'Photo description (English)',
-                description: 'For example: "Portrait of Jane Doe smiling outdoors."',
-                validation: { length: { min: 1, max: 250 } },
-              }),
-              altEs: fields.text({
-                label: 'Photo description (Spanish)',
-                description: 'The same description, in Spanish. For example: "Retrato de Jane Doe sonriendo al aire libre."',
-                validation: { length: { min: 1, max: 250 } },
-              }),
-            }),
-            false: fields.empty(),
-          },
-        ),
         order: fields.integer({
           label: 'Order',
           description: 'People are listed from the lowest number to the highest. Use 10, 20, 30 so it is easy to fit someone in between.',
@@ -390,7 +379,7 @@ export default config({
   },
   singletons: {
     highlights: singleton({
-      label: 'Photos and stats (Home, About, Volunteer)',
+      label: 'Photos and stats',
       path: 'content/highlights',
       format: { data: 'yaml' },
       schema: {
@@ -440,20 +429,41 @@ export default config({
             validation: { length: { max: 4 } },
           },
         ),
-        volunteerPhoto: fields.conditional(
-          fields.checkbox({
-            label: 'Show a volunteering photo',
-            description:
-              'Tick this to add a photo of volunteers at work. It appears at the top of the Volunteer page and in the Volunteer card on the Home page. Never use a photo that shows the face of someone receiving food.',
-            defaultValue: false,
-          }),
+        headerPhotos: fields.object(
           {
-            true: bilingualPhoto(
-              'content/images/highlights',
-              './images/highlights/',
-              'A JPG, PNG or WebP photo, at least 900 pixels wide. It is shown at most 900 pixels wide. Only use photos you have permission to use.',
-            ),
-            false: fields.empty(),
+            about: optionalPhoto('About', 'About page header'),
+            programs: optionalPhoto('Programs', 'Programs page header'),
+            news: optionalPhoto('News', 'News page header'),
+            getHelp: optionalPhoto('Get help', 'Get help page header'),
+            donate: optionalPhoto('Donate', 'Donate page header'),
+            contact: optionalPhoto('Contact', 'Contact page header'),
+            volunteer: optionalPhoto('Volunteer', 'Volunteer page header'),
+          },
+          {
+            label: 'Page header photos',
+            description:
+              'One photo for the top of each page, about 18rem wide on computers and hidden on phones. Pages without a photo show their heading across the full width. Never use a photo that shows the face of someone receiving food, or one that already appears lower on the same page.',
+          },
+        ),
+        homeCardPhotos: fields.object(
+          {
+            getHelp: optionalPhoto('Get help card', 'Home page Get help card'),
+            volunteer: optionalPhoto('Volunteer card', 'Home page Volunteer card'),
+            donate: optionalPhoto('Donate card', 'Home page Donate card'),
+          },
+          {
+            label: 'Home page card photos',
+            description: 'The photos on the three "How you can take part" cards. They are cropped to the same 3:2 shape so the row stays even, so landscape photos work best. Give all three a photo, or none.',
+          },
+        ),
+        homeFallbackPhotos: fields.array(
+          bilingualPhoto('content/images/highlights', './images/highlights/', 'A landscape JPG, PNG or WebP photo, at least 1200 pixels wide.'),
+          {
+            label: 'Home page spare photos',
+            description:
+              'Used, in order, on the Home page in place of a program or news photo that already appears higher on the page, so no photo shows twice. Pick photos that are not used elsewhere on the Home page.',
+            itemLabel: (props) => props.fields.altEn.value || 'New photo',
+            validation: { length: { max: 4 } },
           },
         ),
         aboutPhotos: fields.array(

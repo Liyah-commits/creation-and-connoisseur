@@ -225,16 +225,6 @@
     }
   }
 
-  /* Decorative placeholder used where a photo is still missing. Always aria-hidden. */
-  .placeholder-pattern {
-    background-color: var(--color-sand);
-    background-image:
-      radial-gradient(circle at 25% 25%, var(--color-sandstone) 0 14%, transparent 15%),
-      radial-gradient(circle at 75% 75%, var(--color-sandstone) 0 14%, transparent 15%),
-      linear-gradient(135deg, transparent 46%, rgb(63 90 71 / 0.16) 47% 53%, transparent 54%);
-    background-size: 2.5rem 2.5rem;
-  }
-
   /* Cards: white, a 1px sand border, 12px corners, no shadow. */
   .card {
     background-color: var(--color-white);

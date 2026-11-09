@@ -1,6 +1,10 @@
 ---
-/** One person on the About page. Without a photo, a decorative initials block stands in. */
-import { Picture } from 'astro:assets';
+/**
+ * One person on the About page. Every card shows the person's initials in a
+ * solid sage circle (sand-50 text, DM Serif Display, 6.87:1), never a photo
+ * (D58): the club portraits have names and titles burned in. The circle is
+ * decorative (aria-hidden), because the name is the card's heading.
+ */
 import type { CollectionEntry } from 'astro:content';
 import type { Lang } from '../i18n/routes';
 
@@ -9,7 +13,7 @@ interface Props {
   person: CollectionEntry<'people'>;
 }
 const { lang, person } = Astro.props;
-const { name, photo } = person.data;
+const { name } = person.data;
 const role = lang === 'en' ? person.data.roleEn : person.data.roleEs;
 const bio = lang === 'en' ? person.data.bioEn : person.data.bioEs;
 const initials = name
@@ -20,18 +24,10 @@ const initials = name
   .join('');
 ---
 
-<article class="card flex gap-5 p-5">
-  {
-    photo.discriminant ? (
-      <div class="size-28 shrink-0 overflow-hidden rounded-full border border-sandstone">
-        <Picture src={photo.value.image} alt={lang === 'en' ? photo.value.altEn : photo.value.altEs} widths={[112, 224]} sizes="7rem" formats={['avif']} fallbackFormat="webp" class="size-full object-cover" />
-      </div>
-    ) : (
-      <div class="placeholder-pattern flex size-28 shrink-0 items-center justify-center rounded-full border border-sandstone" aria-hidden="true">
-        <span class="inline-block rounded bg-white px-2 py-0.5 font-serif text-2xl leading-tight text-ink">{initials}</span>
-      </div>
-    )
-  }
+<article class="card flex h-full gap-5 p-5">
+  <div class="initials flex size-28 shrink-0 items-center justify-center rounded-full bg-sage" aria-hidden="true">
+    <span class="font-serif text-4xl leading-none text-sand-50">{initials}</span>
+  </div>
   <div>
     <h3>{name}</h3>
     {role && <p class="mt-1 font-semibold text-ink-muted">{role}</p>}

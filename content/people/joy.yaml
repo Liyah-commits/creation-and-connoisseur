@@ -5,10 +5,4 @@ roleEn: Secretary
 roleEs: Secretaria
 bioEn: "Favorite food: flan napolitano."
 bioEs: "Comida favorita: flan napolitano."
-photo:
-  discriminant: true
-  value:
-    image: ../images/people/joy/photo/value/image.webp
-    altEn: "Joy, Secretary, smiles while lining up a shot at a pool table."
-    altEs: "Joy, secretaria, sonríe mientras se prepara para tirar en una mesa de billar."
 order: 30

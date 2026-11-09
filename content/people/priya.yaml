@@ -5,10 +5,4 @@ roleEn: Event Organizer
 roleEs: Organizadora de Eventos
 bioEn: "Favorite food: sushi and birria tacos."
 bioEs: "Comida favorita: sushi y tacos de birria."
-photo:
-  discriminant: true
-  value:
-    image: ../images/people/priya/photo/value/image.webp
-    altEn: "Priya, Event Organizer, smiles while lining up a shot at a pool table."
-    altEs: "Priya, organizadora de eventos, sonríe mientras se prepara para tirar en una mesa de billar."
 order: 40

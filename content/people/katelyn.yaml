@@ -5,10 +5,4 @@ roleEn: Volunteer Coordinator
 roleEs: Coordinadora de Voluntarios
 bioEn: "Favorite food: mochiko chicken with spicy ahi poke."
 bioEs: "Comida favorita: pollo mochiko con poke de atún ahi picante."
-photo:
-  discriminant: true
-  value:
-    image: ../images/people/katelyn/photo/value/image.webp
-    altEn: "Katelyn, Volunteer Coordinator, leans on a railing outdoors."
-    altEs: "Katelyn, coordinadora de voluntarios, se apoya en un barandal al aire libre."
 order: 60

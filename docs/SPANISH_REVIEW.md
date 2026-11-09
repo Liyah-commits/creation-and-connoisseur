@@ -70,22 +70,22 @@ Each file holds the page title, the search result description, the introduction 
 
 ## Programs (`content/es/programs/`, published 7 November 2026)
 
-- [ ] `content/es/programs/unlv-food-tasting-club.md`: UNLV Food Tasting Club. **Changed (new).** **Changed 9 November 2026:** "Misión del club" (translated from the club's English mission), the club email line, a main photo and two more photos with supplied descriptions. **Changed again (D54):** the short summary, shown as the page introduction and on the card, is now "Noches culturales que celebran las culturas que forman Nevada." (supplied).
+- [ ] `content/es/programs/unlv-food-tasting-club.md`: UNLV Food Tasting Club. **Changed (new).** **Changed 9 November 2026:** "Misión del club" (translated from the club's English mission), the club email line, a main photo and two more photos with supplied descriptions. **Changed again (D54):** the short summary, shown as the page introduction and on the card, is now "Noches culturales que celebran las culturas que forman Nevada." (supplied). **Changed again (D58):** the main photo is now the mariachi group (supplied description), and the extra photos are down to one.
 - [ ] `content/es/programs/jornadas-de-voluntariado.md`: Jornadas de Voluntariado (`/es/programas/jornadas-de-voluntariado/`). **Changed 9 November 2026:** renamed from `voluntariado-quincenal.md` ("Voluntariado Quincenal"), new name, summary and schedule line (supplied), "Cada dos semanas" removed, partners line added, photo added (D48). **Changed again (D56):** the photo is now the volunteering photo, with its supplied description ("Una voluntaria entrega una bolsa de comestibles…").
-- [ ] `content/es/programs/despensa-movil-de-alimentos.md`: Despensa Móvil de Alimentos (prevista para 2027). **Changed (new).**
+- [ ] `content/es/programs/despensa-movil-de-alimentos.md`: Despensa Móvil de Alimentos (prevista para 2027). **Changed (new).** **Changed 9 November 2026 (D58):** photo added, with its supplied description.
 
 ## News (`content/es/news/`, published 9 November 2026)
 
 All **Changed 9 November 2026 (new)**. Each has two paragraphs written from `photos-inbox/FACTS.md`, a summary, and photo descriptions as supplied.
 
 - [ ] `content/es/news/taste-of-the-philippines.md`: Taste of the Philippines (22 de octubre de 2026)
-- [ ] `content/es/news/voluntariado-en-three-square.md`: Voluntariado en Three Square: más de 100 familias alimentadas en dos horas (6 de noviembre de 2026)
+- [ ] `content/es/news/voluntariado-en-three-square.md`: Voluntariado en Three Square: más de 100 familias alimentadas en dos horas (6 de noviembre de 2026). **Changed 9 November 2026 (D58):** photo added, with its supplied description.
 - [ ] `content/es/news/thai-night.md`: Thai Night (2 de abril de 2026)
 - [ ] `content/es/news/down-by-the-bayou.md`: Down By The Bayou alcanza su capacidad máxima (23 de octubre de 2025)
 
 ## People
 
-- [ ] Club board, **Changed 9 November 2026 (new)**: `roleEs`, `bioEs` ("Comida favorita: …") and `altEs` (supplied) in `content/people/aryah.yaml`, `mya.yaml`, `joy.yaml`, `priya.yaml`, `zau.yaml`, `katelyn.yaml`, `emily.yaml`, `george.yaml` and `jaziel.yaml`. Check the food names read naturally ("sándwich po'boy de camarón", "pollo mochiko con poke de atún ahi picante").
+- [ ] Club board, **Changed 9 November 2026 (new)**: `roleEs` and `bioEs` ("Comida favorita: …") in `content/people/aryah.yaml`, `mya.yaml`, `joy.yaml`, `priya.yaml`, `zau.yaml`, `katelyn.yaml`, `emily.yaml`, `george.yaml` and `jaziel.yaml`. Check the food names read naturally ("sándwich po'boy de camarón", "pollo mochiko con poke de atún ahi picante").
 - [ ] `content/people/aryah-certain.yaml`: `roleEs` and `bioEs`. **Changed (new; published 7 November 2026).** The last sentence of the bio was revised to "…y la despensa móvil de alimentos que está en planificación". **Changed 9 November 2026 (D54):** the membership named in the second sentence was removed; it now reads "es fundadora de dos empresas locales".
 
 ## Interface text
@@ -97,7 +97,7 @@ All **Changed 9 November 2026 (new)**. Each has two paragraphs written from `pho
 ## Organization text
 
 - [ ] `content/settings.yaml`: `missionEs` (the mission, rewritten so the pantry is planned), `taglineEs` (the tagline, also used for social bios), `unlvStatementEs` (the relationship to UNLV, shown in every footer) and `descriptionEs` (search results and social previews). **Changed.** **Changed 9 November 2026:** `missionEs` is now "Creation and Connoisseur combate la inseguridad alimentaria en UNLV y en todo Las Vegas.", with no pantry wording (D53).
-- [ ] `content/highlights.yaml` (Shared > Photos and stats (Home, About, Volunteer)): the stats and the photo descriptions (`altEs`, supplied). **Changed again (D56):** new volunteering photo description (`volunteerPhoto.altEs`, supplied). **Changed 9 November 2026 (new).** **Changed again (D54):** the stats are now "1,000+ personas alimentadas", "100+ familias alimentadas" and "Cientos de estudiantes en noches culturales" (`valueEs` "Cientos", all supplied).
+- [ ] `content/highlights.yaml` (Shared > Photos and stats): the stats and the photo descriptions (`altEs`, supplied). **Changed again (D58):** new `altEs` for the seven page header photos, the three Home card photos, the two Home spare photos and the club life photos (all supplied, word for word). **Changed again (D56):** new volunteering photo description (`volunteerPhoto.altEs`, supplied). **Changed 9 November 2026 (new).** **Changed again (D54):** the stats are now "1,000+ personas alimentadas", "100+ familias alimentadas" and "Cientos de estudiantes en noches culturales" (`valueEs` "Cientos", all supplied).
 
 ## Template examples (never published)
 
@@ -105,7 +105,7 @@ These are drafts used only by the test build, but they show editors what good Sp
 
 - [ ] `content/es/programs/programa-de-ejemplo.md`
 - [ ] `content/es/news/noticia-de-ejemplo.md`
-- [ ] `content/people/example-person-with-photo.yaml` and `content/people/example-person-without-photo.yaml` (the `roleEs`, `bioEs` and `altEs` fields)
+- [ ] `content/people/example-person-without-photo.yaml` (the `roleEs` and `bioEs` fields). The example person with a photo was removed on 9 November 2026: people have no photo field now (D58).
 - [ ] `tests/fixtures/settings.template.yaml`: `missionEs`, `taglineEs` and `unlvStatementEs` (fake text for tests). **Changed.**
 
 ## Editor screens (optional)
@@ -115,3 +115,5 @@ These are drafts used only by the test build, but they show editors what good Sp
 ## Adding Spanish later
 
 Whenever a Spanish page, program, news post or person is added or changed, a Spanish speaker should review it before **Hide from the live site** is unticked. Add new files to this list, and uncheck any file that changes.
+
+No interface strings were added on 9 November 2026 for the photo changes (D58): every new Spanish text is a supplied photo description.

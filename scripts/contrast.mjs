@@ -36,6 +36,7 @@ const PAIRS = [
   ['sand-50', 'sage-dark', 'text', 'Footer text and headings'],
   ['sandstone', 'sage-dark', 'text', 'Footer links'],
   ['sand-50', 'ink', 'text', 'The skip link'],
+  ['sand-50', 'sage', 'text', 'Initials in the sage circle on every person card (DM Serif Display)'],
   ['focus', 'sand-50', 'non-text', 'Focus indicator on the page background'],
   ['focus', 'white', 'non-text', 'Focus indicator on cards, page headers and forms'],
   ['sand-50', 'sage-dark', 'non-text', 'Focus indicator in the footer'],

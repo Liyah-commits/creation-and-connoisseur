@@ -86,26 +86,28 @@ To **add** a new program, follow the same steps as a news post: create it in Eng
 
 Every photo needs a description (alt text) for people who can't see it. The site won't let you save a photo without one.
 
-1. On the program, news post or person, tick **Add an image** (on a person: **Add a photo**).
-2. Choose **Choose file** and pick a JPG, PNG or WebP from your computer, at least 1200 pixels wide (600 for people). Only use photos you have permission to use, and that the people in them have agreed to.
+1. On the program or news post, tick **Add an image**. (People have no photo: their cards show their initials.)
+2. Choose **Choose file** and pick a JPG, PNG or WebP from your computer, at least 1200 pixels wide. Only use photos you have permission to use, and that the people in them have agreed to.
 3. In **Image description (alt text)**, describe what the photo shows in one sentence, as you would to someone on the phone:
    - Good: "Two volunteers packing bags of groceries at a folding table."
    - Not helpful: "Image of volunteers", "photo123.jpg", or the same words as the headline.
    - Don't start with "Image of" or "Photo of": screen readers already say it's an image.
-4. For a person, fill in both **Photo description (English)** and **Photo description (Spanish)**.
 5. Choose **Save** (or **Create**). If you forgot the description, the editor shows "Image description (alt text) must not be empty" and doesn't save until you add it.
 
 The Spanish version of a program or post has its own **Add an image** box. Add the same photo there with a Spanish description, or leave it off.
 
 To remove an image, untick **Add an image** and save. To remove one of the **More photos**, open its menu in the list and delete it.
 
-## Change the Home page photo and stats, the volunteering photo, or the About page's club photos
+## Change the shared photos and stats (Home, page headers, About)
 
-Choose **Photos and stats (Home, About, Volunteer)** (under Shared). It's one screen for both languages:
+Choose **Photos and stats** (under Shared). It's one screen for both languages:
 
 - **Show a photo at the top of the Home page**: the main Home photo, with a description in English and in Spanish. Use a landscape photo. It loads first, so keep it to one good photo.
 - **Home page stats**: up to four figures, shown in a strip under the photo. Each has a **Number or word** (written exactly as it should appear, like "1,000+" or "Hundreds"), its Spanish wording if it's a word ("Cientos"), and what it counts, in English and in Spanish. Only publish a figure you can point to a source for. Don't show Instagram reach, impressions or follower counts.
-- **Show a volunteering photo**: a photo of volunteers at work, with a description in English and in Spanish. It appears in the Volunteer page's header and in the Volunteer card on the Home page, and is never shown wider than 900 pixels. Never use a photo that shows the face of someone receiving food. Put the same photo on the Volunteer Days program (its **Add an image**) so its card matches.
+- **Page header photos**: one photo each for About, Programs, News, Get help, Donate, Contact and Volunteer, with descriptions in both languages. It shows at the top right of the page on computers (cropped to 4:3 from the top) and is hidden on phones. Leave one off and that page's heading uses the full width. Accessibility and Privacy have none.
+- **Home page card photos**: the photos on the three "How you can take part" cards. They're cropped to the same 3:2 shape so the row is even. Give all three a photo, or none.
+- **Home page spare photos**: the Home page never shows the same photo twice. If a program or news card would repeat a photo shown higher up, it uses the next spare instead. Keep at least two spares that aren't used elsewhere on the Home page.
+- **Never** use a photo that shows the face of someone receiving food, or one with a name printed on it.
 - **Club life photos (About page)**: up to six photos, shown on About under "Club life", each with a description in both languages.
 
 ## Edit a fixed page (Home, About, Get help…)
@@ -117,7 +119,7 @@ Choose **Photos and stats (Home, About, Volunteer)** (under Shared). It's one sc
 
 On **Home**, the **Introduction** is the main heading at the top of the page (the hero line). The **Page title** (the organization's name) isn't shown on the page. It's the title in the browser tab and in search results, and the header already shows the name.
 
-On **About**, the main text appears as "Our story". The mission comes from **Site settings**, the people from **People** (in two groups, see "Add a person"), and the club life photos from **Photos and stats (Home, About, Volunteer)**.
+On **About**, the main text appears as "Our story". The mission comes from **Site settings**, the people from **People** (in two groups, see "Add a person"), and the header and club life photos from **Photos and stats**. A photo shouldn't appear twice on one page, so don't use the About header photo in club life too.
 
 On **Contact**, the main text appears under "Other ways to reach us", below the form. It holds the UNLV Food Tasting Club's email line. Keep the club's unlv.edu address there and on the club's program page only: never in Site settings or the footer, because a university address shown everywhere would suggest the university endorses the nonprofit.
 
@@ -141,7 +143,7 @@ Choose **Site settings** (under Shared). Fill in a field only when the informati
 1. Choose **People** > **Add**.
 2. Fill in **Name**, **Role** and **Short bio** in English and Spanish. Student club board members are listed by first name only, unless they agree to a full name online.
 3. **Group**: "Creation and Connoisseur" lists the person under "Our people" on About. "UNLV Food Tasting Club board" lists them in the second group, under that heading.
-4. Photo: add one with descriptions in both languages, or leave it off and the site shows their initials.
+4. There is no photo: every person card shows the person's initials in a sage circle, so the cards match and no photo with a name printed on it is ever used.
 5. **Order** sets the position in the list, lowest first. Use 10, 20, 30… so it's easy to fit someone in later.
 6. Untick **Hide from the live site** when the person has approved what's written about them, then choose **Create** or **Save**.
 

@@ -31,9 +31,18 @@ const optionalImage = (image: ImageFn) =>
 /** Keystatic's "More photos" list: each photo with its alt text. Missing means none. */
 const gallery = (image: ImageFn) => z.array(z.object({ image: image(), alt: z.string().trim().min(1) })).default([]);
 
-/** A photo used in both languages, with alt text in each (Home and About photos). */
+/** A photo used in both languages, with alt text in each (the shared "Photos and stats" screen). */
 const bilingualPhoto = (image: ImageFn) =>
   z.object({ image: image(), altEn: z.string().trim().min(1), altEs: z.string().trim().min(1) });
+
+/** Keystatic's "show a photo" conditional around a bilingual photo: off, or the photo. */
+const optionalPhoto = (image: ImageFn) =>
+  z
+    .discriminatedUnion('discriminant', [
+      z.object({ discriminant: z.literal(false) }),
+      z.object({ discriminant: z.literal(true), value: bilingualPhoto(image) }),
+    ])
+    .default({ discriminant: false });
 
 /** Keystatic writes empty text fields as "" and empty optional fields as null. */
 const optionalText = z
@@ -77,7 +86,8 @@ const newsSchema = ({ image }: SchemaContext) =>
 
 const people = defineCollection({
   loader: files('*.yaml', './content/people'),
-  schema: ({ image }) =>
+  // No photo field: person cards show initials only (D58).
+  schema: () =>
     z.object({
       name: z.string().trim().min(1),
       draft: z.boolean().default(false),
@@ -87,19 +97,6 @@ const people = defineCollection({
       roleEs: optionalText,
       bioEn: optionalText,
       bioEs: optionalText,
-      photo: z
-        .discriminatedUnion('discriminant', [
-          z.object({ discriminant: z.literal(false) }),
-          z.object({
-            discriminant: z.literal(true),
-            value: z.object({
-              image: image(),
-              altEn: z.string().trim().min(1),
-              altEs: z.string().trim().min(1),
-            }),
-          }),
-        ])
-        .default({ discriminant: false }),
       order: z.number().int().default(10),
     }),
 });
@@ -128,7 +125,7 @@ const settingsSchema = z.object({
 
 const settings = defineCollection({ loader: files('settings.yaml', './content'), schema: settingsSchema });
 
-/** Home page photo and stats, the volunteering photo (Volunteer page and Home), and the About page's club life photos (Keystatic singleton "highlights"). */
+/** The shared photos and stats (Keystatic singleton "highlights", "Photos and stats"): the Home photo and stats, page header photos, Home card and spare photos, and the About page's club life photos. */
 const highlights = defineCollection({
   loader: files('highlights.yaml', './content'),
   schema: ({ image }) =>
@@ -151,12 +148,23 @@ const highlights = defineCollection({
         )
         .max(4)
         .default([]),
-      volunteerPhoto: z
-        .discriminatedUnion('discriminant', [
-          z.object({ discriminant: z.literal(false) }),
-          z.object({ discriminant: z.literal(true), value: bilingualPhoto(image) }),
-        ])
-        .default({ discriminant: false }),
+      headerPhotos: z
+        .object({
+          about: optionalPhoto(image),
+          programs: optionalPhoto(image),
+          news: optionalPhoto(image),
+          getHelp: optionalPhoto(image),
+          donate: optionalPhoto(image),
+          contact: optionalPhoto(image),
+          volunteer: optionalPhoto(image),
+        })
+        // prefault: a missing object is parsed as {}, so each photo gets its own "off" default.
+        .prefault({}),
+      homeCardPhotos: z
+        .object({ getHelp: optionalPhoto(image), volunteer: optionalPhoto(image), donate: optionalPhoto(image) })
+        // prefault: a missing object is parsed as {}, so each photo gets its own "off" default.
+        .prefault({}),
+      homeFallbackPhotos: z.array(bilingualPhoto(image)).default([]),
       aboutPhotos: z.array(bilingualPhoto(image)).default([]),
     }),
 });

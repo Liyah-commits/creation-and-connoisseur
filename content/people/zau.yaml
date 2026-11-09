@@ -5,10 +5,4 @@ roleEn: Event Organizer
 roleEs: Organizador de Eventos
 bioEn: "Favorite food: fufu and egusi."
 bioEs: "Comida favorita: fufu y egusi."
-photo:
-  discriminant: true
-  value:
-    image: ../images/people/zau/photo/value/image.webp
-    altEn: "Zau, Event Organizer, lines up a shot at a pool table."
-    altEs: "Zau, organizador de eventos, se prepara para tirar en una mesa de billar."
 order: 50

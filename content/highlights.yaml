@@ -17,19 +17,82 @@ stats:
     valueEs: Cientos
     labelEn: of students at culture nights
     labelEs: de estudiantes en noches culturales
-volunteerPhoto:
-  discriminant: true
-  value:
-    image: ./images/highlights/volunteerPhoto/value/image.webp
-    altEn: "A volunteer hands a bag of groceries to a man with a rolling cart at an outdoor food distribution, beside a table of donated food boxes."
-    altEs: "Una voluntaria entrega una bolsa de comestibles a un hombre con un carrito en una distribución de alimentos al aire libre, junto a una mesa con cajas de alimentos donados."
-aboutPhotos:
-  - image: ./images/highlights/aboutPhotos/0/image.webp
-    altEn: "The six members of the 2026 to 2027 UNLV Food Tasting Club executive board pose together on a city street."
-    altEs: "Los seis miembros de la junta ejecutiva 2026 a 2027 del UNLV Food Tasting Club posan juntos en una calle de la ciudad."
-  - image: ./images/highlights/aboutPhotos/1/image.webp
-    altEn: "About thirty students pose under a Food Tasting Club slide at the spring 2026 welcome back pizza and karaoke night."
-    altEs: "Unos treinta estudiantes posan bajo una diapositiva del Food Tasting Club en la noche de pizza y karaoke de bienvenida de la primavera de 2026."
-  - image: ./images/highlights/aboutPhotos/2/image.webp
+headerPhotos:
+  about:
+    discriminant: true
+    value:
+      image: ./images/highlights/headerPhotos/about/value/image.webp
+      altEn: "The six members of the 2026 to 2027 UNLV Food Tasting Club executive board pose together on a city street."
+      altEs: "Los seis miembros de la junta ejecutiva 2026 a 2027 del UNLV Food Tasting Club posan juntos en una calle de la ciudad."
+  programs:
+    discriminant: true
+    value:
+      image: ./images/highlights/headerPhotos/programs/value/image.webp
+      altEn: "A full classroom of students, many in superhero costumes, poses together at the fall 2026 kickoff meeting."
+      altEs: "Un salón lleno de estudiantes, muchos disfrazados de superhéroes, posa en grupo en la reunión de inicio del otoño de 2026."
+  news:
+    discriminant: true
+    value:
+      image: ./images/highlights/headerPhotos/news/value/image.webp
+      altEn: "A student speaker with a microphone shares her Filipina experience in front of a slide reading This is our story."
+      altEs: "Una estudiante con micrófono comparte su experiencia como filipina frente a una diapositiva que dice This is our story."
+  getHelp:
+    discriminant: true
+    value:
+      image: ./images/highlights/headerPhotos/getHelp/value/image.webp
+      altEn: "A gloved volunteer spoons chopped cilantro and onion onto a plate of tacos and empanadas beside a tray of lime wedges."
+      altEs: "Una persona voluntaria con guantes sirve cilantro y cebolla picados sobre un plato de tacos y empanadas junto a una bandeja de limones."
+  donate:
+    discriminant: true
+    value:
+      image: ./images/highlights/headerPhotos/donate/value/image.webp
+      altEn: "Two students eat plates of Filipino food at a round table."
+      altEs: "Dos estudiantes comen platos de comida filipina en una mesa redonda."
+  contact:
+    discriminant: true
+    value:
+      image: ./images/highlights/headerPhotos/contact/value/image.webp
+      altEn: "Around fifty students fill a classroom under a projected Food Tasting Club slide at a general meeting."
+      altEs: "Unos cincuenta estudiantes llenan un salón de clases bajo una diapositiva proyectada del Food Tasting Club durante una reunión general."
+  volunteer:
+    discriminant: true
+    value:
+      image: ./images/highlights/headerPhotos/volunteer/value/image.webp
+      altEn: "A volunteer hands a bag of groceries to a man with a rolling cart at an outdoor food distribution, beside a table of donated food boxes."
+      altEs: "Una voluntaria entrega una bolsa de comestibles a un hombre con un carrito en una distribución de alimentos al aire libre, junto a una mesa con cajas de alimentos donados."
+homeCardPhotos:
+  getHelp:
+    discriminant: true
+    value:
+      image: ./images/highlights/homeCardPhotos/getHelp/value/image.webp
+      altEn: "A plate of yellow rice, roasted chicken, fried fritters and noodles beside two cups of Thai iced tea at a club event."
+      altEs: "Un plato de arroz amarillo, pollo asado, frituras y fideos junto a dos vasos de té tailandés helado en un evento del club."
+  volunteer:
+    discriminant: true
+    value:
+      image: ./images/highlights/homeCardPhotos/volunteer/value/image.webp
+      altEn: "A volunteer in gloves serves food from foil trays onto a guest's plate at a club culture night."
+      altEs: "Una persona voluntaria con guantes sirve comida de bandejas de aluminio en el plato de un invitado durante una noche cultural del club."
+  donate:
+    discriminant: true
+    value:
+      image: ./images/highlights/homeCardPhotos/donate/value/image.webp
+      altEn: "About thirty students pose under a Food Tasting Club slide at the spring 2026 welcome back pizza and karaoke night."
+      altEs: "Unos treinta estudiantes posan bajo una diapositiva del Food Tasting Club en la noche de pizza y karaoke de bienvenida de la primavera de 2026."
+homeFallbackPhotos:
+  - image: ./images/highlights/homeFallbackPhotos/0/image.webp
+    altEn: "Two students laugh while pulling a string during a table game at the fall 2026 kickoff meeting, with wrapped candy on the table."
+    altEs: "Dos estudiantes se ríen mientras jalan un hilo durante un juego de mesa en la reunión de inicio del otoño de 2026, con dulces envueltos sobre la mesa."
+  - image: ./images/highlights/homeFallbackPhotos/1/image.webp
     altEn: "Club members smile around a table of pizza boxes during a restaurant outing at Smash and Slice."
     altEs: "Miembros del club sonríen alrededor de una mesa con cajas de pizza durante una salida al restaurante Smash and Slice."
+aboutPhotos:
+  - image: ./images/highlights/aboutPhotos/0/image.webp
+    altEn: "About thirty students pose under a Food Tasting Club slide at the spring 2026 welcome back pizza and karaoke night."
+    altEs: "Unos treinta estudiantes posan bajo una diapositiva del Food Tasting Club en la noche de pizza y karaoke de bienvenida de la primavera de 2026."
+  - image: ./images/highlights/aboutPhotos/1/image.webp
+    altEn: "Club members smile around a table of pizza boxes during a restaurant outing at Smash and Slice."
+    altEs: "Miembros del club sonríen alrededor de una mesa con cajas de pizza durante una salida al restaurante Smash and Slice."
+  - image: ./images/highlights/aboutPhotos/2/image.webp
+    altEn: "A long table of foil trays with Korean dishes, including kimchi, japchae noodles and fried dumplings, set out buffet style at the Squid Game welcome back mixer."
+    altEs: "Una mesa larga con bandejas de aluminio con platos coreanos, entre ellos kimchi, fideos japchae y empanadillas fritas, servidos estilo bufé."

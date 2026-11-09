@@ -51,7 +51,7 @@ A running record of every choice made in the rebuild and why. Newest entries go 
 **D11. Content model.**
 - **Pages:** one collection per language (`content/en/pages`, `content/es/pages`), as the brief asks for collections. Each fixed page is an entry whose file name is its route key (`getHelp.md`), shown in Keystatic as an "Internal name" with "Do not change" help text. `getPage()` in `src/lib/content.ts` fails the build, with the file path and how to restore it, if any entry is missing.
 - **Programs and news:** one collection per language. A Spanish entry has an "English version" relationship field; the language switch uses it to pair entries. An entry with no translation switches to the other language's list page, and claims no hreflang pair.
-- **People:** one shared YAML collection: name and photo once, role, bio and photo description in both languages, and a sort order. People without a photo get a decorative initials block.
+- **People:** one shared YAML collection: name once, role and bio in both languages, and a sort order. *(Since D58 there is no photo field: every card shows initials.)*
 - **Site settings:** one YAML singleton (`content/settings.yaml`) for legal name, EIN, email, phone, mailing address, donation link, social links, mission in both languages, a short description in both languages, and an optional founding year. Only the short description is filled, from the four facts.
 - **Main text:** Markdoc saved as `.md` (`extension: 'md'` exists in the installed `@keystatic/core` 0.6.9 types). Headings are limited to levels 2 and 3, so editors can't add a second h1 or skip levels. Images, tables, code and dividers are switched off in the editor to keep the text simple and accessible.
 - **Images:** an "Add an image" checkbox that reveals a required image and a required description (alt text). An image can't be saved without one. Files go in `content/images/<collection>/` with relative paths, so Astro optimizes them (AVIF and WebP, responsive sizes).
@@ -134,7 +134,7 @@ A running record of every choice made in the rebuild and why. Newest entries go 
 - Links are underlined everywhere, so they never rely on color.
 - Button color transitions run only under `prefers-reduced-motion: no-preference`. There is no smooth scrolling: it was removed in Phase 3 because it only animated the skip-link jump and delayed focused elements coming into view.
 - The language switch says "Español" (or "English") in that language, with `lang` and `hreflang` set, and a visually hidden "Ver esta página en español" so its purpose is clear to screen reader users.
-- Missing photos get a decorative CSS pattern (`aria-hidden`). No stock photos.
+- Missing photos get a decorative CSS pattern (`aria-hidden`). No stock photos. *(Superseded by D58: no pattern; a missing photo leaves no slot.)*
 
 **D21. Test harness.**
 - **Two builds:** production (real content only, so empty states are tested) and templates (`SHOW_DRAFTS=true`, adds the labeled example entries). `pnpm test:all` runs both; CI runs them as a matrix.
@@ -402,3 +402,23 @@ The site had no tagline field, so Site settings now has "Tagline (English / Span
 - **Hero photo:** from 1024px it takes half the content width (two equal columns, minus the gap) and is cropped to 4:3 with `object-fit: cover`. Below 768px it is full width under the heading and buttons. From 768 to 1023px it keeps the earlier two-column layout (text 3, photo 2), which the request didn't cover. It's still the only eager image, with `fetchpriority="high"`, and `sizes` was updated for the wider column.
 - **Logo:** the mark in the header lockup is 40px (it was 32px, D55). The wordmark's size and alignment and the home link's accessible name ("Creation and Connoisseur") are unchanged.
 - At 320, 768 and 1280px (and 1024px), in both languages, the Home page has no horizontal overflow. A test checks the h1, the titles, the 40px mark, and the photo's 4:3 ratio and width at 1280px.
+
+## Photos in place of patterns (9 November 2026)
+
+**D58. Every blank spot gets a photo or goes away.** Aryah's instruction of 9 November 2026. Photos and alt text are from `photos-inbox/` (each sidecar, word for word). Every new photo was re-encoded to WebP at quality 78, no wider than its own width (and 1600px at most), with no metadata.
+- **No placeholder pattern:** the `.placeholder-pattern` CSS and every element that used it are gone (page headers, cards, person cards, the Home hero fallback). No component renders an empty or decorative image slot: a card or header without a photo simply has none, and the text takes the space. A test checks every page.
+- **Page header photos** come from "Page header photos" in the shared screen, now called "Photos and stats":
+  - About: the executive board (08). Programs: the fall kickoff room (20). News: the student speaker (13). Get help: tacos being served (06). Donate: students eating (15). Contact: a general meeting (03). Volunteer: the volunteer handoff (31, moved from its own field).
+  - They are 18rem wide, cropped to 4:3 from the top, with 12px corners like the cards, lazy loaded, and hidden below 768px (not downloaded there).
+  - Accessibility, Privacy and the 404 page have none, and their header text spans the full width (one grid column; tested).
+- **Home cards:** Get help (05), Volunteer (18) and Donate (22) each have a photo cropped to 3:2. The cards stretch to the same height, so the headings line up (tested at 1280px).
+- **Programs and news:**
+  - Mobile Food Pantry: 16.
+  - UNLV Food Tasting Club: 17, so it no longer reuses the hero (01). Its extra photos are now 20 only, since 17 would otherwise appear twice on the page.
+  - Volunteer Days: 31.
+  - "Volunteering at Three Square": 31. Its alt text names no partner. `FACTS.md` says the photo's partner isn't confirmed, so readers might assume it's from that shift.
+- **No photo twice on a page:** in either language, on any page (a test compares every image's alt text on every page).
+  - **Home:** photos are placed in page order. A program or news card that would repeat a photo already higher up uses the next "Home page spare photo" instead: 07, then 23. Today that swaps the Three Square post's 31 (already on the Volunteer Days card) for 07, and Thai Night's 01 (the hero) for 23. Photos are compared by alt text, because the English and Spanish copies of a photo are separate files with the same sidecar text.
+  - **About:** the header is 08, so club life is now 22, 23 and 04 (a spare) instead of 08, 22 and 23. Club life photos are cropped to 3:2 so the row is even.
+- **Person cards:** no photos. The club portraits (09 to 11 and 25 to 30) have names and titles burned in. Every card shows the initials in a solid sage circle, in sand-50 DM Serif Display, centered (sand-50 on sage, 6.87:1, now a checked pair in `scripts/contrast.mjs`). The photo field was removed from People, the portrait files were deleted, and so was the example person with a photo. Cards in a row are the same height.
+- **Spacing on Home:** the hero band is 3rem/4rem top and bottom (it was 5rem on desktop). Sections after the stats strip are exactly 3rem apart on phones and 4rem on wider screens, and the footer starts 3rem/4rem below the last one (the footer's top margin is now 3rem on phones everywhere). Tested. The only remaining `min-height` that could leave space is the page-level one that keeps the footer at the bottom of a short window. Measured on Home, About, Programs, News, Get help, Donate, Contact and Volunteer at 375 and 1280px, it leaves no empty space under any section, so it stays.

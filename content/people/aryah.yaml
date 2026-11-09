@@ -5,10 +5,4 @@ roleEn: President and Treasurer
 roleEs: Presidenta y Tesorera
 bioEn: "Favorite food: shrimp po'boy sandwich."
 bioEs: "Comida favorita: sándwich po'boy de camarón."
-photo:
-  discriminant: true
-  value:
-    image: ../images/people/aryah/photo/value/image.webp
-    altEn: "Aryah, President and Treasurer of the club, poses in a superhero costume."
-    altEs: "Aryah, presidenta y tesorera del club, posa con un disfraz de superhéroe."
 order: 10

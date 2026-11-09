@@ -43,7 +43,7 @@ Every page is tested in both languages. The page list is read from the built `si
 | Program page | `/programs/example-program/` (with image), `/es/programas/programa-de-ejemplo/` (without image), and the three published programs in each language (UNLV Food Tasting Club, Volunteer Days, Mobile Food Pantry) |
 | News post page | `/news/example-news-post/`, `/es/noticias/noticia-de-ejemplo/` (paired), `/news/example-post-without-translation/` (no translation) |
 | Lists with entries, home page with programs and news | `/programs/`, `/news/`, `/`, and the Spanish equivalents |
-| People (About) | two example people, one with a photo and one with the initials placeholder |
+| People (About) | the published people and one example person; every card shows initials in a sage circle (D58) |
 | Filled-in settings | fake EIN, contact details, social link, mission and a working Donate link (`tests/fixtures/settings.template.yaml`) |
 | Forms, connected | Formspree success and failure states, with the request intercepted in the test browser |
 
@@ -312,7 +312,7 @@ Then these specific checks:
 7. Turn VoiceOver off with **Cmd+F5**.
 
 - [ ] `/` and `/es/`
-- [ ] `/about/` (template build: people with a photo and with initials)
+- [ ] `/about/` (people cards with initials; club life photos)
 - [ ] `/get-help/` and `/es/obtener-ayuda/`
 - [ ] `/contact/` and `/es/contacto/` (step 4)
 - [ ] `/volunteer/` (step 4)

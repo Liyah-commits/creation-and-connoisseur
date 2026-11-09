@@ -8,6 +8,4 @@ bioEn: >-
 bioEs: >-
   Una persona de ejemplo sin foto, para probar el marcador con iniciales. Nunca
   aparece en el sitio público.
-photo:
-  discriminant: false
 order: 20

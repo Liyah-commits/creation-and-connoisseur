@@ -6,7 +6,7 @@ import PageHeader from '../components/PageHeader.astro';
 import Prose from '../components/Prose.astro';
 import { alternatesFor, type Lang } from '../i18n/routes';
 import { t } from '../i18n/ui';
-import { getNews, getPage, getPrograms, type Section } from '../lib/content';
+import { getHeaderPhoto, getNews, getPage, getPrograms, type Section } from '../lib/content';
 
 interface Props {
   lang: Lang;
@@ -15,10 +15,11 @@ interface Props {
 const { lang, section } = Astro.props;
 const page = await getPage(lang, section);
 const entries = section === 'programs' ? await getPrograms(lang) : await getNews(lang);
+const headerImage = await getHeaderPhoto(lang, section);
 ---
 
 <Base lang={lang} title={page.data.title} description={page.data.metaDescription} alternates={alternatesFor(section)}>
-  <PageHeader title={page.data.title} intro={page.data.intro} />
+  <PageHeader title={page.data.title} intro={page.data.intro} image={headerImage} />
   <div class="container-page py-10 md:py-14">
     <Prose entry={page} class="mb-10" />
     {

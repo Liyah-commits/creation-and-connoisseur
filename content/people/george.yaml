@@ -5,10 +5,4 @@ roleEn: Membership Outreach
 roleEs: Encargado de Alcance de Membresía
 bioEn: "Favorite food: sushi and poke."
 bioEs: "Comida favorita: sushi y poke."
-photo:
-  discriminant: true
-  value:
-    image: ../images/people/george/photo/value/image.webp
-    altEn: "George, Membership Outreach, lines up a shot at a pool table."
-    altEs: "George, encargado de alcance de membresía, se prepara para tirar en una mesa de billar."
 order: 80

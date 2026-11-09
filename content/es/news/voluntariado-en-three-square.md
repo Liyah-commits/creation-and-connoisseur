@@ -7,7 +7,10 @@ summary: >-
   El 6 de noviembre, voluntarios del club pasaron dos horas en Three Square Food
   Bank y ayudaron a alimentar a más de 100 familias.
 image:
-  discriminant: false
+  discriminant: true
+  value:
+    image: ../../images/news/es/voluntariado-en-three-square/image/value/image.webp
+    alt: "Una voluntaria entrega una bolsa de comestibles a un hombre con un carrito en una distribución de alimentos al aire libre, junto a una mesa con cajas de alimentos donados."
 gallery: []
 ---
 El 6 de noviembre de 2026, voluntarios del UNLV Food Tasting Club pasaron la tarde en Three Square Food Bank, en un turno de 1:30 a 3:30 p. m.

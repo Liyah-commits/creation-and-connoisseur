@@ -2,6 +2,7 @@
  * Reading content: the one place pages get entries from, so the draft rule and
  * the missing-page guard apply everywhere.
  */
+import type { ImageMetadata } from 'astro';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import { SHOW_DRAFTS } from 'astro:env/server';
 import { entryPath, otherLang, routeKeys, routes, type Alternates, type Lang, type RouteKey } from '../i18n/routes';
@@ -92,10 +93,47 @@ export async function getSettings() {
 
 export type Settings = Awaited<ReturnType<typeof getSettings>>;
 
-/** The Home page photo and stats, the volunteering photo and the About page's club life photos. Empty if the file has never been saved. */
+/** The shared photos and stats ("Photos and stats" in Keystatic). Empty if the file has never been saved. */
 export async function getHighlights() {
   const entry = await getEntry('highlights', 'highlights');
-  return entry?.data ?? { heroImage: { discriminant: false as const }, stats: [], volunteerPhoto: { discriminant: false as const }, aboutPhotos: [] };
+  if (entry) return entry.data;
+  const off = { discriminant: false as const };
+  return {
+    heroImage: off,
+    stats: [],
+    headerPhotos: { about: off, programs: off, news: off, getHelp: off, donate: off, contact: off, volunteer: off },
+    homeCardPhotos: { getHelp: off, volunteer: off, donate: off },
+    homeFallbackPhotos: [],
+    aboutPhotos: [],
+  } satisfies CollectionEntry<'highlights'>['data'];
+}
+
+export type Highlights = Awaited<ReturnType<typeof getHighlights>>;
+type BilingualPhoto = { image: ImageMetadata; altEn: string; altEs: string };
+type OptionalPhoto = { discriminant: false } | { discriminant: true; value: BilingualPhoto } | undefined;
+
+/** A photo with its alt text in one language, as the image components take it. */
+export interface Photo {
+  image: ImageMetadata;
+  alt: string;
+}
+
+/** One language's version of a bilingual photo. */
+export function inLang(photo: BilingualPhoto, lang: Lang): Photo {
+  return { image: photo.image, alt: lang === 'en' ? photo.altEn : photo.altEs };
+}
+
+/** An optional bilingual photo in one language, or null when it's switched off. */
+export function optionalInLang(photo: OptionalPhoto, lang: Lang): Photo | null {
+  return photo?.discriminant ? inLang(photo.value, lang) : null;
+}
+
+export type HeaderPhotoKey = 'about' | 'programs' | 'news' | 'getHelp' | 'donate' | 'contact' | 'volunteer';
+
+/** The photo for a page's header (D58), or null: pages without one show their heading across the full width. */
+export async function getHeaderPhoto(lang: Lang, key: RouteKey): Promise<Photo | null> {
+  const photos = (await getHighlights()).headerPhotos as Partial<Record<HeaderPhotoKey, OptionalPhoto>>;
+  return key in photos ? optionalInLang(photos[key as HeaderPhotoKey], lang) : null;
 }
 
 export async function getPeople() {
