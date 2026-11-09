@@ -202,14 +202,14 @@ test.describe('production build', () => {
     }
   });
 
-  test('the volunteering photo: on Volunteer Days, the Volunteer page and the Home page, never the hero, never wider than 900px', async ({ page }) => {
+  test('the volunteering photo: on the Volunteer page, the Three Square post and the Home page, never the hero, never wider than 900px', async ({ page }) => {
     const placements = [
       [routes.home.en, /bag of groceries/],
       [routes.home.es, /bolsa de comestibles/],
       [routes.volunteer.en, /bag of groceries/],
       [routes.volunteer.es, /bolsa de comestibles/],
-      ['/programs/volunteer-days/', /bag of groceries/],
-      ['/es/programas/jornadas-de-voluntariado/', /bolsa de comestibles/],
+      ['/news/volunteering-at-three-square/', /bag of groceries/],
+      ['/es/noticias/voluntariado-en-three-square/', /bolsa de comestibles/],
     ] as const;
     for (const width of [1000, 1280]) {
       await page.setViewportSize({ width, height: 900 });
@@ -219,7 +219,6 @@ test.describe('production build', () => {
         for (const img of await page.locator('main img').all()) {
           if (!alt.test((await img.getAttribute('alt')) ?? '')) continue;
           found++;
-          await expect(img, path).toHaveAttribute('loading', 'lazy');
           expect(await img.getAttribute('fetchpriority'), path).toBeNull();
           expect((await img.boundingBox())!.width, `${path} at ${width}px`).toBeLessThanOrEqual(900);
         }
@@ -274,7 +273,10 @@ test.describe('production build', () => {
       const img = header().locator('img');
       await expect(img, path).toHaveCount(1);
       await expect(img, path).toBeVisible();
-      await expect(img, path).toHaveAttribute('loading', 'lazy');
+      // D62: above the fold, so eager with async decoding, on a sand frame while it loads.
+      await expect(img, path).toHaveAttribute('loading', 'eager');
+      await expect(img, path).toHaveAttribute('decoding', 'async');
+      await expect(img, path).toHaveCSS('background-color', 'rgb(239, 227, 209)');
       await expect(img, path).toHaveCSS('border-radius', '12px');
       expect(Math.round((await img.boundingBox())!.width), path).toBe(288);
     }
@@ -288,6 +290,22 @@ test.describe('production build', () => {
     for (const path of [routes.about.en, routes.volunteer.es]) {
       await page.goto(path);
       await expect(header().locator('img'), path).toBeHidden();
+    }
+  });
+
+  test('Home photo placement (D62): Volunteer card, Volunteer Days card and the Three Square post', async ({ page }) => {
+    const expected = {
+      en: { volunteerCard: /gloved volunteer spoons chopped cilantro/, volunteerDays: /volunteer in gloves serves food from foil trays/, threeSquare: /bag of groceries/ },
+      es: { volunteerCard: /voluntaria con guantes sirve cilantro/, volunteerDays: /voluntaria con guantes sirve comida de bandejas/, threeSquare: /bolsa de comestibles/ },
+    } as const;
+    for (const lang of ['en', 'es'] as const) {
+      await page.goto(routes.home[lang]);
+      const card = page.locator('section[aria-labelledby="actions-heading"] li', { hasText: ui['home.volunteerTitle'][lang] });
+      await expect(card.locator('img')).toHaveAttribute('alt', expected[lang].volunteerCard);
+      const days = page.locator('section[aria-labelledby="programs-heading"] article', { has: page.locator(`a[href="${lang === 'en' ? '/programs/volunteer-days/' : '/es/programas/jornadas-de-voluntariado/'}"]`) });
+      await expect(days.locator('img')).toHaveAttribute('alt', expected[lang].volunteerDays);
+      const post = page.locator('section[aria-labelledby="news-heading"] article', { has: page.locator(`a[href="${lang === 'en' ? '/news/volunteering-at-three-square/' : '/es/noticias/voluntariado-en-three-square/'}"]`) });
+      await expect(post.locator('img')).toHaveAttribute('alt', expected[lang].threeSquare);
     }
   });
 
@@ -324,10 +342,12 @@ test.describe('production build', () => {
     }
   });
 
-  test('images below the hero are lazy loaded', async ({ page }) => {
-    for (const path of [routes.home.en, routes.about.es, routes.volunteer.en, '/programs/volunteer-days/', '/programs/unlv-food-tasting-club/', '/news/taste-of-the-philippines/']) {
+  test('every image except the Home photo and page header photos is lazy loaded', async ({ page }) => {
+    // Pages with images besides the header photo (the Volunteer page's only photo is its header photo, D62).
+    for (const path of [routes.home.en, routes.about.es, '/programs/volunteer-days/', '/programs/unlv-food-tasting-club/', '/news/taste-of-the-philippines/', routes.news.en]) {
       await page.goto(path);
-      const lazy = page.locator('main img:not([fetchpriority="high"])');
+      // The Home photo (fetchpriority high) and the page header photo (D62) load eagerly; everything else lazily.
+      const lazy = page.locator('main img:not([fetchpriority="high"]):not([data-header-photo] img)');
       expect(await lazy.count(), path).toBeGreaterThan(0);
       for (const img of await lazy.all()) await expect(img, path).toHaveAttribute('loading', 'lazy');
     }

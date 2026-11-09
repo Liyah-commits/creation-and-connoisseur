@@ -13,10 +13,7 @@ image:
   discriminant: true
   value:
     image: ../../images/programs/es/jornadas-de-voluntariado/image/value/image.webp
-    alt: >-
-      Una voluntaria entrega una bolsa de comestibles a un hombre con un carrito
-      en una distribución de alimentos al aire libre, junto a una mesa con cajas
-      de alimentos donados.
+    alt: "Una persona voluntaria con guantes sirve comida de bandejas de aluminio en el plato de un invitado durante una noche cultural del club."
 gallery: []
 ---
 Nuestros voluntarios sirven junto a organizaciones aliadas que alimentan a personas en Las Vegas: clasificando y empacando alimentos, sirviendo comidas y ayudando en distribuciones. No se necesita experiencia. Los turnos suelen durar de dos a tres horas, y coordinamos viajes compartidos desde el campus.

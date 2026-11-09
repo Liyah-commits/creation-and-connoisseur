@@ -12,9 +12,7 @@ image:
   discriminant: true
   value:
     image: ../../images/programs/en/volunteer-days/image/value/image.webp
-    alt: >-
-      A volunteer hands a bag of groceries to a man with a rolling cart at an
-      outdoor food distribution, beside a table of donated food boxes.
+    alt: "A volunteer in gloves serves food from foil trays onto a guest's plate at a club culture night."
 gallery: []
 ---
 Our volunteers serve alongside partner organizations that feed people in Las Vegas: sorting and packing food, serving meals, and helping at distributions. No experience is needed. Shifts are usually two to three hours, and we coordinate carpools from campus.

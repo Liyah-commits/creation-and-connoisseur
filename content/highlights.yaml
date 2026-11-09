@@ -71,8 +71,8 @@ homeCardPhotos:
     discriminant: true
     value:
       image: ./images/highlights/homeCardPhotos/volunteer/value/image.webp
-      altEn: "A volunteer in gloves serves food from foil trays onto a guest's plate at a club culture night."
-      altEs: "Una persona voluntaria con guantes sirve comida de bandejas de aluminio en el plato de un invitado durante una noche cultural del club."
+      altEn: "A gloved volunteer spoons chopped cilantro and onion onto a plate of tacos and empanadas beside a tray of lime wedges."
+      altEs: "Una persona voluntaria con guantes sirve cilantro y cebolla picados sobre un plato de tacos y empanadas junto a una bandeja de limones."
   donate:
     discriminant: true
     value:
@@ -81,9 +81,6 @@ homeCardPhotos:
       altEs: "Unos treinta estudiantes posan bajo una diapositiva del Food Tasting Club en la noche de pizza y karaoke de bienvenida de la primavera de 2026."
 homeFallbackPhotos:
   - image: ./images/highlights/homeFallbackPhotos/0/image.webp
-    altEn: "Two students laugh while pulling a string during a table game at the fall 2026 kickoff meeting, with wrapped candy on the table."
-    altEs: "Dos estudiantes se ríen mientras jalan un hilo durante un juego de mesa en la reunión de inicio del otoño de 2026, con dulces envueltos sobre la mesa."
-  - image: ./images/highlights/homeFallbackPhotos/1/image.webp
     altEn: "Club members smile around a table of pizza boxes during a restaurant outing at Smash and Slice."
     altEs: "Miembros del club sonríen alrededor de una mesa con cajas de pizza durante una salida al restaurante Smash and Slice."
 aboutPhotos:

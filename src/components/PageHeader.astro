@@ -4,9 +4,11 @@
  * sandstone rule underneath (D55). When the page has a header photo (D58), it
  * sits in an 18rem column on screens 768px and wider, cropped to 4:3 from the
  * top (faces, not the text some photos have printed low) and rounded like
- * the cards; below 768px it is not shown (and, being lazy loaded and hidden,
- * not downloaded). Without a photo the text spans the full width:
- * there is never an empty or decorative image slot.
+ * the cards; below 768px it is not shown. It sits above the fold, so it loads
+ * eagerly (with async decoding), and its frame has a sand background, so it
+ * never shows as an empty white box while the photo arrives (D62). Without a
+ * photo the text spans the full width: there is never an empty or decorative
+ * image slot.
  */
 import { Picture } from 'astro:assets';
 import type { Photo } from '../lib/content';
@@ -28,7 +30,7 @@ const { title, intro, image } = Astro.props;
     </div>
     {
       image && (
-        <div class="hidden md:block">
+        <div class="hidden md:block" data-header-photo>
           <Picture
             src={image.image}
             alt={image.alt}
@@ -36,7 +38,9 @@ const { title, intro, image } = Astro.props;
             sizes="18rem"
             formats={['avif']}
             fallbackFormat="webp"
-            class="aspect-[4/3] w-[18rem] rounded-xl border border-sandstone object-cover object-top"
+            loading="eager"
+            decoding="async"
+            class="aspect-[4/3] w-[18rem] rounded-xl border border-sandstone bg-sand object-cover object-top"
           />
         </div>
       )
