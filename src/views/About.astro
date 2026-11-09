@@ -1,12 +1,18 @@
 ---
-/** About: mission (from Site settings), story (the page text) and people. Each section hides while empty. */
+/**
+ * About: mission (from Site settings), story (the page text), the nonprofit's
+ * people, the UNLV Food Tasting Club board (People with Group set to the club
+ * board), and club life photos (from "Home and About photos and stats").
+ * Each section hides while empty.
+ */
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import PersonCard from '../components/PersonCard.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
 import Prose from '../components/Prose.astro';
 import { alternatesFor, type Lang } from '../i18n/routes';
 import { t } from '../i18n/ui';
-import { getPage, getPeople, getSettings, hasBody } from '../lib/content';
+import { getHighlights, getPage, getPeople, getSettings, hasBody } from '../lib/content';
 
 interface Props {
   lang: Lang;
@@ -15,6 +21,9 @@ const { lang } = Astro.props;
 const page = await getPage(lang, 'about');
 const settings = await getSettings();
 const people = await getPeople();
+const nonprofitPeople = people.filter((person) => person.data.group === 'nonprofit');
+const clubBoard = people.filter((person) => person.data.group === 'clubBoard');
+const clubPhotos = (await getHighlights()).aboutPhotos.map((photo) => ({ image: photo.image, alt: lang === 'en' ? photo.altEn : photo.altEs }));
 const mission = lang === 'en' ? settings.missionEn : settings.missionEs;
 ---
 
@@ -38,14 +47,34 @@ const mission = lang === 'en' ? settings.missionEn : settings.missionEs;
       )
     }
     {
-      people.length > 0 && (
+      nonprofitPeople.length > 0 && (
         <section aria-labelledby="people-heading">
           <h2 id="people-heading">{t(lang, 'about.peopleHeading')}</h2>
           <ul class="mt-6 grid gap-5 md:grid-cols-2" role="list">
-            {people.map((person) => (
+            {nonprofitPeople.map((person) => (
               <li><PersonCard lang={lang} person={person} /></li>
             ))}
           </ul>
+        </section>
+      )
+    }
+    {
+      clubBoard.length > 0 && (
+        <section aria-labelledby="club-board-heading">
+          <h2 id="club-board-heading">{t(lang, 'about.clubBoardHeading')}</h2>
+          <ul class="mt-6 grid gap-5 md:grid-cols-2" role="list">
+            {clubBoard.map((person) => (
+              <li><PersonCard lang={lang} person={person} /></li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+    {
+      clubPhotos.length > 0 && (
+        <section aria-labelledby="club-life-heading">
+          <h2 id="club-life-heading">{t(lang, 'about.clubLifeHeading')}</h2>
+          <PhotoGrid photos={clubPhotos} class="mt-6" />
         </section>
       )
     }

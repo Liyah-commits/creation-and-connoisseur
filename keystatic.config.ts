@@ -81,6 +81,57 @@ const optionalImageField = (folder: string, publicPath: string) =>
     },
   );
 
+/**
+ * Extra photos shown under the main text of a program or news post, each with
+ * its own required description. The main image above stays the one shown on
+ * list cards and when the page is shared.
+ */
+const galleryField = (folder: string, publicPath: string) =>
+  fields.array(
+    fields.object({
+      image: fields.image({
+        label: 'Photo',
+        description: 'A JPG, PNG or WebP photo, at least 1200 pixels wide. Only use photos you have permission to use.',
+        directory: `content/images/${folder}`,
+        publicPath,
+        validation: { isRequired: true },
+      }),
+      alt: fields.text({
+        label: 'Photo description (alt text)',
+        description: 'Describe what the photo shows in one sentence, as you would to someone on the phone. Do not start with "Image of".',
+        validation: { length: { min: 1, max: 250 } },
+      }),
+    }),
+    {
+      label: 'More photos',
+      description: 'Optional. Up to six more photos, shown under the main text. Each one needs its own description.',
+      itemLabel: (props) => props.fields.alt.value || 'New photo',
+      validation: { length: { max: 6 } },
+    },
+  );
+
+/** A photo used in both languages, with a description in each (People, Home and About photos). */
+const bilingualPhoto = (directory: string, publicPath: string, imageDescription: string) =>
+  fields.object({
+    image: fields.image({
+      label: 'Photo',
+      description: imageDescription,
+      directory,
+      publicPath,
+      validation: { isRequired: true },
+    }),
+    altEn: fields.text({
+      label: 'Photo description (English)',
+      description: 'For example: "Volunteers packing bags of groceries at a folding table."',
+      validation: { length: { min: 1, max: 250 } },
+    }),
+    altEs: fields.text({
+      label: 'Photo description (Spanish)',
+      description: 'The same description, in Spanish.',
+      validation: { length: { min: 1, max: 250 } },
+    }),
+  });
+
 const draftField = () =>
   fields.checkbox({
     label: 'Hide from the live site',
@@ -185,6 +236,7 @@ const programsCollection = (lang: 'en' | 'es') =>
         description: 'The place, in plain words, with a building and room if there is one. Leave empty if it does not apply.',
       }),
       image: optionalImageField(`programs/${lang}`, `../../images/programs/${lang}/`),
+      gallery: galleryField(`programs/${lang}`, `../../images/programs/${lang}/`),
       body: bodyField(),
     },
   });
@@ -229,6 +281,7 @@ const newsCollection = (lang: 'en' | 'es') =>
       }),
       summary: summaryField('post'),
       image: optionalImageField(`news/${lang}`, `../../images/news/${lang}/`),
+      gallery: galleryField(`news/${lang}`, `../../images/news/${lang}/`),
       body: bodyField(),
     },
   });
@@ -240,7 +293,7 @@ export default config({
     navigation: {
       English: ['pagesEn', 'programsEn', 'newsEn'],
       Español: ['pagesEs', 'programsEs', 'newsEs'],
-      Shared: ['people', 'settings'],
+      Shared: ['people', 'highlights', 'settings'],
     },
   },
   collections: {
@@ -260,7 +313,8 @@ export default config({
         name: fields.slug({
           name: {
             label: 'Name',
-            description: 'Full name, as the person wants it shown.',
+            description:
+              'The name as the person wants it shown. Student board members are listed by first name only, unless they agree to a full name online.',
             validation: { length: { min: 1, max: 80 } },
           },
           slug: {
@@ -269,6 +323,15 @@ export default config({
           },
         }),
         draft: draftField(),
+        group: fields.select({
+          label: 'Group',
+          description: 'Where the person appears on the About page.',
+          options: [
+            { label: 'Creation and Connoisseur (first, under "Our people")', value: 'nonprofit' },
+            { label: 'UNLV Food Tasting Club board (second group)', value: 'clubBoard' },
+          ],
+          defaultValue: 'nonprofit',
+        }),
         roleEn: fields.text({
           label: 'Role (English)',
           description: 'Their role, in English. For example: "Board member".',
@@ -326,6 +389,66 @@ export default config({
     }),
   },
   singletons: {
+    highlights: singleton({
+      label: 'Home and About photos and stats',
+      path: 'content/highlights',
+      format: { data: 'yaml' },
+      schema: {
+        heroImage: fields.conditional(
+          fields.checkbox({
+            label: 'Show a photo at the top of the Home page',
+            description: 'Tick this to add the main Home page photo. It loads first, so use a landscape photo.',
+            defaultValue: false,
+          }),
+          {
+            true: bilingualPhoto(
+              'content/images/highlights',
+              './images/highlights/',
+              'A landscape JPG, PNG or WebP photo, at least 1600 pixels wide. Only use photos you have permission to use.',
+            ),
+            false: fields.empty(),
+          },
+        ),
+        stats: fields.array(
+          fields.object({
+            value: fields.text({
+              label: 'Number',
+              description: 'The figure exactly as it should appear, for example "700+". Only publish a figure you can point to a source for.',
+              validation: { length: { min: 1, max: 12 } },
+            }),
+            labelEn: fields.text({
+              label: 'What it counts (English)',
+              description: 'Plain words that follow the number, for example "people fed in one two hour volunteer shift".',
+              validation: { length: { min: 1, max: 80 } },
+            }),
+            labelEs: fields.text({
+              label: 'What it counts (Spanish)',
+              description: 'The same words, in Spanish.',
+              validation: { length: { min: 1, max: 80 } },
+            }),
+          }),
+          {
+            label: 'Home page stats',
+            description: 'Up to four figures, shown in a strip under the Home page photo. Leave empty to hide the strip.',
+            itemLabel: (props) => `${props.fields.value.value} ${props.fields.labelEn.value}`.trim() || 'New stat',
+            validation: { length: { max: 4 } },
+          },
+        ),
+        aboutPhotos: fields.array(
+          bilingualPhoto(
+            'content/images/highlights',
+            './images/highlights/',
+            'A JPG, PNG or WebP photo, at least 1200 pixels wide. Only use photos you have permission to use.',
+          ),
+          {
+            label: 'Club life photos (About page)',
+            description: 'Optional. Up to six photos, shown on the About page under "Club life".',
+            itemLabel: (props) => props.fields.altEn.value || 'New photo',
+            validation: { length: { max: 6 } },
+          },
+        ),
+      },
+    }),
     settings: singleton({
       label: 'Site settings',
       path: 'content/settings',
@@ -373,7 +496,8 @@ export default config({
           }),
           {
             label: 'Social media links',
-            description: 'Links shown in the footer. Leave empty to hide the section.',
+            description:
+              'Links shown in the footer and on the Contact page. Instagram, TikTok and Discord links get their icon automatically. Leave empty to hide the section.',
             itemLabel: (props) => props.fields.label.value || 'New link',
           },
         ),

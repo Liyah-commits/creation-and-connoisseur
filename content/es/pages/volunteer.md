@@ -12,7 +12,7 @@ intro: >-
 
 ### Voluntariado de servicio
 
-Únase a un turno quincenal para clasificar, empacar o servir alimentos con una organización aliada. No se necesita experiencia.
+Únase a una jornada de voluntariado para clasificar, empacar o servir alimentos con una organización aliada. No se necesita experiencia.
 
 **Compromiso:** de 2 a 3 horas, con la frecuencia que desee.
 

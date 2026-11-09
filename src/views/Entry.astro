@@ -1,11 +1,13 @@
 ---
 /**
- * One program or news post. The language switch goes to the paired entry
+ * One program or news post, with its "More photos" in a grid under the main
+ * text. The language switch goes to the paired entry
  * (through the Spanish entry's "English version" field) or, if there is no
  * translation, to the other language's list page.
  */
 import { getImage, Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
 import Prose from '../components/Prose.astro';
 import { routes, type Lang } from '../i18n/routes';
 import { formatDate, navLabel, t } from '../i18n/ui';
@@ -81,7 +83,8 @@ const location = 'location' in entry.data ? entry.data.location : '';
               alt={image.alt}
               widths={[480, 800, 1200]}
               sizes="(min-width: 64rem) 28rem, 100vw"
-              formats={['avif', 'webp']}
+              formats={['avif']}
+              fallbackFormat="webp"
               class="w-full rounded-lg border border-ink/10"
             />
           </figure>
@@ -89,5 +92,14 @@ const location = 'location' in entry.data ? entry.data.location : '';
       }
       <Prose entry={entry} />
     </div>
+
+    {
+      entry.data.gallery.length > 0 && (
+        <section class="container-page pb-10 md:pb-14" aria-labelledby="gallery-heading">
+          <h2 id="gallery-heading">{t(lang, 'entry.galleryHeading')}</h2>
+          <PhotoGrid photos={entry.data.gallery} class="mt-6" />
+        </section>
+      )
+    }
   </article>
 </Base>

@@ -10,6 +10,6 @@ intro: >-
 ---
 Creation and Connoisseur started at UNLV with a simple observation: a lot of students were hungry, and most of them were not getting help. Food insecurity on campus is common, quiet, and easy to miss. We decided to do something about it.
 
-We are a nonprofit with a campus heart. Our student club, the UNLV Food Tasting Club, brings student members together around food every month, and those events are where our volunteers come from and where much of our funding is raised. Every other week, those volunteers serve alongside the organizations that feed Las Vegas today.
+We are a nonprofit with a campus heart. Our student club, the UNLV Food Tasting Club, brings student members together around food every month, and those events are where our volunteers come from and where much of our funding is raised. Those volunteers serve alongside the organizations that feed Las Vegas today.
 
 Our next step is planned for 2027: a mobile food pantry that would bring free groceries directly to the students and neighborhoods that cannot easily reach a food bank. We plan to stock it with what the people we serve actually cook, because food that gets eaten is the only kind that counts.

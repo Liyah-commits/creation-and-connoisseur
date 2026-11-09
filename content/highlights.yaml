@@ -1,0 +1,26 @@
+heroImage:
+  discriminant: true
+  value:
+    image: ./images/highlights/heroImage/value/image.webp
+    altEn: "About sixty students gather behind a row of Thai dancers in traditional dress at Thai Night, a Food Tasting Club culture night."
+    altEs: "Unos sesenta estudiantes se reúnen detrás de una fila de bailarines tailandeses con vestimenta tradicional en una noche cultural del Food Tasting Club dedicada a la cultura tailandesa."
+stats:
+  - value: 700+
+    labelEn: people fed in one two hour volunteer shift
+    labelEs: personas alimentadas en un solo turno de voluntariado de dos horas
+  - value: 100+
+    labelEn: families fed at Three Square in two hours
+    labelEs: familias alimentadas en Three Square en dos horas
+  - value: '20,000'
+    labelEn: people reached on Instagram this fall
+    labelEs: personas alcanzadas en Instagram este otoño
+aboutPhotos:
+  - image: ./images/highlights/aboutPhotos/0/image.webp
+    altEn: "The six members of the 2026 to 2027 UNLV Food Tasting Club executive board pose together on a city street."
+    altEs: "Los seis miembros de la junta ejecutiva 2026 a 2027 del UNLV Food Tasting Club posan juntos en una calle de la ciudad."
+  - image: ./images/highlights/aboutPhotos/1/image.webp
+    altEn: "About thirty students pose under a Food Tasting Club slide at the spring 2026 welcome back pizza and karaoke night."
+    altEs: "Unos treinta estudiantes posan bajo una diapositiva del Food Tasting Club en la noche de pizza y karaoke de bienvenida de la primavera de 2026."
+  - image: ./images/highlights/aboutPhotos/2/image.webp
+    altEn: "Club members smile around a table of pizza boxes during a restaurant outing at Smash and Slice."
+    altEs: "Miembros del club sonríen alrededor de una mesa con cajas de pizza durante una salida al restaurante Smash and Slice."

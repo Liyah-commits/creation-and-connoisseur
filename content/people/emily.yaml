@@ -1,0 +1,14 @@
+name: Emily
+draft: false
+group: clubBoard
+roleEn: Volunteer Coordinator
+roleEs: Coordinadora de Voluntarios
+bioEn: "Favorite food: hotpot."
+bioEs: "Comida favorita: hotpot."
+photo:
+  discriminant: true
+  value:
+    image: ../images/people/emily/photo/value/image.webp
+    altEn: "Emily, Volunteer Coordinator, leans on a railing outdoors and smiles."
+    altEs: "Emily, coordinadora de voluntarios, se apoya en un barandal al aire libre y sonríe."
+order: 70

@@ -2,31 +2,31 @@
 
 Every fact or asset the site needs that could not be found or hasn't been supplied. Each one ships **empty**: the field exists in the CMS, and the page hides the section until it's filled. Nothing here was guessed.
 
-**Where the site's facts come from:** the brief's four facts (the name, the 501(c)(3) status, the focus on food insecurity at UNLV, and that Aryah Certain owns and runs the organization), plus Aryah's content batch of 6 November 2026, loaded with three edits (decision D38).
+**Where the site's facts come from:** the brief's four facts (the name, the 501(c)(3) status, the focus on food insecurity at UNLV, and that Aryah Certain owns and runs the organization), plus Aryah's content batch of 6 November 2026, loaded with three edits (decision D38), plus the lines marked CONFIRMED in `photos-inbox/FACTS.md` (from the club's Instagram export, 8 November 2026, D46). `photos-inbox/` is git-ignored and stays on Aryah's computer.
 
 "Where to enter it" points to the Keystatic admin (`/keystatic`). In local development that's `http://127.0.0.1:4321/keystatic`.
 
 Item numbers stay fixed so other documents can refer to them. **Supplied** items are loaded, and the note says what's left before they go live. Programs and Aryah's bio were loaded as drafts and published on 7 November 2026, before the first deploy (D44). Pages and Site settings have no draft state, so their text has been in the build since it was loaded.
 
-*(Updated 6 November 2026 after the content batch.)*
+*(Updated 9 November 2026 after the photos, stats, board, news and contact batch, D46 to D53.)*
 
 ## Organization facts
 
-1. **Mission statement and tagline.** **Supplied.** The mission (content batch, rewritten so the pantry reads as planned for 2027, D38) is in Site settings > Mission statement and shows on About. The tagline ("Fighting food insecurity at UNLV and across Las Vegas." / "Combatimos la inseguridad alimentaria en UNLV y en todo Las Vegas.") is in Site settings > Tagline. It shows in every footer, in the home page title and in search-engine data (D43).
+1. **Mission statement and tagline.** **Supplied.** The mission, "Creation and Connoisseur fights food insecurity at UNLV and across Las Vegas." (replaced 9 November 2026, with no pantry wording, D53), is in Site settings > Mission statement and shows on About. The tagline ("Fighting food insecurity at UNLV and across Las Vegas." / "Combatimos la inseguridad alimentaria en UNLV y en todo Las Vegas.") is in Site settings > Tagline. It shows in every footer, in the home page title and in search-engine data (D43).
 2. **The story for the About page.** **Supplied**, in Pages > about > Main text, both languages, with the student figures removed and the pantry as planned.
-3. **Aryah Certain's title, short bio and photo.** Title ("Founder and President" / "Fundadora y Presidenta") and bio **supplied** (last sentence revised 6 November 2026 to "and the planned mobile food pantry"), in Shared > People > Aryah Certain, **published** 7 November 2026. Still needed: confirm the title matches the bylaws, and supply a photo with permission and a description in both languages. Until then, the About page shows her initials.
-4. **Board members and other people** to list, with roles, bios and photos. Where: Shared > People.
+3. **Aryah Certain's title, short bio and photo.** Title ("Founder and President" / "Fundadora y Presidenta") and bio **supplied** (last sentence revised 6 November 2026 to "and the planned mobile food pantry"), in Shared > People > Aryah Certain, **published** 7 November 2026. Still needed: confirm the title matches the bylaws, and supply a photo with permission and a description in both languages. Until then, the About page shows her initials. **To confirm** (`FACTS.md`): whether this photo is the club costume portrait or a separate professional headshot. `FACTS.md` recommends a headshot for the nonprofit; the costume portrait is already used for her card in the club board group.
+4. **Board members and other people** to list, with roles, bios and photos. Where: Shared > People. **Club board supplied** (9 November 2026, D51): nine UNLV Food Tasting Club board members, first names, titles, "Favorite food" bios and portraits, in the "UNLV Food Tasting Club board" group. Still needed: portraits without the printed name and title, from Jaziel (`FACTS.md`); each member's agreement before any full name goes online; the Spanish reviewer's check of the gendered Spanish titles with each person. The nonprofit's own board, if it has one, is still needed.
 5. **EIN.** Where: Site settings > EIN. Shows in the footer and on Donate.
 6. **Exact legal name**, as registered with the IRS. Where: Site settings > Legal name.
-7. **Mailing address, public email and phone.** Where: Site settings. Shows in the footer and on Contact. The privacy policy, accessibility statement and Get Help page all point people to "the email on our Contact page", so this matters more now.
-8. **Donation link** and any other ways to give. Where: Site settings > Donation link. Until then the Donate button reads "Donation link coming soon".
-9. **Social media links.** Where: Site settings > Social media links. The pantry program page says sites will be announced "on our social channels". For each profile's bio, use the tagline (item 1), in English or Spanish.
+7. **Mailing address, public email and phone.** Where: Site settings. Shows in the footer and on Contact. The privacy policy, accessibility statement and Get Help page all point people to "the email on our Contact page", so this matters more now. **Public email needed** (`FACTS.md`): an address on creationandconnoisseur.org. Until then the footer and Contact point to the contact form. The only email on Contact is the club's `Foodtastingclub@unlv.edu` line (D52), which is not the nonprofit's privacy or accessibility contact, so until the nonprofit address exists, those three pages send people to the club's address.
+8. **Donation link** and any other ways to give. Where: Site settings > Donation link. **Interim link supplied** (9 November 2026, D53): `https://cash.app/$Unlvfood`, the club's Cash App. `FACTS.md` says to replace it with a nonprofit processor, such as Zeffy, **before December**: one that takes payments in the nonprofit's name and issues donation receipts.
+9. **Social media links.** **Supplied** (9 November 2026, D53): the club's Instagram, TikTok and Discord, in Site settings > Social media links, shown in the footer and on Contact. For each profile's bio, use the tagline (item 1), in English or Spanish. Off-site, `FACTS.md` says: the Instagram bio says "Official 501(c)(3) Nonprofit". Change it to match the site, for example "UNLV Food Tasting Club, a program of Creation and Connoisseur, a 501(c)(3)."
 10. **Relationship to UNLV.** Wording **supplied**, in Site settings > Relationship to UNLV, both languages. It shows in every page's footer (D39). Still needed, as the batch says: confirm the exact phrasing with UNLV Student Involvement before deploying.
 11. **Founding year** (optional). Where: Site settings > Year founded. Once known, the batch suggests adding it to the first sentence of the About story.
 
 ## Programs and help
 
-12. **Programs.** **Supplied** and **published** 7 November 2026, three in each language: UNLV Food Tasting Club, Biweekly Volunteering, and Mobile Food Pantry (planned for 2027).
+12. **Programs.** **Supplied** and **published** 7 November 2026, three in each language: UNLV Food Tasting Club, Volunteer Days (renamed from Biweekly Volunteering on 9 November 2026, with redirects, D48), and Mobile Food Pantry (planned for 2027). If volunteer days do run on a real cadence, change the schedule line in both languages.
 13. **Get Help details.** **Supplied**, in Pages > getHelp, both languages, with a request form added (D40). The response time is two business days.
 14. **Community resources on Get Help.** **Supplied**: four links, verified on 6 November 2026 (D41):
 
@@ -39,7 +39,7 @@ Item numbers stay fixed so other documents can refer to them. **Supplied** items
 
     Recheck them before launch and each semester. The link checker requests them on every test run.
 15. **Volunteer roles.** **Supplied**: five roles, in Pages > volunteer, both languages. The Pantry team role says it starts once the planned pantry launches.
-16. **Any existing news posts** to publish.
+16. **Any existing news posts** to publish. **Supplied** (9 November 2026, D53): four posts in each language. The optional Taste of the Caribbean notice (12 November 2026) wasn't created; add it only if someone will take it down afterwards.
 
 ## Forms and privacy
 
@@ -50,13 +50,19 @@ Item numbers stay fixed so other documents can refer to them. **Supplied** items
 ## Brand and photos
 
 20. **Logo files and brand colors**, if any exist. The site uses a typographic wordmark and an original palette until then.
-21. **Photos:** every photo the site should show (home page, About, people, programs, news), with permission to use them. Decorative patterns stand in until then; no stock photos are used.
+21. **Photos:** every photo the site should show (home page, About, people, programs, news), with permission to use them. Decorative patterns stand in until then; no stock photos are used. **Partly supplied** (9 November 2026, D47): the Home photo, club life photos on About, board portraits, the club program's photos and the news photos. Still needed (`FACTS.md`): one clean photo of volunteers at a food bank, with no text on it (the Volunteer Days card uses a culture-night serving photo until then), clean board portraits (item 4) and Aryah's About photo (item 3). Also check the board photo's description: it says "The six members of the … executive board", but the board has nine members, so "Six members of…" may be what was meant.
 
 ## Launch
 
 22. **Production domain** (`SITE_URL`). Until it's set, canonical links and the sitemap use Vercel's production address.
-23. **GitHub repository and the Keystatic GitHub App** for editing in production, including whether the repository is public (a visible portfolio piece) or private. Nothing has been pushed or deployed (ruling D2); `docs/ADMIN_GUIDE.md` section 4 has the steps.
-24. **A Spanish-speaking reviewer**, and their sign-off on every file in `docs/SPANISH_REVIEW.md`. Every Spanish file changed with the content batch, so every box is unchecked.
+23. **GitHub repository and the Keystatic GitHub App** for editing in production, including whether the repository is public (a visible portfolio piece) or private. The repository is on GitHub, and pushes are made on Aryah's instruction (D46); `docs/ADMIN_GUIDE.md` section 4 has the Keystatic App steps.
+24. **A Spanish-speaking reviewer**, and their sign-off on every file in `docs/SPANISH_REVIEW.md`. Every Spanish file changed with the content batch, so every box is unchecked. The 9 November 2026 batch added or changed more (marked in that file).
 25. **Spanish register.** **Resolved**: usted throughout, ruled 6 November 2026 (D25).
 26. **Aryah's manual accessibility passes:** keyboard, VoiceOver (macOS and iOS), NVDA, 200 percent zoom and color-blindness simulation, as listed in `docs/ACCESSIBILITY_TEST_REPORT.md` section 8. A WCAG 2.1 AA conformance claim waits on these. When they're done, replace the "in progress" paragraph in the accessibility statement (both languages) with a plain conformance claim.
 27. **Editors:** who will edit the site, and their GitHub accounts, so they can be given access (`docs/ADMIN_GUIDE.md` section 5).
+
+## Added 9 November 2026 (from `photos-inbox/FACTS.md`)
+
+28. **The cultural food nights count.** **To confirm.** `FACTS.md` derives "13 cultural food nights since 2024" from captions, but also lists the count as TO CONFIRM, and one of the 13 (the Italian American Heritage dinner, October 2024) is noted "confirm it was held". It isn't published (D46). Once checked, add it as the fourth stat in Shared > Home and About photos and stats, in both languages.
+29. **Stats that go out of date.** "20,000 people reached on Instagram this fall" is Instagram insights for 10 August to 7 November 2026 (19,973 accounts reached, rounded). Update or remove it after the fall semester. The two volunteering stats come from reel captions of 24 January 2026 and 6 November 2026.
+30. **Two confirmed links with no place on the site yet.** The volunteer sign-up form (Google Forms) and "Become a member" (UNLV Involvement Center) are CONFIRMED in `FACTS.md`, but it gives no placement for them, so they aren't on the site. Decide where they go (for example, the Volunteer page and the club program page). The Volunteer page already has its own form.

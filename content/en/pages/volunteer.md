@@ -12,7 +12,7 @@ intro: >-
 
 ### Service volunteer
 
-Join a biweekly shift sorting, packing or serving food with a partner organization. No experience needed.
+Join a volunteer day sorting, packing or serving food with a partner organization. No experience needed.
 
 **Commitment:** 2 to 3 hours, as often as you like.
 

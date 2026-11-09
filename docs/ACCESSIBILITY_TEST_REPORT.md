@@ -40,7 +40,7 @@ Every page is tested in both languages. The page list is read from the built `si
 
 | Template | Pages |
 |---|---|
-| Program page | `/programs/example-program/` (with image), `/es/programas/programa-de-ejemplo/` (without image), and the three published programs in each language (UNLV Food Tasting Club, Biweekly Volunteering, Mobile Food Pantry) |
+| Program page | `/programs/example-program/` (with image), `/es/programas/programa-de-ejemplo/` (without image), and the three published programs in each language (UNLV Food Tasting Club, Volunteer Days, Mobile Food Pantry) |
 | News post page | `/news/example-news-post/`, `/es/noticias/noticia-de-ejemplo/` (paired), `/news/example-post-without-translation/` (no translation) |
 | Lists with entries, home page with programs and news | `/programs/`, `/news/`, `/`, and the Spanish equivalents |
 | People (About) | two example people, one with a photo and one with the initials placeholder |
@@ -250,7 +250,7 @@ Run these yourself. Automated tools catch roughly a third to a half of accessibi
 3. Or use a deployed Vercel preview address instead of `localhost`.
 4. For each failure, note the page, what you did, what happened and what you expected, and add a row to the defect log (section 7).
 
-**Pages to cover:** the 20 pages in section 3; the three programs in each language (`/programs/unlv-food-tasting-club/`, `/programs/biweekly-volunteering/`, `/programs/mobile-food-pantry/` and their Spanish versions); `/programs/example-program/`, `/news/example-news-post/` and `/es/programas/programa-de-ejemplo/`; and one wrong address (`/es/no-existe/`).
+**Pages to cover:** the 20 pages in section 3; the three programs in each language (`/programs/unlv-food-tasting-club/`, `/programs/volunteer-days/`, `/programs/mobile-food-pantry/` and their Spanish versions); the four news posts in each language (added 9 November 2026, with photo grids); the Home page photo and stats strip, and the club board and club life sections on About; `/programs/example-program/`, `/news/example-news-post/` and `/es/programas/programa-de-ejemplo/`; and one wrong address (`/es/no-existe/`).
 
 ### 8.1 Full keyboard walk of every page
 

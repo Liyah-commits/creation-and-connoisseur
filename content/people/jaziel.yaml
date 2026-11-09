@@ -1,0 +1,14 @@
+name: Jaziel
+draft: false
+group: clubBoard
+roleEn: Photographer
+roleEs: Fotógrafo
+bioEn: "Favorite food: birria."
+bioEs: "Comida favorita: birria."
+photo:
+  discriminant: true
+  value:
+    image: ../images/people/jaziel/photo/value/image.webp
+    altEn: "Jaziel, Photographer, leans over a pool table to take a shot."
+    altEs: "Jaziel, fotógrafo, se inclina sobre una mesa de billar para tirar."
+order: 90

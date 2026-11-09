@@ -60,6 +60,13 @@ export default defineConfig({
   site: resolveSite(),
   trailingSlash: 'always',
   output: 'static',
+  // 301s for renamed pages (docs/REDIRECTS.md, D23). The volunteering program
+  // was renamed on 9 November 2026 because its old name claimed a biweekly
+  // schedule the record doesn't support (D48).
+  redirects: {
+    '/programs/biweekly-volunteering': { status: 301, destination: '/programs/volunteer-days/' },
+    '/es/programas/voluntariado-quincenal': { status: 301, destination: '/es/programas/jornadas-de-voluntariado/' },
+  },
   adapter: vercel(),
   integrations: [react(), keystatic()],
   i18n: {

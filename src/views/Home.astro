@@ -1,10 +1,18 @@
 ---
+/**
+ * Home: the title and introduction beside the main photo, the stats strip,
+ * the page text, the three ways to take part, and the latest programs and news.
+ * The photo and stats come from "Home and About photos and stats" in Keystatic.
+ * The photo is the only image on the site that is not lazy loaded: it is the
+ * likely largest paint, so it loads first.
+ */
+import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import EntryCard from '../components/EntryCard.astro';
 import Prose from '../components/Prose.astro';
 import { alternatesFor, routes, type Lang } from '../i18n/routes';
 import { t, type UIKey } from '../i18n/ui';
-import { getNews, getPage, getPrograms } from '../lib/content';
+import { getHighlights, getNews, getPage, getPrograms } from '../lib/content';
 
 interface Props {
   lang: Lang;
@@ -13,6 +21,10 @@ const { lang } = Astro.props;
 const page = await getPage(lang, 'home');
 const programs = (await getPrograms(lang)).slice(0, 3);
 const news = (await getNews(lang)).slice(0, 3);
+const highlights = await getHighlights();
+const hero = highlights.heroImage.discriminant ? highlights.heroImage.value : null;
+const stats = highlights.stats;
+const statColumns = stats.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : stats.length === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2';
 
 const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UIKey }[] = [
   { key: 'getHelp', title: 'home.getHelpTitle', text: 'home.getHelpText' },
@@ -32,9 +44,45 @@ const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UI
           <a href={routes.volunteer[lang]} class="btn btn-secondary">{t(lang, 'home.volunteerTitle')}</a>
         </div>
       </div>
-      <div class="placeholder-pattern hidden aspect-[4/3] rounded-lg border border-ink/10 md:block" aria-hidden="true"></div>
+      {
+        hero ? (
+          <Picture
+            src={hero.image}
+            alt={lang === 'en' ? hero.altEn : hero.altEs}
+            widths={[480, 800, 1200, 1600]}
+            sizes="(min-width: 72rem) 27rem, (min-width: 48rem) 36vw, 100vw"
+            formats={['avif']}
+            fallbackFormat="webp"
+            loading="eager"
+            fetchpriority="high"
+            class="h-auto w-full rounded-lg border border-ink/10"
+          />
+        ) : (
+          <div class="placeholder-pattern hidden aspect-[4/3] rounded-lg border border-ink/10 md:block" aria-hidden="true" />
+        )
+      }
     </div>
   </div>
+
+  {
+    stats.length > 0 && (
+      <section class="border-b border-ink/10" aria-labelledby="stats-heading">
+        <div class="container-page py-10">
+          <h2 id="stats-heading" class="sr-only">{t(lang, 'home.statsHeading')}</h2>
+          <ul class:list={['grid gap-8 text-center', statColumns]} role="list">
+            {stats.map((stat) => (
+              <li>
+                <p>
+                  <span class="block font-serif text-4xl font-bold text-tomato-dark">{stat.value}</span>{' '}
+                  <span class="mt-1 block">{lang === 'en' ? stat.labelEn : stat.labelEs}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
 
   {
     page.body?.trim() && (

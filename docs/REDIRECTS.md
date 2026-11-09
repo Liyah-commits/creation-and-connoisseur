@@ -4,11 +4,14 @@
 
 **No old site exists, so there are no old URLs to redirect.** See `docs/CONTENT_INVENTORY.md` and `docs/PLAN.md`, section 1.
 
+Pages renamed on this site after it went live are redirected too. They're listed in the map below.
+
 ## Map
 
 | Old URL | New URL | Status | Reason |
 |---|---|---|---|
-| *none* | | | |
+| `/programs/biweekly-volunteering/` | `/programs/volunteer-days/` | 301 | Program renamed 9 November 2026: the old name claimed a biweekly schedule (D48) |
+| `/es/programas/voluntariado-quincenal/` | `/es/programas/jornadas-de-voluntariado/` | 301 | Spanish version of the same rename (D48) |
 
 ## How to add a redirect
 

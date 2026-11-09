@@ -92,6 +92,12 @@ export async function getSettings() {
 
 export type Settings = Awaited<ReturnType<typeof getSettings>>;
 
+/** The Home page photo and stats and the About page's club life photos. Empty if the file has never been saved. */
+export async function getHighlights() {
+  const entry = await getEntry('highlights', 'highlights');
+  return entry?.data ?? { heroImage: { discriminant: false as const }, stats: [], aboutPhotos: [] };
+}
+
 export async function getPeople() {
   const people = await getCollection('people', isPublished);
   return people.sort((a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name));

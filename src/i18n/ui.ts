@@ -60,6 +60,7 @@ export const ui = {
   'home.volunteerText': { en: 'Let us know you would like to give your time.', es: 'Cuéntenos que le gustaría donar su tiempo.' },
   'home.donateTitle': { en: 'Donate', es: 'Donar' },
   'home.donateText': { en: 'Support the work against food insecurity at UNLV.', es: 'Apoye el trabajo contra la inseguridad alimentaria en UNLV.' },
+  'home.statsHeading': { en: 'Our work in numbers', es: 'Nuestro trabajo en cifras' },
   'home.programsHeading': { en: 'Programs', es: 'Programas' },
   'home.newsHeading': { en: 'Latest news', es: 'Noticias recientes' },
   'home.allPrograms': { en: 'See all programs', es: 'Ver todos los programas' },
@@ -69,6 +70,8 @@ export const ui = {
   'about.missionHeading': { en: 'Our mission', es: 'Nuestra misión' },
   'about.storyHeading': { en: 'Our story', es: 'Nuestra historia' },
   'about.peopleHeading': { en: 'Our people', es: 'Nuestro equipo' },
+  'about.clubBoardHeading': { en: 'UNLV Food Tasting Club board', es: 'Junta del UNLV Food Tasting Club' },
+  'about.clubLifeHeading': { en: 'Club life', es: 'La vida en el club' },
 
   // Programs and news
   'programs.empty': { en: 'No programs are listed yet. Please check back soon.', es: 'Todavía no hay programas publicados. Vuelva a visitarnos pronto.' },
@@ -77,6 +80,7 @@ export const ui = {
   'programs.back': { en: 'All programs', es: 'Todos los programas' },
   'news.empty': { en: 'There are no news posts yet. Please check back soon.', es: 'Todavía no hay noticias publicadas. Vuelva a visitarnos pronto.' },
   'news.back': { en: 'All news', es: 'Todas las noticias' },
+  'entry.galleryHeading': { en: 'Photos', es: 'Fotos' },
   'news.published': { en: 'Published', es: 'Publicado el' },
   'draft.badge': { en: 'Draft', es: 'Borrador' },
   'draft.notice': {

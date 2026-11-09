@@ -4,13 +4,17 @@ Every file that contains Spanish the public will read. It needs review by a Span
 
 **Reset on 6 November 2026.** The content batch (decision D38) and the switch to usted (D25) changed every Spanish file, so every box is unchecked, including any that had been reviewed before. Files marked **changed** were edited or created on that date.
 
+**Updated 9 November 2026.** The photos, stats, board, news and contact batch (decisions D46 to D53) added or changed the files marked **Changed 9 November 2026**. Their boxes are unchecked, and any that had been ticked are unticked again.
+
 **Reviewer:** _______________________  **Date signed off:** _______________
 
 ## Before you start
 
 - **Register:** neutral US Latin American Spanish, using **usted** throughout ("Envíenos un mensaje", "Si usted o su familia necesitan alimentos…", "Únase al club"). The site was first written in tú. Every tú form was replaced, and a search of every Spanish file for tú forms came back clean. Flag any that remain.
 - **Gender-neutral phrasing** is used where Spanish would otherwise force a gender: "Haga voluntariado", "Pertenece a Aryah Certain, quien también la dirige", "Persona anfitriona de Noche Cultural", "la persona coordinadora de voluntarios". Aryah's title, "Fundadora y Presidenta", is as supplied. Confirm these read naturally.
-- **Names stay in English:** "Creation and Connoisseur", "UNLV Food Tasting Club", "Three Square Food Bank", "Nevada 211", "Access Nevada".
+- **Club board titles are gendered, as supplied** (D51). Each Spanish title follows that person's supplied Spanish photo description ("Zau, organizador de eventos", "Joy, secretaria", "Jaziel, fotógrafo"). Confirm each one with the person before ticking the People files.
+- **Photo descriptions (alt text) were supplied in both languages** with the photos and are used word for word (D46). If one needs changing, tell Aryah, so the English and Spanish stay in step and the source files match.
+- **Names stay in English:** "Creation and Connoisseur", "UNLV Food Tasting Club", "Three Square Food Bank", "Olive Crest", "Nevada 211", "Access Nevada", and event and restaurant names ("Taste of the Philippines", "Thai Night", "Down By The Bayou", "Tina's Filipino Cuisine", "Chao Thai"). The film is given its US Latin American title, *La princesa y el sapo*.
 - **The pantry is planned, not running.** Every Spanish mention of the despensa móvil must say it's planned or expected for 2027 ("prevista para 2027", "que planeamos", "llevaría"), never that it already operates or is guaranteed, and must not mention Rotary or partners. Check this in the mission, the About story, the club and pantry programs, Get Help, the Pantry team role and Aryah's bio.
 - **Same facts as the English:** the Spanish must say no more and no less than the English version of each page.
 - **How to see it:** run `pnpm build:test && pnpm serve` and open `http://localhost:4321/es/`. Spanish pages are under `/es/`. The programs and Aryah's bio were published on 7 November 2026, so they're live content: review them first.
@@ -27,7 +31,14 @@ Every file that contains Spanish the public will read. It needs review by a Span
 | SNAP (food stamps) | SNAP (cupones de alimentos) |
 | Get help | Obtener ayuda |
 | Volunteer (page) / volunteering | Voluntariado / hacer voluntariado |
-| Biweekly Volunteering | Voluntariado Quincenal |
+| Volunteer Days (was Biweekly Volunteering) | Jornadas de Voluntariado (was Voluntariado Quincenal) |
+| volunteer day | jornada de voluntariado |
+| Club mission | Misión del club |
+| UNLV Food Tasting Club board | Junta del UNLV Food Tasting Club |
+| Club life | La vida en el club |
+| Favorite food | Comida favorita |
+| Our work in numbers (stats strip, screen readers only) | Nuestro trabajo en cifras |
+| Photos | Fotos |
 | Culture Night | Noche Cultural |
 | partner organization | organización aliada |
 | About (us) | Quiénes somos |
@@ -46,35 +57,46 @@ Every file that contains Spanish the public will read. It needs review by a Span
 Each file holds the page title, the search result description, the introduction and the main text.
 
 - [ ] `content/es/pages/home.md`: Inicio (`/es/`)
-- [ ] `content/es/pages/about.md`: Quiénes somos (`/es/acerca-de/`). **Changed:** story from the batch, figures removed, pantry planned; usted description.
+- [ ] `content/es/pages/about.md`: Quiénes somos (`/es/acerca-de/`). **Changed:** story from the batch, figures removed, pantry planned; usted description. **Changed 9 November 2026:** "Cada dos semanas" removed from the second paragraph (D48). The page also shows the new club board and club life sections (see People and Organization text).
 - [ ] `content/es/pages/programs.md`: Programas (`/es/programas/`)
 - [ ] `content/es/pages/getHelp.md`: Obtener ayuda (`/es/obtener-ayuda/`). **Changed:** new text from the batch, four resource links, pantry planned. Check especially for plain, friendly language.
-- [ ] `content/es/pages/volunteer.md`: Voluntariado (`/es/voluntariado/`). **Changed:** new introduction and five roles. Role names and commitments were translated during loading.
+- [ ] `content/es/pages/volunteer.md`: Voluntariado (`/es/voluntariado/`). **Changed:** new introduction and five roles. Role names and commitments were translated during loading. **Changed 9 November 2026:** the Service volunteer role says "una jornada de voluntariado" instead of "un turno quincenal" (D48).
 - [ ] `content/es/pages/donate.md`: Donar (`/es/donar/`). **Changed:** usted.
 - [ ] `content/es/pages/news.md`: Noticias (`/es/noticias/`)
-- [ ] `content/es/pages/contact.md`: Contáctenos (`/es/contacto/`). **Changed:** title, search result description and introduction switched to usted ("Contáctanos" became "Contáctenos", and "Comunícate" became "Comuníquese").
+- [ ] `content/es/pages/contact.md`: Contáctenos (`/es/contacto/`). **Changed:** title, search result description and introduction switched to usted ("Contáctanos" became "Contáctenos", and "Comunícate" became "Comuníquese"). **Changed 9 November 2026:** new main text, the UNLV Food Tasting Club email line, shown under "Otras formas de comunicarse con nosotros" (D52).
 - [ ] `content/es/pages/accessibility.md`: Declaración de accesibilidad (`/es/accesibilidad/`). **Changed:** new text from the batch.
 - [ ] `content/es/pages/privacy.md`: Política de privacidad (`/es/privacidad/`). **Changed:** new text from the batch. Needs legal review too (`docs/OPEN_ITEMS.md`, item 18).
 
 ## Programs (`content/es/programs/`, published 7 November 2026)
 
-- [ ] `content/es/programs/unlv-food-tasting-club.md`: UNLV Food Tasting Club. **Changed (new).**
-- [ ] `content/es/programs/voluntariado-quincenal.md`: Voluntariado Quincenal. **Changed (new).**
+- [ ] `content/es/programs/unlv-food-tasting-club.md`: UNLV Food Tasting Club. **Changed (new).** **Changed 9 November 2026:** "Misión del club" (translated from the club's English mission), the club email line, a main photo and two more photos with supplied descriptions.
+- [ ] `content/es/programs/jornadas-de-voluntariado.md`: Jornadas de Voluntariado (`/es/programas/jornadas-de-voluntariado/`). **Changed 9 November 2026:** renamed from `voluntariado-quincenal.md` ("Voluntariado Quincenal"), new name, summary and schedule line (supplied), "Cada dos semanas" removed, partners line added, photo added (D48).
 - [ ] `content/es/programs/despensa-movil-de-alimentos.md`: Despensa Móvil de Alimentos (prevista para 2027). **Changed (new).**
+
+## News (`content/es/news/`, published 9 November 2026)
+
+All **Changed 9 November 2026 (new)**. Each has two paragraphs written from `photos-inbox/FACTS.md`, a summary, and photo descriptions as supplied.
+
+- [ ] `content/es/news/taste-of-the-philippines.md`: Taste of the Philippines (22 de octubre de 2026)
+- [ ] `content/es/news/voluntariado-en-three-square.md`: Voluntariado en Three Square: más de 100 familias alimentadas en dos horas (6 de noviembre de 2026)
+- [ ] `content/es/news/thai-night.md`: Thai Night (2 de abril de 2026)
+- [ ] `content/es/news/down-by-the-bayou.md`: Down By The Bayou alcanza su capacidad máxima (23 de octubre de 2025)
 
 ## People
 
+- [ ] Club board, **Changed 9 November 2026 (new)**: `roleEs`, `bioEs` ("Comida favorita: …") and `altEs` (supplied) in `content/people/aryah.yaml`, `mya.yaml`, `joy.yaml`, `priya.yaml`, `zau.yaml`, `katelyn.yaml`, `emily.yaml`, `george.yaml` and `jaziel.yaml`. Check the food names read naturally ("sándwich po'boy de camarón", "pollo mochiko con poke de atún ahi picante").
 - [ ] `content/people/aryah-certain.yaml`: `roleEs` and `bioEs`. **Changed (new; published 7 November 2026).** The last sentence of the bio was revised to "…y la despensa móvil de alimentos que está en planificación".
 
 ## Interface text
 
-- [ ] `src/i18n/ui.ts`: every button, label, menu item, form message, error message, footer line and screen-reader-only text. Each entry shows the English (`en:`) next to the Spanish (`es:`). **Changed:** usted throughout, and new strings for the Get Help form. Read the form messages in context by submitting each form empty and then complete, on `/es/contacto/`, `/es/voluntariado/` and `/es/obtener-ayuda/`.
+- [ ] `src/i18n/ui.ts`: every button, label, menu item, form message, error message, footer line and screen-reader-only text. Each entry shows the English (`en:`) next to the Spanish (`es:`). **Changed:** usted throughout, and new strings for the Get Help form. Read the form messages in context by submitting each form empty and then complete, on `/es/contacto/`, `/es/voluntariado/` and `/es/obtener-ayuda/`. **Changed 9 November 2026:** new strings `home.statsHeading`, `about.clubBoardHeading`, `about.clubLifeHeading` and `entry.galleryHeading`.
 - [ ] `src/i18n/routes.ts`: the Spanish addresses (`acerca-de`, `programas`, `obtener-ayuda`, `voluntariado`, `donar`, `noticias`, `contacto`, `accesibilidad`, `privacidad`). Changing one after launch needs a redirect, so confirm them now.
 - [ ] `src/pages/404.astro`: the Spanish half of the "page not found" page (open any wrong address, like `/es/no-existe/`). Checked for tú forms during the switch; it had none.
 
 ## Organization text
 
-- [ ] `content/settings.yaml`: `missionEs` (the mission, rewritten so the pantry is planned), `taglineEs` (the tagline, also used for social bios), `unlvStatementEs` (the relationship to UNLV, shown in every footer) and `descriptionEs` (search results and social previews). **Changed.**
+- [ ] `content/settings.yaml`: `missionEs` (the mission, rewritten so the pantry is planned), `taglineEs` (the tagline, also used for social bios), `unlvStatementEs` (the relationship to UNLV, shown in every footer) and `descriptionEs` (search results and social previews). **Changed.** **Changed 9 November 2026:** `missionEs` is now "Creation and Connoisseur combate la inseguridad alimentaria en UNLV y en todo Las Vegas.", with no pantry wording (D53).
+- [ ] `content/highlights.yaml` (Shared > Home and About photos and stats): the three stat labels (`labelEs`) and the photo descriptions (`altEs`, supplied). **Changed 9 November 2026 (new).**
 
 ## Template examples (never published)
 

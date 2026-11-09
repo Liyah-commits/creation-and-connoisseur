@@ -28,6 +28,13 @@ const optionalImage = (image: ImageFn) =>
     ])
     .default({ discriminant: false });
 
+/** Keystatic's "More photos" list: each photo with its alt text. Missing means none. */
+const gallery = (image: ImageFn) => z.array(z.object({ image: image(), alt: z.string().trim().min(1) })).default([]);
+
+/** A photo used in both languages, with alt text in each (Home and About photos). */
+const bilingualPhoto = (image: ImageFn) =>
+  z.object({ image: image(), altEn: z.string().trim().min(1), altEs: z.string().trim().min(1) });
+
 /** Keystatic writes empty text fields as "" and empty optional fields as null. */
 const optionalText = z
   .string()
@@ -54,6 +61,7 @@ const programSchema = ({ image }: SchemaContext) =>
     schedule: optionalText,
     location: optionalText,
     image: optionalImage(image),
+    gallery: gallery(image),
   });
 
 const newsSchema = ({ image }: SchemaContext) =>
@@ -64,6 +72,7 @@ const newsSchema = ({ image }: SchemaContext) =>
     date: z.coerce.date(),
     summary: z.string().trim().min(1),
     image: optionalImage(image),
+    gallery: gallery(image),
   });
 
 const people = defineCollection({
@@ -72,6 +81,8 @@ const people = defineCollection({
     z.object({
       name: z.string().trim().min(1),
       draft: z.boolean().default(false),
+      /** Which group on the About page: the nonprofit's people first, then the club board. */
+      group: z.enum(['nonprofit', 'clubBoard']).default('nonprofit'),
       roleEn: optionalText,
       roleEs: optionalText,
       bioEn: optionalText,
@@ -117,6 +128,25 @@ const settingsSchema = z.object({
 
 const settings = defineCollection({ loader: files('settings.yaml', './content'), schema: settingsSchema });
 
+/** Home page photo and stats, and the About page's club life photos (Keystatic singleton "highlights"). */
+const highlights = defineCollection({
+  loader: files('highlights.yaml', './content'),
+  schema: ({ image }) =>
+    z.object({
+      heroImage: z
+        .discriminatedUnion('discriminant', [
+          z.object({ discriminant: z.literal(false) }),
+          z.object({ discriminant: z.literal(true), value: bilingualPhoto(image) }),
+        ])
+        .default({ discriminant: false }),
+      stats: z
+        .array(z.object({ value: z.string().trim().min(1), labelEn: z.string().trim().min(1), labelEs: z.string().trim().min(1) }))
+        .max(4)
+        .default([]),
+      aboutPhotos: z.array(bilingualPhoto(image)).default([]),
+    }),
+});
+
 /**
  * Obviously fake settings used only by the template test build (SHOW_DRAFTS=true),
  * so the footer contact details, EIN line, social links, mission and working
@@ -132,6 +162,7 @@ export const collections = {
   newsEn: defineCollection({ loader: files('*.md', './content/en/news'), schema: newsSchema }),
   newsEs: defineCollection({ loader: files('*.md', './content/es/news'), schema: newsSchema }),
   people,
+  highlights,
   settings,
   settingsTemplate,
 };

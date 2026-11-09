@@ -3,16 +3,18 @@ ein: ''
 email: ''
 phone: ''
 mailingAddress: ''
-socialLinks: []
-missionEn: >-
-  Creation and Connoisseur fights food insecurity in Las Vegas. We are planning
-  a mobile food pantry, targeted for 2027, that would bring food directly to the
-  students and neighborhoods that cannot reach it.
+donationUrl: https://cash.app/$Unlvfood
+socialLinks:
+  - label: Instagram
+    url: https://www.instagram.com/foodtastingclublv
+  - label: TikTok
+    url: https://www.tiktok.com/@foodtastingclub
+  - label: Discord
+    url: https://discord.gg/8xBFpFrtbh
+missionEn: Creation and Connoisseur fights food insecurity at UNLV and across Las Vegas.
 missionEs: >-
-  Creation and Connoisseur combate la inseguridad alimentaria en Las Vegas.
-  Estamos planeando una despensa móvil de alimentos, prevista para 2027, que
-  llevaría alimentos directamente a los estudiantes y vecindarios que no pueden
-  acceder a ellos.
+  Creation and Connoisseur combate la inseguridad alimentaria en UNLV y en todo
+  Las Vegas.
 taglineEn: Fighting food insecurity at UNLV and across Las Vegas.
 taglineEs: Combatimos la inseguridad alimentaria en UNLV y en todo Las Vegas.
 unlvStatementEn: >-

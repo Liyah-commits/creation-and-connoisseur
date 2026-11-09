@@ -10,3 +10,7 @@ test-results/
 playwright-report/
 .lighthouseci/
 reports/
+
+# Local source material, never committed (originals of photos may show people who did not consent to a public repo)
+photos-inbox/
+instagram-export/

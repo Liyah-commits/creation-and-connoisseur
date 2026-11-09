@@ -6,3 +6,4 @@ metaDescription: >-
   501(c)(3) enfocada en la inseguridad alimentaria en UNLV.
 intro: ¿Tiene alguna pregunta? Envíenos un mensaje con el formulario de abajo.
 ---
+**UNLV Food Tasting Club:** las preguntas sobre nuestro club en el campus pueden enviarse a [Foodtastingclub@unlv.edu](mailto:Foodtastingclub@unlv.edu).

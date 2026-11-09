@@ -47,9 +47,10 @@ These keep the site accessible, which matters to the people it serves and to fun
 3. Leave **Hide from the live site** ticked for now.
 4. **Date**: the publication date. It starts as today.
 5. **Short summary**: one or two sentences, under 160 characters. It shows in the news list and in search results.
-6. **Add an image** (optional): see "Add an image" below.
-7. Write the post in the large text area on the left. Use the toolbar for headings, bold, links and lists.
-8. Choose **Create**. The post is saved but hidden.
+6. **Add an image** (optional): see "Add an image" below. It's the photo on the news list and when the post is shared.
+7. **More photos** (optional): up to six more photos, shown in a grid under the text, each with its own description.
+8. Write the post in the large text area on the left. Use the toolbar for headings, bold, links and lists.
+9. Choose **Create**. The post is saved but hidden.
 
 ### 2. Write the Spanish version and link it
 
@@ -74,6 +75,7 @@ If there is no Spanish version yet, you can still publish the English post. The 
    - **Short summary**: shown on the Programs list.
    - **When**: days and times in plain words, like "Tuesdays, 11 a.m. to 2 p.m.". Leave it empty if it doesn't apply.
    - **Where**: the place in plain words, with building and room if there is one.
+   - **Add an image** and **More photos**: the program's card photo, and up to six more shown under the text.
    - **Main text**: everything else.
 3. Choose **Save**.
 4. Make the same change in Spanish: **Programas (Spanish programs)** > the matching program > edit > **Save**.
@@ -85,7 +87,7 @@ To **add** a new program, follow the same steps as a news post: create it in Eng
 Every photo needs a description (alt text) for people who can't see it. The site won't let you save a photo without one.
 
 1. On the program, news post or person, tick **Add an image** (on a person: **Add a photo**).
-2. Choose **Choose file** and pick a JPG or PNG from your computer, at least 1200 pixels wide (600 for people). Only use photos you have permission to use, and that the people in them have agreed to.
+2. Choose **Choose file** and pick a JPG, PNG or WebP from your computer, at least 1200 pixels wide (600 for people). Only use photos you have permission to use, and that the people in them have agreed to.
 3. In **Image description (alt text)**, describe what the photo shows in one sentence, as you would to someone on the phone:
    - Good: "Two volunteers packing bags of groceries at a folding table."
    - Not helpful: "Image of volunteers", "photo123.jpg", or the same words as the headline.
@@ -95,7 +97,15 @@ Every photo needs a description (alt text) for people who can't see it. The site
 
 The Spanish version of a program or post has its own **Add an image** box. Add the same photo there with a Spanish description, or leave it off.
 
-To remove an image, untick **Add an image** and save.
+To remove an image, untick **Add an image** and save. To remove one of the **More photos**, open its menu in the list and delete it.
+
+## Change the Home page photo and stats, or the About page's club photos
+
+Choose **Home and About photos and stats** (under Shared). It's one screen for both languages:
+
+- **Show a photo at the top of the Home page**: the main Home photo, with a description in English and in Spanish. Use a landscape photo. It loads first, so keep it to one good photo.
+- **Home page stats**: up to four figures, shown in a strip under the photo. Each has a **Number** (written exactly as it should appear, like "700+") and what it counts, in English and in Spanish. Only publish a figure you can point to a source for, and update or remove figures that go out of date ("this fall").
+- **Club life photos (About page)**: up to six photos, shown on About under "Club life", each with a description in both languages.
 
 ## Edit a fixed page (Home, About, Get help…)
 
@@ -104,7 +114,9 @@ To remove an image, untick **Add an image** and save.
 3. Don't change the **Internal name** or **File name**, and don't add or delete pages in this list. The site finds each page by its internal name. Deleting one stops the site from updating until it's restored (the admin can do this).
 4. Each page needs its own **Search result description**: a different sentence for every page, in each language.
 
-On **About**, the main text appears as "Our story". The mission comes from **Site settings**, and the people from **People**.
+On **About**, the main text appears as "Our story". The mission comes from **Site settings**, the people from **People** (in two groups, see "Add a person"), and the club life photos from **Home and About photos and stats**.
+
+On **Contact**, the main text appears under "Other ways to reach us", below the form. It holds the UNLV Food Tasting Club's email line. Keep the club's unlv.edu address there and on the club's program page only: never in Site settings or the footer, because a university address shown everywhere would suggest the university endorses the nonprofit.
 
 ## Update the organization's details
 
@@ -113,9 +125,9 @@ Choose **Site settings** (under Shared). Fill in a field only when the informati
 | Field | Where it appears |
 |---|---|
 | Legal name, EIN | Footer (EIN) and Donate page |
-| Public email, phone, mailing address | Footer and Contact page |
+| Public email, phone, mailing address | Footer and Contact page. Use the nonprofit's own address, never the club's unlv.edu address. |
 | Donation link | The Donate page button starts working (until then it reads "Donation link coming soon") |
-| Social media links | Footer |
+| Social media links | Footer and Contact page, each with its icon (Instagram, TikTok and Discord are recognized from the address) |
 | Mission statement (English and Spanish) | About page |
 | Tagline (English and Spanish) | Under the name in every footer, and in the home page title in search results. Use the same words for social media bios. |
 | Relationship to UNLV (English and Spanish) | Footer of every page, in place of the general nonprofit line. Change it only with wording confirmed by UNLV Student Involvement. |
@@ -124,9 +136,11 @@ Choose **Site settings** (under Shared). Fill in a field only when the informati
 ## Add a person
 
 1. Choose **People** > **Add**.
-2. Fill in **Name**, **Role** and **Short bio** in English and Spanish. Add a photo with descriptions in both languages, or leave it off and the site shows their initials.
-3. **Order** sets the position in the list, lowest first. Use 10, 20, 30… so it's easy to fit someone in later.
-4. Untick **Hide from the live site** when the person has approved what's written about them, then choose **Create** or **Save**.
+2. Fill in **Name**, **Role** and **Short bio** in English and Spanish. Student club board members are listed by first name only, unless they agree to a full name online.
+3. **Group**: "Creation and Connoisseur" lists the person under "Our people" on About. "UNLV Food Tasting Club board" lists them in the second group, under that heading.
+4. Photo: add one with descriptions in both languages, or leave it off and the site shows their initials.
+5. **Order** sets the position in the list, lowest first. Use 10, 20, 30… so it's easy to fit someone in later.
+6. Untick **Hide from the live site** when the person has approved what's written about them, then choose **Create** or **Save**.
 
 ## Hide or delete something
 
