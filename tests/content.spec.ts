@@ -17,6 +17,9 @@ const isTemplateBuild = PAGES.includes('/programs/example-program/');
 /** The real Site settings file, read directly, so the Donate test follows whatever is set there. */
 const donationUrl = /^donationUrl:\s*(\S+)/m.exec(readFileSync('content/settings.yaml', 'utf8'))?.[1]?.replace(/^['"]|['"]$/g, '') ?? '';
 
+/** The nonprofit's public email (photos-inbox/FACTS.md, D56). */
+const NONPROFIT_EMAIL = 'info@creationandconnoisseur.org';
+
 /** The only pages allowed to show the club's unlv.edu address (photos-inbox/FACTS.md, D52). */
 const CLUB_EMAIL_PAGES = [
   '/programs/unlv-food-tasting-club/',
@@ -41,13 +44,25 @@ test.describe('production build', () => {
     await expect(page.locator('main article')).toHaveCount(4);
   });
 
-  test('empty facts render nothing: no EIN line, no nonprofit email or phone', async ({ page }) => {
+  test('empty facts render nothing: no EIN line, no phone; the footer has the form link and the nonprofit email only', async ({ page }) => {
     await page.goto(routes.about.en);
     await expect(page.locator('footer')).not.toContainText('EIN');
-    await expect(page.locator('footer a[href^="mailto:"]')).toHaveCount(0);
     await expect(page.locator('footer a[href^="tel:"]')).toHaveCount(0);
-    // With no public email, the footer's contact column points to the contact form.
     await expect(page.locator('footer').getByRole('link', { name: ui['footer.contactForm'].en })).toHaveAttribute('href', routes.contact.en);
+    const footerEmail = page.locator('footer a[href^="mailto:"]');
+    await expect(footerEmail).toHaveCount(1);
+    await expect(footerEmail).toHaveAttribute('href', `mailto:${NONPROFIT_EMAIL}`);
+  });
+
+  test('the nonprofit email is on Contact, Privacy, Accessibility and Get Help, in both languages, and the contact form stays', async ({ page }) => {
+    for (const key of ['contact', 'privacy', 'accessibility', 'getHelp'] as const) {
+      for (const lang of ['en', 'es'] as const) {
+        await page.goto(routes[key][lang]);
+        await expect(page.locator(`main a[href="mailto:${NONPROFIT_EMAIL}"]`).first(), routes[key][lang]).toHaveText(NONPROFIT_EMAIL);
+      }
+    }
+    await page.goto(routes.contact.es);
+    await expect(page.locator('main form')).toHaveCount(1);
   });
 
   for (const lang of ['en', 'es'] as const) {
@@ -140,8 +155,40 @@ test.describe('production build', () => {
     }
   });
 
+  test('the volunteering photo: on Volunteer Days, the Volunteer page and the Home Volunteer card, never the hero, never wider than 900px', async ({ page }) => {
+    const placements = [
+      [routes.home.en, /bag of groceries/],
+      [routes.home.es, /bolsa de comestibles/],
+      [routes.volunteer.en, /bag of groceries/],
+      [routes.volunteer.es, /bolsa de comestibles/],
+      ['/programs/volunteer-days/', /bag of groceries/],
+      ['/es/programas/jornadas-de-voluntariado/', /bolsa de comestibles/],
+    ] as const;
+    for (const width of [1000, 1280]) {
+      await page.setViewportSize({ width, height: 900 });
+      for (const [path, alt] of placements) {
+        await page.goto(path);
+        let found = 0;
+        for (const img of await page.locator('main img').all()) {
+          if (!alt.test((await img.getAttribute('alt')) ?? '')) continue;
+          found++;
+          await expect(img, path).toHaveAttribute('loading', 'lazy');
+          expect(await img.getAttribute('fetchpriority'), path).toBeNull();
+          expect((await img.boundingBox())!.width, `${path} at ${width}px`).toBeLessThanOrEqual(900);
+        }
+        expect(found, path).toBeGreaterThan(0);
+      }
+    }
+    // The Volunteer page shows it in the page header; the Home Volunteer card shows it above its heading.
+    await page.goto(routes.volunteer.en);
+    await expect(page.locator('main > div').first().locator('img[alt*="bag of groceries"]')).toHaveCount(1);
+    await page.goto(routes.home.en);
+    const card = page.locator('section[aria-labelledby="actions-heading"] li', { hasText: ui['home.volunteerTitle'].en });
+    await expect(card.locator('img[alt*="bag of groceries"]')).toHaveCount(1);
+  });
+
   test('images below the hero are lazy loaded', async ({ page }) => {
-    for (const path of [routes.home.en, routes.about.es, '/programs/unlv-food-tasting-club/', '/news/taste-of-the-philippines/']) {
+    for (const path of [routes.home.en, routes.about.es, routes.volunteer.en, '/programs/volunteer-days/', '/programs/unlv-food-tasting-club/', '/news/taste-of-the-philippines/']) {
       await page.goto(path);
       const lazy = page.locator('main img:not([fetchpriority="high"])');
       expect(await lazy.count(), path).toBeGreaterThan(0);

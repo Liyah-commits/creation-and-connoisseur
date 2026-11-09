@@ -390,7 +390,7 @@ export default config({
   },
   singletons: {
     highlights: singleton({
-      label: 'Home and About photos and stats',
+      label: 'Photos and stats (Home, About, Volunteer)',
       path: 'content/highlights',
       format: { data: 'yaml' },
       schema: {
@@ -438,6 +438,22 @@ export default config({
             description: 'Up to four figures, shown in a strip under the Home page photo. Leave empty to hide the strip.',
             itemLabel: (props) => `${props.fields.value.value} ${props.fields.labelEn.value}`.trim() || 'New stat',
             validation: { length: { max: 4 } },
+          },
+        ),
+        volunteerPhoto: fields.conditional(
+          fields.checkbox({
+            label: 'Show a volunteering photo',
+            description:
+              'Tick this to add a photo of volunteers at work. It appears at the top of the Volunteer page and in the Volunteer card on the Home page. Never use a photo that shows the face of someone receiving food.',
+            defaultValue: false,
+          }),
+          {
+            true: bilingualPhoto(
+              'content/images/highlights',
+              './images/highlights/',
+              'A JPG, PNG or WebP photo, at least 900 pixels wide. It is shown at most 900 pixels wide. Only use photos you have permission to use.',
+            ),
+            false: fields.empty(),
           },
         ),
         aboutPhotos: fields.array(

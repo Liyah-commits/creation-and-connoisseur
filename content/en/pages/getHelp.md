@@ -17,7 +17,7 @@ We are planning a mobile food pantry, targeted to begin monthly distributions in
 
 ## How to reach us
 
-Use the form below or the email on our [Contact page](/contact/). Tell us what you need, how many people are in your household, and the best way to reach you. We reply within two business days. There is no paperwork, no proof of income, and no judgment. Everything you tell us stays private.
+Use the form below or email [info@creationandconnoisseur.org](mailto:info@creationandconnoisseur.org). Tell us what you need, how many people are in your household, and the best way to reach you. We reply within two business days. There is no paperwork, no proof of income, and no judgment. Everything you tell us stays private.
 
 ## When the pantry is running
 

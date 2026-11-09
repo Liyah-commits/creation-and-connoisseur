@@ -17,6 +17,12 @@ stats:
     valueEs: Cientos
     labelEn: of students at culture nights
     labelEs: de estudiantes en noches culturales
+volunteerPhoto:
+  discriminant: true
+  value:
+    image: ./images/highlights/volunteerPhoto/value/image.webp
+    altEn: "A volunteer hands a bag of groceries to a man with a rolling cart at an outdoor food distribution, beside a table of donated food boxes."
+    altEs: "Una voluntaria entrega una bolsa de comestibles a un hombre con un carrito en una distribución de alimentos al aire libre, junto a una mesa con cajas de alimentos donados."
 aboutPhotos:
   - image: ./images/highlights/aboutPhotos/0/image.webp
     altEn: "The six members of the 2026 to 2027 UNLV Food Tasting Club executive board pose together on a city street."

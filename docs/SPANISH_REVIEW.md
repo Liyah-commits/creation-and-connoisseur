@@ -60,18 +60,18 @@ Each file holds the page title, the search result description, the introduction 
 - [ ] `content/es/pages/home.md`: Inicio (`/es/`). **Changed 9 November 2026 (D54):** the introduction is now Aryah's hero line, "Celebramos las culturas que forman Nevada y trabajamos para que nadie pase hambre."
 - [ ] `content/es/pages/about.md`: Quiénes somos (`/es/acerca-de/`). **Changed:** story from the batch, figures removed, pantry planned; usted description. **Changed 9 November 2026:** "Cada dos semanas" removed from the second paragraph (D48). The page also shows the new club board and club life sections (see People and Organization text).
 - [ ] `content/es/pages/programs.md`: Programas (`/es/programas/`)
-- [ ] `content/es/pages/getHelp.md`: Obtener ayuda (`/es/obtener-ayuda/`). **Changed:** new text from the batch, four resource links, pantry planned. Check especially for plain, friendly language.
+- [ ] `content/es/pages/getHelp.md`: Obtener ayuda (`/es/obtener-ayuda/`). **Changed:** new text from the batch, four resource links, pantry planned. Check especially for plain, friendly language. **Changed 9 November 2026 (D56):** "o escriba a info@creationandconnoisseur.org" replaces the pointer to the Contact page's email.
 - [ ] `content/es/pages/volunteer.md`: Voluntariado (`/es/voluntariado/`). **Changed:** new introduction and five roles. Role names and commitments were translated during loading. **Changed 9 November 2026:** the Service volunteer role says "una jornada de voluntariado" instead of "un turno quincenal" (D48).
 - [ ] `content/es/pages/donate.md`: Donar (`/es/donar/`). **Changed:** usted.
 - [ ] `content/es/pages/news.md`: Noticias (`/es/noticias/`)
 - [ ] `content/es/pages/contact.md`: Contáctenos (`/es/contacto/`). **Changed:** title, search result description and introduction switched to usted ("Contáctanos" became "Contáctenos", and "Comunícate" became "Comuníquese"). **Changed 9 November 2026:** new main text, the UNLV Food Tasting Club email line, shown under "Otras formas de comunicarse con nosotros" (D52).
-- [ ] `content/es/pages/accessibility.md`: Declaración de accesibilidad (`/es/accesibilidad/`). **Changed:** new text from the batch.
-- [ ] `content/es/pages/privacy.md`: Política de privacidad (`/es/privacidad/`). **Changed:** new text from the batch. Needs legal review too (`docs/OPEN_ITEMS.md`, item 18).
+- [ ] `content/es/pages/accessibility.md`: Declaración de accesibilidad (`/es/accesibilidad/`). **Changed:** new text from the batch. **Changed 9 November 2026 (D56):** "Escriba a info@creationandconnoisseur.org" replaces the pointer to the Contact page's email.
+- [ ] `content/es/pages/privacy.md`: Política de privacidad (`/es/privacidad/`). **Changed:** new text from the batch. Needs legal review too (`docs/OPEN_ITEMS.md`, item 18). **Changed 9 November 2026 (D56):** "escríbanos a info@creationandconnoisseur.org" and "Escriba a info@creationandconnoisseur.org" give the address directly; the date is now "9 de noviembre de 2026".
 
 ## Programs (`content/es/programs/`, published 7 November 2026)
 
 - [ ] `content/es/programs/unlv-food-tasting-club.md`: UNLV Food Tasting Club. **Changed (new).** **Changed 9 November 2026:** "Misión del club" (translated from the club's English mission), the club email line, a main photo and two more photos with supplied descriptions. **Changed again (D54):** the short summary, shown as the page introduction and on the card, is now "Noches culturales que celebran las culturas que forman Nevada." (supplied).
-- [ ] `content/es/programs/jornadas-de-voluntariado.md`: Jornadas de Voluntariado (`/es/programas/jornadas-de-voluntariado/`). **Changed 9 November 2026:** renamed from `voluntariado-quincenal.md` ("Voluntariado Quincenal"), new name, summary and schedule line (supplied), "Cada dos semanas" removed, partners line added, photo added (D48).
+- [ ] `content/es/programs/jornadas-de-voluntariado.md`: Jornadas de Voluntariado (`/es/programas/jornadas-de-voluntariado/`). **Changed 9 November 2026:** renamed from `voluntariado-quincenal.md` ("Voluntariado Quincenal"), new name, summary and schedule line (supplied), "Cada dos semanas" removed, partners line added, photo added (D48). **Changed again (D56):** the photo is now the volunteering photo, with its supplied description ("Una voluntaria entrega una bolsa de comestibles…").
 - [ ] `content/es/programs/despensa-movil-de-alimentos.md`: Despensa Móvil de Alimentos (prevista para 2027). **Changed (new).**
 
 ## News (`content/es/news/`, published 9 November 2026)
@@ -97,7 +97,7 @@ All **Changed 9 November 2026 (new)**. Each has two paragraphs written from `pho
 ## Organization text
 
 - [ ] `content/settings.yaml`: `missionEs` (the mission, rewritten so the pantry is planned), `taglineEs` (the tagline, also used for social bios), `unlvStatementEs` (the relationship to UNLV, shown in every footer) and `descriptionEs` (search results and social previews). **Changed.** **Changed 9 November 2026:** `missionEs` is now "Creation and Connoisseur combate la inseguridad alimentaria en UNLV y en todo Las Vegas.", with no pantry wording (D53).
-- [ ] `content/highlights.yaml` (Shared > Home and About photos and stats): the stats and the photo descriptions (`altEs`, supplied). **Changed 9 November 2026 (new).** **Changed again (D54):** the stats are now "1,000+ personas alimentadas", "100+ familias alimentadas" and "Cientos de estudiantes en noches culturales" (`valueEs` "Cientos", all supplied).
+- [ ] `content/highlights.yaml` (Shared > Photos and stats (Home, About, Volunteer)): the stats and the photo descriptions (`altEs`, supplied). **Changed again (D56):** new volunteering photo description (`volunteerPhoto.altEs`, supplied). **Changed 9 November 2026 (new).** **Changed again (D54):** the stats are now "1,000+ personas alimentadas", "100+ familias alimentadas" and "Cientos de estudiantes en noches culturales" (`valueEs` "Cientos", all supplied).
 
 ## Template examples (never published)
 

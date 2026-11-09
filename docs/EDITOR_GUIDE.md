@@ -99,12 +99,13 @@ The Spanish version of a program or post has its own **Add an image** box. Add t
 
 To remove an image, untick **Add an image** and save. To remove one of the **More photos**, open its menu in the list and delete it.
 
-## Change the Home page photo and stats, or the About page's club photos
+## Change the Home page photo and stats, the volunteering photo, or the About page's club photos
 
-Choose **Home and About photos and stats** (under Shared). It's one screen for both languages:
+Choose **Photos and stats (Home, About, Volunteer)** (under Shared). It's one screen for both languages:
 
 - **Show a photo at the top of the Home page**: the main Home photo, with a description in English and in Spanish. Use a landscape photo. It loads first, so keep it to one good photo.
 - **Home page stats**: up to four figures, shown in a strip under the photo. Each has a **Number or word** (written exactly as it should appear, like "1,000+" or "Hundreds"), its Spanish wording if it's a word ("Cientos"), and what it counts, in English and in Spanish. Only publish a figure you can point to a source for. Don't show Instagram reach, impressions or follower counts.
+- **Show a volunteering photo**: a photo of volunteers at work, with a description in English and in Spanish. It appears in the Volunteer page's header and in the Volunteer card on the Home page, and is never shown wider than 900 pixels. Never use a photo that shows the face of someone receiving food. Put the same photo on the Volunteer Days program (its **Add an image**) so its card matches.
 - **Club life photos (About page)**: up to six photos, shown on About under "Club life", each with a description in both languages.
 
 ## Edit a fixed page (Home, About, Get help…)
@@ -114,7 +115,7 @@ Choose **Home and About photos and stats** (under Shared). It's one screen for b
 3. Don't change the **Internal name** or **File name**, and don't add or delete pages in this list. The site finds each page by its internal name. Deleting one stops the site from updating until it's restored (the admin can do this).
 4. Each page needs its own **Search result description**: a different sentence for every page, in each language.
 
-On **About**, the main text appears as "Our story". The mission comes from **Site settings**, the people from **People** (in two groups, see "Add a person"), and the club life photos from **Home and About photos and stats**.
+On **About**, the main text appears as "Our story". The mission comes from **Site settings**, the people from **People** (in two groups, see "Add a person"), and the club life photos from **Photos and stats (Home, About, Volunteer)**.
 
 On **Contact**, the main text appears under "Other ways to reach us", below the form. It holds the UNLV Food Tasting Club's email line. Keep the club's unlv.edu address there and on the club's program page only: never in Site settings or the footer, because a university address shown everywhere would suggest the university endorses the nonprofit.
 
@@ -125,7 +126,7 @@ Choose **Site settings** (under Shared). Fill in a field only when the informati
 | Field | Where it appears |
 |---|---|
 | Legal name, EIN | Footer (EIN) and Donate page |
-| Public email, phone, mailing address | Footer and Contact page. Use the nonprofit's own address, never the club's unlv.edu address. |
+| Public email, phone, mailing address | Footer and Contact page. The public email is `info@creationandconnoisseur.org`. Never use the club's unlv.edu address here. The privacy policy, accessibility statement and Get Help page also give the email in their text, so change it there too if it ever changes. |
 | Donation link | The Donate page button starts working (until then it reads "Donation link coming soon") |
 | Social media links | Footer and Contact page, each with its icon (Instagram, TikTok and Discord are recognized from the address) |
 | Mission statement (English and Spanish) | About page |

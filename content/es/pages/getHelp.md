@@ -17,7 +17,7 @@ Estamos planeando una despensa móvil de alimentos, con distribuciones mensuales
 
 ## Cómo comunicarse con nosotros
 
-Use el formulario a continuación o el correo electrónico de nuestra [página de Contacto](/es/contacto/). Cuéntenos qué necesita, cuántas personas hay en su hogar y la mejor manera de comunicarnos con usted. Respondemos en un plazo de dos días hábiles. No hay papeleo, ni comprobante de ingresos, ni juicios. Todo lo que nos cuente se mantiene privado.
+Use el formulario a continuación o escriba a [info@creationandconnoisseur.org](mailto:info@creationandconnoisseur.org). Cuéntenos qué necesita, cuántas personas hay en su hogar y la mejor manera de comunicarnos con usted. Respondemos en un plazo de dos días hábiles. No hay papeleo, ni comprobante de ingresos, ni juicios. Todo lo que nos cuente se mantiene privado.
 
 ## Cuando la despensa esté en funcionamiento
 

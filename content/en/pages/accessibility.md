@@ -12,7 +12,7 @@ intro: >-
 ---
 Manual testing with screen readers and keyboard navigation is in progress. We will update this page when it is complete.
 
-If anything on this site is hard for you to use, tell us. Email the address on our [Contact page](/contact/) and describe the page and the problem. We reply within five business days and will fix what we can.
+If anything on this site is hard for you to use, tell us. Email [info@creationandconnoisseur.org](mailto:info@creationandconnoisseur.org) and describe the page and the problem. We reply within five business days and will fix what we can.
 
 The content editing area at /keystatic, which only the site's editors use, is made by a third party and is not covered by this statement.
 

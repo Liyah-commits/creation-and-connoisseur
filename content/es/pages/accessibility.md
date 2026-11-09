@@ -13,7 +13,7 @@ intro: >-
 ---
 Las pruebas manuales con lectores de pantalla y navegación por teclado están en curso. Actualizaremos esta página cuando se completen.
 
-Si algo en este sitio le resulta difícil de usar, díganos. Escriba al correo electrónico de nuestra [página de Contacto](/es/contacto/) y describa la página y el problema. Respondemos en un plazo de cinco días hábiles y corregiremos lo que podamos.
+Si algo en este sitio le resulta difícil de usar, díganos. Escriba a [info@creationandconnoisseur.org](mailto:info@creationandconnoisseur.org) y describa la página y el problema. Respondemos en un plazo de cinco días hábiles y corregiremos lo que podamos.
 
 El área de edición de contenido en /keystatic, que solo usan las personas que editan el sitio, es de un tercero y no está incluida en esta declaración. Esa área está disponible solo en inglés.
 

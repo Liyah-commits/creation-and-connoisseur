@@ -128,7 +128,7 @@ const settingsSchema = z.object({
 
 const settings = defineCollection({ loader: files('settings.yaml', './content'), schema: settingsSchema });
 
-/** Home page photo and stats, and the About page's club life photos (Keystatic singleton "highlights"). */
+/** Home page photo and stats, the volunteering photo (Volunteer page and Home), and the About page's club life photos (Keystatic singleton "highlights"). */
 const highlights = defineCollection({
   loader: files('highlights.yaml', './content'),
   schema: ({ image }) =>
@@ -151,6 +151,12 @@ const highlights = defineCollection({
         )
         .max(4)
         .default([]),
+      volunteerPhoto: z
+        .discriminatedUnion('discriminant', [
+          z.object({ discriminant: z.literal(false) }),
+          z.object({ discriminant: z.literal(true), value: bilingualPhoto(image) }),
+        ])
+        .default({ discriminant: false }),
       aboutPhotos: z.array(bilingualPhoto(image)).default([]),
     }),
 });

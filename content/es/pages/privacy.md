@@ -18,7 +18,7 @@ Usamos su información solo para responderle y para operar nuestros programas. S
 
 ## Cuánto tiempo la conservamos
 
-Los mensajes de los formularios se conservan durante 12 meses y luego se eliminan. Si desea que el suyo se elimine antes, escríbanos y lo haremos en un plazo de 10 días hábiles.
+Los mensajes de los formularios se conservan durante 12 meses y luego se eliminan. Si desea que el suyo se elimine antes, escríbanos a [info@creationandconnoisseur.org](mailto:info@creationandconnoisseur.org) y lo haremos en un plazo de 10 días hábiles.
 
 ## Quién puede verla
 
@@ -30,6 +30,6 @@ Este sitio web está alojado en Vercel. Como cualquier servicio de alojamiento w
 
 ## Preguntas
 
-Escriba al correo electrónico de nuestra [página de Contacto](/es/contacto/). Respondemos en un plazo de dos días hábiles.
+Escriba a [info@creationandconnoisseur.org](mailto:info@creationandconnoisseur.org). Respondemos en un plazo de dos días hábiles.
 
-Última actualización: 6 de noviembre de 2026.
+Última actualización: 9 de noviembre de 2026.

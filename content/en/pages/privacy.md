@@ -18,7 +18,7 @@ We use your information only to reply to you and to run our programs. If you ask
 
 ## How long we keep it
 
-Form messages are kept for 12 months and then deleted. If you want yours deleted sooner, email us and we will do it within 10 business days.
+Form messages are kept for 12 months and then deleted. If you want yours deleted sooner, email us at [info@creationandconnoisseur.org](mailto:info@creationandconnoisseur.org) and we will do it within 10 business days.
 
 ## Who can see it
 
@@ -30,6 +30,6 @@ This website is hosted by Vercel. Like any web host, Vercel processes technical 
 
 ## Questions
 
-Email the address on our [Contact page](/contact/). We reply within two business days.
+Email [info@creationandconnoisseur.org](mailto:info@creationandconnoisseur.org). We reply within two business days.
 
-Last updated 6 November 2026.
+Last updated 9 November 2026.

@@ -2,11 +2,11 @@
 /**
  * Home: the title and hero line (the page introduction, in the display face)
  * beside the main photo, with one primary and one secondary button; the stats
- * strip on a sand band;
- * the page text, the three ways to take part, and the latest programs and news.
- * The photo and stats come from "Home and About photos and stats" in Keystatic.
- * The photo is the only image on the site that is not lazy loaded: it is the
- * likely largest paint, so it loads first.
+ * strip on a sand band; the page text; the three ways to take part (the
+ * Volunteer card shows the volunteering photo, D56); and the latest programs
+ * and news. The photos and stats come from "Photos and stats (Home, About,
+ * Volunteer)" in Keystatic. The main photo is the only image on the site that
+ * is not lazy loaded: it is the likely largest paint, so it loads first.
  */
 import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
@@ -26,6 +26,7 @@ const news = (await getNews(lang)).slice(0, 3);
 const highlights = await getHighlights();
 const hero = highlights.heroImage.discriminant ? highlights.heroImage.value : null;
 const stats = highlights.stats;
+const volunteer = highlights.volunteerPhoto.discriminant ? highlights.volunteerPhoto.value : null;
 const statColumns = stats.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : stats.length === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2';
 
 const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UIKey }[] = [
@@ -96,14 +97,27 @@ const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UI
 
   <section class="container-page py-12" aria-labelledby="actions-heading">
     <h2 id="actions-heading">{t(lang, 'home.actionsHeading')}</h2>
-    <ul class="mt-6 grid gap-5 md:grid-cols-3" role="list">
+    <ul class="mt-6 grid items-start gap-5 md:grid-cols-3" role="list">
       {
         actions.map((action) => (
-          <li class="card p-6">
-            <h3>
-              <a href={routes[action.key][lang]} class="text-ink">{t(lang, action.title)}</a>
-            </h3>
-            <p class="mt-2">{t(lang, action.text)}</p>
+          <li class="card overflow-hidden">
+            {action.key === 'volunteer' && volunteer && (
+              <Picture
+                src={volunteer.image}
+                alt={lang === 'en' ? volunteer.altEn : volunteer.altEs}
+                widths={[400, 800]}
+                sizes="(min-width: 72rem) 22rem, (min-width: 48rem) 30vw, 100vw"
+                formats={['avif']}
+                fallbackFormat="webp"
+                class="h-auto w-full max-w-[900px] border-b border-sand"
+              />
+            )}
+            <div class="p-6">
+              <h3>
+                <a href={routes[action.key][lang]} class="text-ink">{t(lang, action.title)}</a>
+              </h3>
+              <p class="mt-2">{t(lang, action.text)}</p>
+            </div>
           </li>
         ))
       }

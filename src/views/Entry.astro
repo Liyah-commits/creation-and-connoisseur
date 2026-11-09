@@ -77,12 +77,12 @@ const location = 'location' in entry.data ? entry.data.location : '';
     <div class="container-page grid gap-10 py-10 md:py-14 lg:grid-cols-[minmax(0,68ch)_1fr]">
       {
         image && (
-          <figure class="lg:order-2">
+          <figure class="w-full max-w-[900px] lg:order-2">
             <Picture
               src={image.image}
               alt={image.alt}
               widths={[480, 800, 1200]}
-              sizes="(min-width: 64rem) 28rem, 100vw"
+              sizes="(min-width: 64rem) 28rem, (min-width: 60.25rem) 900px, 100vw"
               formats={['avif']}
               fallbackFormat="webp"
               class="w-full rounded-xl border border-sandstone"
