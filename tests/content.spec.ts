@@ -17,6 +17,16 @@ const isTemplateBuild = PAGES.includes('/programs/example-program/');
 /** The real Site settings file, read directly, so the Donate test follows whatever is set there. */
 const donationUrl = /^donationUrl:\s*(\S+)/m.exec(readFileSync('content/settings.yaml', 'utf8'))?.[1]?.replace(/^['"]|['"]$/g, '') ?? '';
 
+/** The tax line from photos-inbox/FACTS.md, word for word (D60). */
+const TAX_FIRST_SENTENCE = {
+  en: 'Creation and Connoisseur is a 501(c)(3) nonprofit, EIN 93-2889729.',
+  es: 'Creation and Connoisseur es una organización sin fines de lucro 501(c)(3), EIN 93-2889729.',
+} as const;
+const TAX_LINE = {
+  en: `${TAX_FIRST_SENTENCE.en} Donations are tax deductible to the extent allowed by law.`,
+  es: `${TAX_FIRST_SENTENCE.es} Las donaciones son deducibles de impuestos en la medida en que lo permita la ley.`,
+} as const;
+
 /** The nonprofit's public email (photos-inbox/FACTS.md, D56). */
 const NONPROFIT_EMAIL = 'info@creationandconnoisseur.org';
 
@@ -44,9 +54,13 @@ test.describe('production build', () => {
     await expect(page.locator('main article')).toHaveCount(4);
   });
 
-  test('empty facts render nothing: no EIN line, no phone; the footer has the form link and the nonprofit email only', async ({ page }) => {
+  test('empty facts render nothing: no phone; the footer has the tax line, the form link and the nonprofit email only', async ({ page }) => {
+    // D60: the tax line's first sentence, from the EIN in Site settings, under the nonprofit description.
+    for (const lang of ['en', 'es'] as const) {
+      await page.goto(routes.about[lang]);
+      await expect(page.locator('footer')).toContainText(TAX_FIRST_SENTENCE[lang]);
+    }
     await page.goto(routes.about.en);
-    await expect(page.locator('footer')).not.toContainText('EIN');
     await expect(page.locator('footer a[href^="tel:"]')).toHaveCount(0);
     await expect(page.locator('footer').getByRole('link', { name: ui['footer.contactForm'].en })).toHaveAttribute('href', routes.contact.en);
     const footerEmail = page.locator('footer a[href^="mailto:"]');
@@ -71,8 +85,22 @@ test.describe('production build', () => {
       if (donationUrl) {
         const link = page.locator('main a.btn', { hasText: ui['donate.button'][lang] });
         await expect(link).toHaveAttribute('href', donationUrl);
+        await expect(link).not.toHaveAttribute('target', /.+/);
         await expect(link).toContainText(ui['donate.leavesSite'][lang]);
         await expect(page.locator('main button[aria-disabled="true"]')).toHaveCount(0);
+        // D60: intro, then the button and its note, then the two sections, then the tax line, in that order.
+        await expect(page.locator('[data-donate] p').first()).toHaveText(ui['donate.giftNote'][lang]);
+        const order = await page.locator('main h1, main [data-donate] a.btn, main .prose h2, main [data-tax-line]').evaluateAll((els) => els.map((el) => el.tagName + (el.hasAttribute('data-tax-line') ? '.tax' : '')));
+        expect(order).toEqual(['H1', 'A', 'H2', 'H2', 'P.tax']);
+        const programLinks = await page.locator('main .prose a').evaluateAll((links) => links.map((a) => (a as HTMLAnchorElement).getAttribute('href')));
+        const programs = lang === 'en'
+          ? ['/programs/volunteer-days/', '/programs/unlv-food-tasting-club/', '/programs/mobile-food-pantry/']
+          : ['/es/programas/jornadas-de-voluntariado/', '/es/programas/unlv-food-tasting-club/', '/es/programas/despensa-movil-de-alimentos/'];
+        expect(programLinks).toEqual([...programs, routes.volunteer[lang], `mailto:${NONPROFIT_EMAIL}`]);
+        await expect(page.locator('main .prose')).not.toContainText(/%|\$\d/);
+        await expect(page.locator('[data-tax-line]')).toHaveText(TAX_LINE[lang]);
+        // The header Donate button still goes to this page, not straight to the giving platform.
+        await expect(page.locator('header a.btn-accent')).toHaveAttribute('href', routes.donate[lang]);
         return;
       }
       const button = page.locator('main button[aria-disabled="true"]');
@@ -161,13 +189,16 @@ test.describe('production build', () => {
     }
   });
 
-  test('no page claims a biweekly volunteering schedule, or shows Instagram figures', async ({ page }) => {
+  test('no page claims a biweekly volunteering schedule, shows Instagram figures, or links the old payment app', async ({ page }) => {
     for (const path of PAGES) {
       await page.goto(path);
       const body = page.locator('body');
       await expect(body, path).not.toContainText(/biweekly|every other week|every two weeks|quincenal|cada dos semanas/i);
       // FACTS.md (D54): no Instagram reach, impressions or follower counts anywhere.
       await expect(body, path).not.toContainText(/reached on instagram|alcanzadas en instagram|impressions|impresiones|followers|seguidores/i);
+      // FACTS.md (D60): the old interim payment app is gone everywhere.
+      await expect(body, path).not.toContainText(/cash ?app|unlvfood/i);
+      await expect(page.locator('a[href*="cash.app"]'), path).toHaveCount(0);
     }
   });
 
@@ -340,7 +371,7 @@ test.describe('template build', () => {
     await page.goto(routes.donate.en);
     const link = page.locator('main a.btn', { hasText: ui['donate.button'].en });
     await expect(link).toHaveAttribute('href', /^https:\/\//);
-    await expect(page.locator('footer')).toContainText('EIN: 00-0000000');
+    await expect(page.locator('footer')).toContainText('Creation and Connoisseur is a 501(c)(3) nonprofit, EIN 00-0000000.');
     await expect(page.locator('footer a[href^="mailto:"]')).toHaveCount(1);
     await expect(page.locator('footer a[href^="tel:"]')).toHaveCount(1);
     await expect(page.getByRole('heading', { name: ui['footer.socialHeading'].en })).toBeVisible();

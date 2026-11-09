@@ -24,6 +24,10 @@ Form messages are kept for 12 months and then deleted. If you want yours deleted
 
 Only our board members and volunteer coordinator can read form messages.
 
+## Donations
+
+Donations are processed by Zeffy, which receives your name, email address and payment details under its own privacy policy. We receive your name, email address and the amount of your gift, and use them to thank you and keep our records.
+
 ## Hosting
 
 This website is hosted by Vercel. Like any web host, Vercel processes technical information, such as your IP address, to deliver pages and keep the site secure. You can read [Vercel's privacy policy](https://vercel.com/legal/privacy-policy).

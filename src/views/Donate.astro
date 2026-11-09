@@ -1,45 +1,61 @@
 ---
 /**
- * Donate. Until a donation link is entered in Site settings, the button reads
- * "Donation link coming soon" and is marked aria-disabled: it stays in the tab
- * order so screen reader users find it and hear that it is unavailable.
+ * Donate (D60), in this order: the header with the introduction and photo; the
+ * Donate now button to the giving platform in Site settings (same tab, with
+ * "goes to an external site" for screen readers) and a line on one-time and
+ * monthly gifts and receipts; the page text ("What your gift supports", "Other
+ * ways to give"); and the tax line, built from the EIN in Site settings.
+ *
+ * Until a donation link is entered, the button reads "Donation link coming
+ * soon" and is marked aria-disabled: it stays in the tab order so screen
+ * reader users find it and hear that it is unavailable.
  */
-import StandardPage from './StandardPage.astro';
-import type { Lang } from '../i18n/routes';
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import { alternatesFor, type Lang } from '../i18n/routes';
 import { t } from '../i18n/ui';
-import { getSettings } from '../lib/content';
+import { getHeaderPhoto, getPage, getSettings } from '../lib/content';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
+const page = await getPage(lang, 'donate');
 const settings = await getSettings();
+const headerImage = await getHeaderPhoto(lang, 'donate');
+const taxLine = settings.ein ? `${t(lang, 'footer.taxLine').replace('{ein}', settings.ein)} ${t(lang, 'donate.deductible')}` : '';
 ---
 
-<StandardPage lang={lang} pageKey="donate">
-  <div class="card mt-10 max-w-[68ch] p-6">
-    {
-      settings.donationUrl ? (
-        <a href={settings.donationUrl} class="btn btn-primary text-lg">
-          {t(lang, 'donate.button')}
-          <span class="sr-only"> {t(lang, 'donate.leavesSite')}</span>
-        </a>
-      ) : (
-        <>
-          <button type="button" class="btn text-lg" aria-disabled="true" aria-describedby="donate-note">
-            {t(lang, 'donate.comingSoon')}
-          </button>
-          <p id="donate-note" class="mt-3 text-ink-muted">{t(lang, 'donate.comingSoonNote')}</p>
-        </>
-      )
-    }
-    {
-      (settings.legalName || settings.ein) && (
-        <dl class="mt-6 grid gap-x-4 gap-y-1 sm:grid-cols-[auto_1fr]">
-          {settings.legalName && (<><dt class="font-semibold">{t(lang, 'donate.legalName')}</dt><dd>{settings.legalName}</dd></>)}
-          {settings.ein && (<><dt class="font-semibold">{t(lang, 'footer.ein')}</dt><dd>{settings.ein}</dd></>)}
-        </dl>
-      )
-    }
+<Base lang={lang} title={page.data.title} description={page.data.metaDescription} alternates={alternatesFor('donate')}>
+  <PageHeader title={page.data.title} intro={page.data.intro} image={headerImage} />
+  <div class="container-page space-y-10 py-10 md:py-14">
+    <div class="card max-w-[68ch] p-6" data-donate>
+      {
+        settings.donationUrl ? (
+          <>
+            <a href={settings.donationUrl} class="btn btn-primary text-lg">
+              {t(lang, 'donate.button')}
+              <span class="sr-only"> {t(lang, 'donate.leavesSite')}</span>
+            </a>
+            <p class="mt-3">{t(lang, 'donate.giftNote')}</p>
+          </>
+        ) : (
+          <>
+            <button type="button" class="btn text-lg" aria-disabled="true" aria-describedby="donate-note">
+              {t(lang, 'donate.comingSoon')}
+            </button>
+            <p id="donate-note" class="mt-3 text-ink-muted">{t(lang, 'donate.comingSoonNote')}</p>
+          </>
+        )
+      }
+      {
+        settings.legalName && (
+          <p class="mt-4"><span class="font-semibold">{t(lang, 'donate.legalName')}:</span> {settings.legalName}</p>
+        )
+      }
+    </div>
+    <Prose entry={page} />
+    {taxLine && <p class="max-w-[68ch]" data-tax-line>{taxLine}</p>}
   </div>
-</StandardPage>
+</Base>

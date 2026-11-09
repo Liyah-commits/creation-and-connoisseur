@@ -129,9 +129,9 @@ Choose **Site settings** (under Shared). Fill in a field only when the informati
 
 | Field | Where it appears |
 |---|---|
-| Legal name, EIN | Footer (EIN) and Donate page |
+| Legal name, EIN | The EIN makes the tax line ("Creation and Connoisseur is a 501(c)(3) nonprofit, EIN …") in every footer and at the end of the Donate page. The legal name shows under the Donate button. |
 | Public email, phone, mailing address | Footer and Contact page. The public email is `info@creationandconnoisseur.org`. Never use the club's unlv.edu address here. The privacy policy, accessibility statement and Get Help page also give the email in their text, so change it there too if it ever changes. |
-| Donation link | The Donate page button starts working (until then it reads "Donation link coming soon") |
+| Donation link | The Donate page's "Donate now" button (until then it reads "Donation link coming soon"). It's the Zeffy form. The header's Donate button always goes to the site's Donate page, not straight to Zeffy. |
 | Social media links | Footer and Contact page, each with its icon (Instagram, TikTok and Discord are recognized from the address) |
 | Mission statement (English and Spanish) | About page |
 | Tagline (English and Spanish) | Under the name in every footer, and in the home page title in search results. Use the same words for social media bios. |

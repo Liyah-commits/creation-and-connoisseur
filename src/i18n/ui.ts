@@ -40,6 +40,11 @@ export const ui = {
     es: 'Creation and Connoisseur es una organización sin fines de lucro 501(c)(3).',
   },
   'footer.ein': { en: 'EIN', es: 'EIN (número de identificación fiscal)' },
+  // The tax line's first sentence (photos-inbox/FACTS.md, D60); {ein} comes from Site settings.
+  'footer.taxLine': {
+    en: 'Creation and Connoisseur is a 501(c)(3) nonprofit, EIN {ein}.',
+    es: 'Creation and Connoisseur es una organización sin fines de lucro 501(c)(3), EIN {ein}.',
+  },
   'footer.contactHeading': { en: 'Contact', es: 'Contacto' },
   'footer.contactForm': { en: 'Send us a message', es: 'Envíenos un mensaje' },
   'footer.socialHeading': { en: 'Follow us', es: 'Síganos' },
@@ -90,7 +95,16 @@ export const ui = {
   },
 
   // Donate
-  'donate.button': { en: 'Donate online', es: 'Done en línea' },
+  'donate.button': { en: 'Donate now', es: 'Done ahora' },
+  'donate.giftNote': {
+    en: 'One-time and monthly gifts are accepted, and Zeffy emails you a tax receipt automatically.',
+    es: 'Se aceptan donaciones únicas y mensuales, y Zeffy le envía automáticamente un recibo fiscal por correo electrónico.',
+  },
+  // The tax line's second sentence (photos-inbox/FACTS.md, D60).
+  'donate.deductible': {
+    en: 'Donations are tax deductible to the extent allowed by law.',
+    es: 'Las donaciones son deducibles de impuestos en la medida en que lo permita la ley.',
+  },
   'donate.comingSoon': { en: 'Donation link coming soon', es: 'Enlace para donar próximamente' },
   'donate.comingSoonNote': {
     en: 'Online donations are not available yet. This button will work once the donation link is ready.',

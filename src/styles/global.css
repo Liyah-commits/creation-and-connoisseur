@@ -93,6 +93,11 @@
     text-decoration-thickness: 3px;
   }
 
+  /* An email address is one long word: let it break rather than push the page sideways (WCAG 1.4.10, 1.4.12). */
+  a[href^='mailto:'] {
+    overflow-wrap: anywhere;
+  }
+
   /*
    * Focus indicator: a 3px outline with a 3px gap, in focus blue on light
    * surfaces (6.51:1 on sand-50, 7.21:1 on white) and sand-50 on the dark

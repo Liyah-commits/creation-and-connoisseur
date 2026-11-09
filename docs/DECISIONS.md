@@ -294,7 +294,7 @@ The site had no tagline field, so Site settings now has "Tagline (English / Span
 
 **D53. Social links, Donate link and mission.**
 - **Social links:** Instagram, TikTok and Discord are in Site settings. They show in the footer and now also on Contact. Each link has a decorative icon, chosen from the address, and its visible name ("Instagram"), which is also its accessible name. An address the site doesn't recognize gets a generic link icon.
-- **Donate link:** the interim Cash App link from `FACTS.md`, which says to replace it with a nonprofit processor before December. The production Donate test now follows Site settings: it checks the working link when one is set, and the unavailable state otherwise.
+- **Donate link:** an interim payment link from `FACTS.md`, to be replaced with a nonprofit processor before December (replaced by Zeffy, D60). The production Donate test now follows Site settings: it checks the working link when one is set, and the unavailable state otherwise.
 - **Mission:** now exactly "Creation and Connoisseur fights food insecurity at UNLV and across Las Vegas." ("…combate la inseguridad alimentaria en UNLV y en todo Las Vegas."). The pantry sentence was removed from this field; the pantry is still described as planned on its own program page.
 - **News:** four posts in each language, from the `FACTS.md` news list, each with two short paragraphs written only from its facts and its photos' descriptions. "Volunteering at Three Square" is text only: `FACTS.md` offered the board photo (08) as an alternative, but it shows the board on a city street, not volunteering. The optional Taste of the Caribbean notice wasn't created, because it would have to be taken down after 12 November. With posts published, the production test checks the News list instead of its empty state (D44).
 
@@ -432,3 +432,21 @@ The site had no tagline field, so Site settings now has "Tagline (English / Span
   - `@formspree/react`: the public pages don't render with React; React is only used by the Keystatic admin.
 - **Where the ID lives:** in Vercel's environment variables (Production and Preview), not in the repo, as `.env.example` and `docs/ADMIN_GUIDE.md` already said. It is not a secret (it appears in every form's `action`), but keeping it in Vercel means a new form needs no code change. The test builds still set their own value (empty for production, `template-test` for templates), and the tests intercept requests, so a test run never sends a message.
 - **Checked after deploying:** the live forms post to the Formspree endpoint, and the "not connected yet" notice is gone. No test message was sent; Aryah sends one from each form (`docs/ADMIN_GUIDE.md` 4.5, step 5).
+
+## Donations through Zeffy (9 November 2026)
+
+**D60. Donations go through Zeffy, and the Donate page is rebuilt around it.** From the "Donations (CONFIRMED Nov 9, 2026)" section of `photos-inbox/FACTS.md`.
+- **Donation link:** Site settings > Donation link is the Zeffy form (`https://www.zeffy.com/en-US/donation-form/donate-to-change-lives-28878`): one-time or monthly gifts, with Zeffy emailing each donor a tax receipt. It replaces the interim link from D53, which is gone from `src/` and `content/` in both languages, and the tests check that no page mentions or links it.
+- **EIN:** `93-2889729`, in Site settings > EIN. It also feeds the home page's Organization data (`taxID`).
+- **Donate page, in this order:**
+  1. The header, with the introduction ("Every gift supports the work against food insecurity at UNLV and across Las Vegas.") and the page's header photo.
+  2. A "Donate now" button ("Done ahora") to Zeffy, in the same tab, with "goes to an external site" for screen readers. Under it is a line on one-time and monthly gifts and Zeffy's tax receipt.
+  3. "What your gift supports": one sentence naming Volunteer Days, the UNLV Food Tasting Club culture nights and the mobile food pantry planned for 2027, each linked to its program page. As `FACTS.md` says, there's nothing about how money is divided: no percentages and no "your $25 buys" lines.
+  4. "Other ways to give": volunteering (linked) and, for partnerships or food and supply donations, the public email.
+  5. The tax line, word for word in each language: "Creation and Connoisseur is a 501(c)(3) nonprofit, EIN 93-2889729. Donations are tax deductible to the extent allowed by law."
+  - The page text (introduction and both sections) is in Pages > donate, so editors can change it. The button, its note and the tax line are part of the page's design: the tax line is built from the EIN in Site settings, so the EIN lives in one place. The test checks the order, the links, the absence of amounts and the exact tax line.
+- **Footer:** the tax line's first sentence, in each language, sits under the nonprofit description. It replaces the old "EIN: …" line, so the EIN isn't shown twice.
+- **Header:** the Donate button still goes to the site's Donate page, not straight to Zeffy (tested).
+- **Privacy policy:** a new "Donations" section. Zeffy processes donations and receives the donor's name, email address and payment details under its own privacy policy. We receive the donor's name, email address and the amount of the gift, to thank them and keep records. The "last updated" date was already 9 November 2026, today.
+- **Long email addresses wrap:** with the WCAG 1.4.12 text spacing, `info@creationandconnoisseur.org` overflowed the Donate page's list at 375px, and Get help and Contact at 320px. Every `mailto:` link now uses `overflow-wrap: anywhere`, and those pages have no overflow at 320px with the spacing applied.
+- **Not checked:** Zeffy answers automated requests with a bot challenge (HTTP 403). So the link checker reports the Zeffy link as a warning, not a failure (external links are warnings, D21), and it couldn't confirm whether Zeffy has a Spanish version of the form or the address of its privacy policy. The privacy section names the policy without linking to it.

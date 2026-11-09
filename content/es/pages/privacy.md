@@ -24,6 +24,10 @@ Los mensajes de los formularios se conservan durante 12 meses y luego se elimina
 
 Solo los miembros de nuestra junta directiva y la persona coordinadora de voluntarios pueden leer los mensajes de los formularios.
 
+## Donaciones
+
+Las donaciones las procesa Zeffy, que recibe su nombre, correo electrónico y datos de pago según su propia política de privacidad. Nosotros recibimos su nombre, correo electrónico y el monto de su donación, y los usamos para agradecerle y llevar nuestros registros.
+
 ## Alojamiento
 
 Este sitio web está alojado en Vercel. Como cualquier servicio de alojamiento web, Vercel procesa información técnica, como su dirección IP, para mostrar las páginas y mantener el sitio seguro. Puede leer la [política de privacidad de Vercel](https://vercel.com/legal/privacy-policy) (en inglés).
