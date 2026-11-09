@@ -100,6 +100,8 @@ Editors sign in with GitHub, and Keystatic saves their changes as commits. This 
 
 ### 4.5 Connect the forms (Formspree)
 
+**Status (9 November 2026):** steps 1 to 4 are done. The form exists, and `FORMSPREE_FORM_ID` is set in Vercel for Production and Preview (D59). Steps 5 and 6 are still to do.
+
 1. Create a free account at `https://formspree.io` with the email address that should receive messages.
 2. Create one form. The Contact, Volunteer and Get Help forms all use it; the subject line says which form, and which language, each message came from. Get Help requests arrive with the subject "Get Help request", and the site promises a reply within two business days.
 3. Copy the form ID: the part after `/f/` in the endpoint (`https://formspree.io/f/abcdwxyz` gives `abcdwxyz`).

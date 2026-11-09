@@ -43,7 +43,7 @@ Item numbers stay fixed so other documents can refer to them. **Supplied** items
 
 ## Forms and privacy
 
-17. **`FORMSPREE_FORM_ID`** and the email address that should receive submissions. All three forms (Contact, Volunteer, Get Help) use one Formspree form, told apart by subject line. Until it's set, the forms show a notice that they aren't connected. Where: Vercel environment variables (`docs/ADMIN_GUIDE.md`).
+17. **`FORMSPREE_FORM_ID`** and the email address that should receive submissions. **Supplied** (9 November 2026, D59): Aryah created the Formspree form, and its ID is set in Vercel for Production and Preview, so all three forms (Contact, Volunteer, Get Help) now send, told apart by subject line. Messages go to the email address on the Formspree account. Still to do, in Formspree (`docs/ADMIN_GUIDE.md` 4.5): send one test from each form in each language, and restrict submissions to the site's domain.
 18. **Privacy policy.** Answers **supplied** and loaded in Pages > privacy, both languages: 12 months' retention, board and volunteer coordinator access, the public email as the contact, never sold. The public email (`info@creationandconnoisseur.org`) is in the policy since 9 November 2026. Still needed: the read-through by someone with a law background that the batch recommends.
 19. **Accessibility feedback contact and response time.** **Supplied**: the public email (`info@creationandconnoisseur.org`, given in the statement since 9 November 2026), five business days. Loaded in Pages > accessibility.
 
