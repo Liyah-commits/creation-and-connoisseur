@@ -394,3 +394,11 @@ The site had no tagline field, so Site settings now has "Tagline (English / Span
   - **Home:** it sits at the top of the Volunteer card in "How you can take part". The Volunteer Days program card further down the Home page shows it too.
   - It comes from a new "Show a volunteering photo" field in the shared screen, renamed "Photos and stats (Home, About, Volunteer)" (D49).
   - **Never wider than 900px, never the hero:** program and news page images are now capped at 900px wide (the cap applied at a 1000px window, where the program image used to fill 936px). The other placements are narrower. Every placement is lazy loaded, and the Home hero is still the Thai Night photo. A test checks the width at 1000 and 1280px on all six pages.
+
+## Home page fixes (9 November 2026)
+
+**D57. The hero line is the Home page's h1; a larger hero photo and logo mark.**
+- **H1:** the organization's name appeared twice at the top of the Home page, in the header wordmark and as the hero h1. The hero line from `FACTS.md` (the Home page's Introduction field) is now the one h1, in both languages, at the normal h1 size, and the repeated name is gone from the hero. The Page title is unchanged, so the browser title, `og:title` and search results are unchanged ("Creation and Connoisseur | …"). If the Introduction is ever left empty, the Page title becomes the h1, so the page always has one. This replaces D54's note that the h1 stayed the organization's name.
+- **Hero photo:** from 1024px it takes half the content width (two equal columns, minus the gap) and is cropped to 4:3 with `object-fit: cover`. Below 768px it is full width under the heading and buttons. From 768 to 1023px it keeps the earlier two-column layout (text 3, photo 2), which the request didn't cover. It's still the only eager image, with `fetchpriority="high"`, and `sizes` was updated for the wider column.
+- **Logo:** the mark in the header lockup is 40px (it was 32px, D55). The wordmark's size and alignment and the home link's accessible name ("Creation and Connoisseur") are unchanged.
+- At 320, 768 and 1280px (and 1024px), in both languages, the Home page has no horizontal overflow. A test checks the h1, the titles, the 40px mark, and the photo's 4:3 ratio and width at 1280px.

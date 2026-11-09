@@ -115,6 +115,8 @@ Choose **Photos and stats (Home, About, Volunteer)** (under Shared). It's one sc
 3. Don't change the **Internal name** or **File name**, and don't add or delete pages in this list. The site finds each page by its internal name. Deleting one stops the site from updating until it's restored (the admin can do this).
 4. Each page needs its own **Search result description**: a different sentence for every page, in each language.
 
+On **Home**, the **Introduction** is the main heading at the top of the page (the hero line). The **Page title** (the organization's name) isn't shown on the page. It's the title in the browser tab and in search results, and the header already shows the name.
+
 On **About**, the main text appears as "Our story". The mission comes from **Site settings**, the people from **People** (in two groups, see "Add a person"), and the club life photos from **Photos and stats (Home, About, Volunteer)**.
 
 On **Contact**, the main text appears under "Other ways to reach us", below the form. It holds the UNLV Food Tasting Club's email line. Keep the club's unlv.edu address there and on the club's program page only: never in Site settings or the footer, because a university address shown everywhere would suggest the university endorses the nonprofit.

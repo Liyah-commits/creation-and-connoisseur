@@ -88,10 +88,22 @@ test.describe('production build', () => {
 
     test(`Home: the hero photo loads first, the stats strip has a label for each number (${lang})`, async ({ page }) => {
       await page.goto(routes.home[lang]);
+      // D57: the hero line is the one h1; the site name stays in the browser title and og:title, and in the header wordmark.
+      await expect(page.locator('main h1')).not.toHaveText('Creation and Connoisseur');
+      await expect(page.locator('main h1')).toHaveText(/\S{3,}.*\S{3,}/);
+      await expect(page).toHaveTitle(/^Creation and Connoisseur \| /);
+      await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', 'Creation and Connoisseur');
+      await expect(page.locator('.wordmark svg')).toHaveAttribute('width', '40');
       const hero = page.locator('main img[fetchpriority="high"]');
       await expect(hero).toHaveCount(1);
       await expect(hero).toHaveAttribute('loading', 'eager');
       await expect(hero).toHaveAttribute('alt', /\S/);
+      // At 1024px and wider the photo takes about half the content width, at 4:3, cropped with object-fit: cover.
+      await page.setViewportSize({ width: 1280, height: 900 });
+      const box = (await hero.boundingBox())!;
+      expect(box.width / box.height).toBeCloseTo(4 / 3, 2);
+      expect(box.width).toBeGreaterThan(1088 * 0.45);
+      await expect(hero).toHaveCSS('object-fit', 'cover');
       const strip = page.locator('section[aria-labelledby="stats-heading"]');
       await expect(strip.getByRole('heading', { name: ui['home.statsHeading'][lang] })).toBeAttached();
       const items = strip.locator('li');

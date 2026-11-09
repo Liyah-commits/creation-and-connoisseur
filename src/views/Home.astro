@@ -1,7 +1,9 @@
 ---
 /**
- * Home: the title and hero line (the page introduction, in the display face)
- * beside the main photo, with one primary and one secondary button; the stats
+ * Home: the hero line as the page's one h1 (the Home page's Introduction
+ * field; the Page title, the organization's name, stays the browser title and
+ * search title, and the header wordmark already shows the name, D57) beside
+ * the main photo, with one primary and one secondary button; the stats
  * strip on a sand band; the page text; the three ways to take part (the
  * Volunteer card shows the volunteering photo, D56); and the latest programs
  * and news. The photos and stats come from "Photos and stats (Home, About,
@@ -27,6 +29,8 @@ const highlights = await getHighlights();
 const hero = highlights.heroImage.discriminant ? highlights.heroImage.value : null;
 const stats = highlights.stats;
 const volunteer = highlights.volunteerPhoto.discriminant ? highlights.volunteerPhoto.value : null;
+// The hero line is the h1. If it is ever left empty, the page title takes its place, so the page always has an h1.
+const heroHeading = page.data.intro || page.data.title;
 const statColumns = stats.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : stats.length === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2';
 
 const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UIKey }[] = [
@@ -38,10 +42,9 @@ const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UI
 
 <Base lang={lang} title={page.data.title} description={page.data.metaDescription} alternates={alternatesFor('home')} isHome>
   <div class="border-b-2 border-sandstone bg-white">
-    <div class="container-page grid items-center gap-10 py-12 md:grid-cols-[3fr_2fr] md:py-20">
+    <div class="container-page grid items-center gap-10 py-12 md:grid-cols-[3fr_2fr] md:py-20 lg:grid-cols-2">
       <div>
-        <h1>{page.data.title}</h1>
-        {page.data.intro && <p class="mt-5 max-w-[32ch] font-serif text-2xl leading-snug text-ink sm:text-3xl">{page.data.intro}</p>}
+        <h1>{heroHeading}</h1>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href={routes.volunteer[lang]} class="btn btn-primary">{t(lang, 'home.volunteerCta')}</a>
           <a href={routes.getHelp[lang]} class="btn btn-secondary">{t(lang, 'home.getHelpTitle')}</a>
@@ -53,12 +56,12 @@ const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UI
             src={hero.image}
             alt={lang === 'en' ? hero.altEn : hero.altEs}
             widths={[480, 800, 1200, 1600]}
-            sizes="(min-width: 72rem) 27rem, (min-width: 48rem) 36vw, 100vw"
+            sizes="(min-width: 72rem) 33rem, (min-width: 64rem) 45vw, (min-width: 48rem) 36vw, 100vw"
             formats={['avif']}
             fallbackFormat="webp"
             loading="eager"
             fetchpriority="high"
-            class="h-auto w-full rounded-xl border border-sandstone"
+            class="h-auto w-full rounded-xl border border-sandstone lg:aspect-[4/3] lg:object-cover"
           />
         ) : (
           <div class="placeholder-pattern hidden aspect-[4/3] rounded-xl border border-sandstone md:block" aria-hidden="true" />
