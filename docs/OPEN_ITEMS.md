@@ -49,7 +49,7 @@ Item numbers stay fixed so other documents can refer to them. **Supplied** items
 
 ## Brand and photos
 
-20. **Logo files and brand colors**, if any exist. The site uses a typographic wordmark and an original palette until then.
+20. **Logo files and brand colors.** **Resolved** (9 November 2026, D55): Aryah chose the "desert table" direction, with an original logo mark (sun, mesa and table line), the wordmark in DM Serif Display, and the sand, sage and coral palette.
 21. **Photos:** every photo the site should show (home page, About, people, programs, news), with permission to use them. Decorative patterns stand in until then; no stock photos are used. **Partly supplied** (9 November 2026, D47): the Home photo, club life photos on About, board portraits, the club program's photos and the news photos. Still needed (`FACTS.md`): one clean photo of volunteers at a food bank, with no text on it (the Volunteer Days card uses a culture-night serving photo until then), clean board portraits (item 4) and Aryah's About photo (item 3). Also check the board photo's description: it says "The six members of the … executive board", but the board has nine members, so "Six members of…" may be what was meant.
 
 ## Launch

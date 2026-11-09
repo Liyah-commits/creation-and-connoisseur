@@ -230,8 +230,8 @@ test.describe('targets and focus', () => {
           expect(info.outlineWidth, `${info.key} outline width`).toBeGreaterThanOrEqual(2);
           expect(info.inViewport, `${info.key} scrolled into view`).toBe(true);
           expect(info.covered, `${info.key} not covered by other content`).toBe(false);
-          // Saffron ring (8.89:1) on the dark footer, focus blue (6.83:1 or more) elsewhere.
-          expect(info.outlineColor, `${info.key} ring color`).toBe(info.inFooter ? 'rgb(242, 181, 68)' : 'rgb(26, 79, 191)');
+          // Sand-50 ring (10.05:1) on the sage-dark footer, focus blue (6.51:1 or more) elsewhere.
+          expect(info.outlineColor, `${info.key} ring color`).toBe(info.inFooter ? 'rgb(247, 243, 236)' : 'rgb(26, 79, 191)');
         }
         expect(seen.length, 'number of focus stops').toBeGreaterThan(8);
       }

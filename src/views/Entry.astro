@@ -39,7 +39,7 @@ const location = 'location' in entry.data ? entry.data.location : '';
   {...ogImage ? { ogImage, ogImageAlt: image!.alt } : {}}
 >
   <article>
-    <div class="border-b border-ink/10 bg-white">
+    <div class="border-b-2 border-sandstone bg-white">
       <div class="container-page py-10 md:py-14">
         <p>
           <a href={routes[section][lang]} class="inline-flex min-h-6 items-center gap-1">
@@ -51,7 +51,7 @@ const location = 'location' in entry.data ? entry.data.location : '';
         </p>
         {
           entry.data.draft && (
-            <p class="mt-4 max-w-[68ch] rounded border-2 border-ink bg-saffron px-3 py-2 font-semibold text-ink">{t(lang, 'draft.notice')}</p>
+            <p class="mt-4 max-w-[68ch] rounded border-2 border-ink bg-sandstone px-3 py-2 font-semibold text-ink">{t(lang, 'draft.notice')}</p>
           )
         }
         <h1 class="mt-4 max-w-[30ch]">{entry.data.title}</h1>
@@ -85,7 +85,7 @@ const location = 'location' in entry.data ? entry.data.location : '';
               sizes="(min-width: 64rem) 28rem, 100vw"
               formats={['avif']}
               fallbackFormat="webp"
-              class="w-full rounded-lg border border-ink/10"
+              class="w-full rounded-xl border border-sandstone"
             />
           </figure>
         )

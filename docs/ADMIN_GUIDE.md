@@ -186,5 +186,5 @@ Pick the smallest tool that fixes the problem.
 - **Updating dependencies:** `pnpm outdated`, then `pnpm update`, then `pnpm test:all`, and commit the lockfile. pnpm won't install a version published less than seven days ago (`minimumReleaseAge` in `pnpm-workspace.yaml`, decision D7). `@lhci/cli` 0.16 and Playwright 1.65 can be adopted after 12 November 2026 (D22).
 - **Adding a redirect** (if old URLs ever surface): `docs/REDIRECTS.md`.
 - **Adding a page:** add the key and both addresses to `src/i18n/routes.ts`; add `nav.<key>` to `src/i18n/ui.ts`; create the two thin page files in `src/pages/` and `src/pages/es/`; create `content/en/pages/<key>.md` and `content/es/pages/<key>.md`; add the Spanish file to `docs/SPANISH_REVIEW.md`; run `pnpm test:all`. The type check and the missing-page guard fail until every part exists.
-- **Share image and icons:** `pnpm images` regenerates them from `scripts/make-images.mjs`. Replace them with real logo files once supplied.
+- **Share image and icons:** `pnpm images` regenerates the favicon, touch icon and share image from the logo mark (`scripts/make-images.mjs`, D55). Run it again after changing the palette, the mark or the Home hero line.
 - **Accessibility statement:** update the review date in both languages whenever the site is retested.

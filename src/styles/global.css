@@ -1,27 +1,39 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens. Tailwind's default palette is switched off (--color-*: initial)
- * so only these colors can be used, and every pair the site uses is listed and
- * checked by scripts/contrast.mjs. Ratios are recorded in docs/DECISIONS.md.
+ * Design tokens: the "desert table" palette (D55). Tailwind's default palette
+ * is switched off (--color-*: initial) so only these colors can be used, and
+ * every pair the site uses is listed and checked by scripts/contrast.mjs.
+ * Ratios are recorded in docs/DECISIONS.md.
+ *
+ *   sand-50    page background          sandstone  decoration only (rules, frames, badges)
+ *   white      cards, headers, fields   ink        body text and headings
+ *   sand       stats strip band         ink-muted  intros, dates, roles, hints, field borders
+ *   sage       primary buttons, stats   sage-dark  links, button hover, footer background
+ *   coral      Donate button, logo sun  coral-dark coral hover, error text and borders
+ *
+ * coral is never text on sand or sandstone; ink-muted is never on sandstone.
  */
 @theme {
   --color-*: initial;
-  --color-cream: #fff8ee;
+  --color-sand-50: #f7f3ec;
   --color-white: #ffffff;
-  --color-ink: #2b1d16;
-  --color-ink-muted: #5e4a3e;
-  --color-tomato: #b23a1e;
-  --color-tomato-dark: #8f2c14;
-  --color-herb: #2e5e3e;
-  --color-saffron: #f2b544;
+  --color-sand: #efe3d1;
+  --color-sandstone: #e3c9a8;
+  --color-ink: #26302a;
+  --color-ink-muted: #4e5a52;
+  --color-sage: #3f5a47;
+  --color-sage-dark: #2c4033;
+  --color-coral: #b04a32;
+  --color-coral-dark: #8e3a25;
   --color-focus: #1a4fbf;
   --color-transparent: transparent;
   --color-current: currentColor;
 
+  /* Self-hosted through @fontsource (src/styles/fonts.css), with the system stacks as fallbacks. */
   --font-*: initial;
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif;
-  --font-serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Cambria, 'Times New Roman', serif;
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif;
+  --font-serif: 'DM Serif Display', Georgia, 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Cambria, 'Times New Roman', serif;
 
   --breakpoint-sm: 40rem;
   --breakpoint-md: 48rem;
@@ -30,7 +42,7 @@
 
 @layer base {
   html {
-    background-color: var(--color-cream);
+    background-color: var(--color-sand-50);
     color: var(--color-ink);
     font-family: var(--font-sans);
     line-height: 1.6;
@@ -45,12 +57,14 @@
     font-size: 1.0625rem;
   }
 
+  /* DM Serif Display has one weight (400), so headings are never bold and the browser never fakes it. */
   h1,
   h2,
   h3 {
     font-family: var(--font-serif);
     line-height: 1.2;
-    font-weight: 700;
+    font-weight: 400;
+    font-synthesis-weight: none;
     color: var(--color-ink);
     text-wrap: balance;
   }
@@ -69,7 +83,7 @@
 
   /* Links are always underlined, so they never rely on color alone (WCAG 1.4.1). */
   a {
-    color: var(--color-tomato-dark);
+    color: var(--color-sage-dark);
     text-decoration-line: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.18em;
@@ -81,8 +95,9 @@
 
   /*
    * Focus indicator: a 3px outline with a 3px gap, in focus blue on light
-   * surfaces (6.83:1 on cream, 7.21:1 on white) and saffron on dark ones
-   * (8.89:1 on ink). Shown for keyboard focus on every interactive element.
+   * surfaces (6.51:1 on sand-50, 7.21:1 on white) and sand-50 on the dark
+   * footer (10.05:1 on sage-dark). Shown for keyboard focus on every
+   * interactive element.
    */
   :focus-visible {
     outline: 3px solid var(--color-focus);
@@ -90,7 +105,7 @@
   }
 
   .surface-dark :focus-visible {
-    outline-color: var(--color-saffron);
+    outline-color: var(--color-sand-50);
   }
 
   /* The main landmark receives focus from the skip link; it is not a control, so no ring. */
@@ -99,8 +114,13 @@
   }
 
   ::selection {
-    background-color: var(--color-saffron);
+    background-color: var(--color-sandstone);
     color: var(--color-ink);
+  }
+
+  /* Anything set in the display face: never a synthesized bold. */
+  .font-serif {
+    font-synthesis-weight: none;
   }
 
   [hidden] {
@@ -130,7 +150,7 @@
     z-index: 50;
     padding: 0.75rem 1rem;
     background-color: var(--color-ink);
-    color: var(--color-cream);
+    color: var(--color-sand-50);
     font-weight: 700;
     border-radius: 0.375rem;
     transform: translateY(-200%);
@@ -158,12 +178,23 @@
   }
 
   .btn-primary {
-    background-color: var(--color-tomato);
+    background-color: var(--color-sage);
     color: var(--color-white);
   }
 
   .btn-primary:hover {
-    background-color: var(--color-tomato-dark);
+    background-color: var(--color-sage-dark);
+    text-decoration: underline;
+  }
+
+  /* The accent button: Donate, in the header. */
+  .btn-accent {
+    background-color: var(--color-coral);
+    color: var(--color-white);
+  }
+
+  .btn-accent:hover {
+    background-color: var(--color-coral-dark);
     text-decoration: underline;
   }
 
@@ -174,7 +205,7 @@
   }
 
   .btn-secondary:hover {
-    background-color: var(--color-cream);
+    background-color: var(--color-sand-50);
     text-decoration: underline;
   }
 
@@ -196,12 +227,19 @@
 
   /* Decorative placeholder used where a photo is still missing. Always aria-hidden. */
   .placeholder-pattern {
-    background-color: var(--color-cream);
+    background-color: var(--color-sand);
     background-image:
-      radial-gradient(circle at 25% 25%, var(--color-saffron) 0 14%, transparent 15%),
-      radial-gradient(circle at 75% 75%, var(--color-saffron) 0 14%, transparent 15%),
-      linear-gradient(135deg, transparent 46%, rgb(178 58 30 / 0.18) 47% 53%, transparent 54%);
+      radial-gradient(circle at 25% 25%, var(--color-sandstone) 0 14%, transparent 15%),
+      radial-gradient(circle at 75% 75%, var(--color-sandstone) 0 14%, transparent 15%),
+      linear-gradient(135deg, transparent 46%, rgb(63 90 71 / 0.16) 47% 53%, transparent 54%);
     background-size: 2.5rem 2.5rem;
+  }
+
+  /* Cards: white, a 1px sand border, 12px corners, no shadow. */
+  .card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-sand);
+    border-radius: 0.75rem;
   }
 
   /* Text from the CMS (Markdown). Headings in it are h2 and h3 only. */
@@ -248,7 +286,7 @@
   }
 
   .prose blockquote {
-    border-left: 4px solid var(--color-herb);
+    border-left: 4px solid var(--color-sage);
     padding-left: 1em;
     font-style: italic;
   }

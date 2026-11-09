@@ -7,7 +7,7 @@
  */
 interface Props {
   links: { label: string; url: string }[];
-  /** "dark" for the ink footer (saffron links), "light" for page content. */
+  /** "dark" for the sage-dark footer (sandstone links), "light" for page content. */
   surface: 'dark' | 'light';
   class?: string;
 }
@@ -30,7 +30,7 @@ function iconFor(url: string): Icon {
       const icon = iconFor(link.url);
       return (
         <li>
-          <a href={link.url} class:list={['inline-flex min-h-6 items-center gap-2', surface === 'dark' && 'text-saffron']} rel="me noopener">
+          <a href={link.url} class:list={['inline-flex min-h-6 items-center gap-2', surface === 'dark' && 'text-sandstone']} rel="me noopener">
             <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" class="shrink-0">
               {icon === 'instagram' && (
                 <g fill="none" stroke="currentColor" stroke-width="2">

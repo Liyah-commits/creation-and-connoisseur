@@ -14,30 +14,38 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
 const css = readFileSync('src/styles/global.css', 'utf8');
 const theme = css.slice(css.indexOf('@theme'), css.indexOf('}', css.indexOf('@theme')));
-const tokens = Object.fromEntries([...theme.matchAll(/--color-([a-z-]+):\s*(#[0-9a-f]{6})/gi)].map(([, name, hex]) => [name, hex.toUpperCase()]));
+const tokens = Object.fromEntries([...theme.matchAll(/--color-([a-z0-9-]+):\s*(#[0-9a-f]{6})/gi)].map(([, name, hex]) => [name, hex.toUpperCase()]));
 
 const PAIRS = [
   // [foreground, background, kind, where it is used]
-  ['ink', 'cream', 'text', 'Body text on the page background'],
-  ['ink', 'white', 'text', 'Text on cards, page headers, form fields and secondary buttons'],
+  ['ink', 'sand-50', 'text', 'Body text on the page background; the wordmark in the header'],
+  ['ink', 'white', 'text', 'Text on cards, page headers, form fields and secondary buttons; the Home hero line'],
+  ['ink', 'sand', 'text', 'Stat labels on the stats strip'],
+  ['ink', 'sandstone', 'text', 'Draft badge, draft notice and text selection'],
   ['ink-muted', 'white', 'text', 'Introductions, dates, roles, hints and the unavailable Donate button'],
-  ['ink-muted', 'cream', 'text', 'Muted text on the page background (404 page)'],
-  ['tomato-dark', 'cream', 'text', 'Links and the current navigation item'],
-  ['tomato-dark', 'white', 'text', 'Links on cards and page headers; form error text'],
-  ['white', 'tomato', 'text', 'Primary buttons (Donate, Get help, Send)'],
-  ['white', 'tomato-dark', 'text', 'Primary buttons on hover'],
-  ['ink', 'saffron', 'text', 'Draft badge and text selection'],
-  ['cream', 'ink', 'text', 'Footer text and the skip link'],
-  ['saffron', 'ink', 'text', 'Footer links'],
-  ['focus', 'cream', 'non-text', 'Focus indicator on the page background'],
+  ['ink-muted', 'sand-50', 'text', 'Muted text on the page background (404 page)'],
+  ['sage', 'sand', 'text', 'Stat numbers on the stats strip'],
+  ['sage', 'sand-50', 'text', 'The current navigation item; "and" in the header wordmark'],
+  ['sage-dark', 'sand-50', 'text', 'Links on the page background, including the language switch area'],
+  ['sage-dark', 'white', 'text', 'Links on cards, page headers and forms'],
+  ['white', 'sage', 'text', 'Primary buttons (Volunteer with us, Send)'],
+  ['white', 'sage-dark', 'text', 'Primary buttons on hover'],
+  ['white', 'coral', 'text', 'Donate button in the header'],
+  ['white', 'coral-dark', 'text', 'Donate button on hover'],
+  ['coral-dark', 'white', 'text', 'Form error text'],
+  ['sand-50', 'sage-dark', 'text', 'Footer text and headings'],
+  ['sandstone', 'sage-dark', 'text', 'Footer links'],
+  ['sand-50', 'ink', 'text', 'The skip link'],
+  ['focus', 'sand-50', 'non-text', 'Focus indicator on the page background'],
   ['focus', 'white', 'non-text', 'Focus indicator on cards, page headers and forms'],
-  ['focus', 'saffron', 'non-text', 'Focus indicator where it crosses the saffron band at the top of the page'],
-  ['saffron', 'ink', 'non-text', 'Focus indicator in the footer'],
-  ['ink', 'white', 'non-text', 'Secondary button and menu button border'],
+  ['sand-50', 'sage-dark', 'non-text', 'Focus indicator in the footer'],
+  ['ink', 'white', 'non-text', 'Secondary button border'],
+  ['ink', 'sand-50', 'non-text', 'Menu button border in the header'],
   ['ink-muted', 'white', 'non-text', 'Form field borders; unavailable button border'],
-  ['tomato', 'cream', 'non-text', 'Primary button shape against the page'],
-  ['tomato', 'white', 'non-text', 'Primary button shape against cards'],
-  ['tomato-dark', 'white', 'non-text', 'Error border on invalid form fields'],
+  ['sage', 'white', 'non-text', 'Primary button shape against cards, forms and the Home hero'],
+  ['coral', 'sand-50', 'non-text', 'Donate button shape against the header'],
+  ['coral-dark', 'white', 'non-text', 'Error border on invalid form fields'],
+  ['sage', 'sand-50', 'non-text', 'Form status message border'],
 ];
 
 const required = { text: 4.5, 'large text': 3, 'non-text': 3 };

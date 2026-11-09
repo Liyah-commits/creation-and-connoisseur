@@ -33,6 +33,7 @@ Every file that contains Spanish the public will read. It needs review by a Span
 | Volunteer (page) / volunteering | Voluntariado / hacer voluntariado |
 | Volunteer Days (was Biweekly Volunteering) | Jornadas de Voluntariado (was Voluntariado Quincenal) |
 | volunteer day | jornada de voluntariado |
+| Volunteer with us (Home button) | Sea voluntario |
 | Club mission | Misión del club |
 | UNLV Food Tasting Club board | Junta del UNLV Food Tasting Club |
 | Club life | La vida en el club |
@@ -89,7 +90,7 @@ All **Changed 9 November 2026 (new)**. Each has two paragraphs written from `pho
 
 ## Interface text
 
-- [ ] `src/i18n/ui.ts`: every button, label, menu item, form message, error message, footer line and screen-reader-only text. Each entry shows the English (`en:`) next to the Spanish (`es:`). **Changed:** usted throughout, and new strings for the Get Help form. Read the form messages in context by submitting each form empty and then complete, on `/es/contacto/`, `/es/voluntariado/` and `/es/obtener-ayuda/`. **Changed 9 November 2026:** new strings `home.statsHeading`, `about.clubBoardHeading`, `about.clubLifeHeading` and `entry.galleryHeading`.
+- [ ] `src/i18n/ui.ts`: every button, label, menu item, form message, error message, footer line and screen-reader-only text. Each entry shows the English (`en:`) next to the Spanish (`es:`). **Changed:** usted throughout, and new strings for the Get Help form. Read the form messages in context by submitting each form empty and then complete, on `/es/contacto/`, `/es/voluntariado/` and `/es/obtener-ayuda/`. **Changed 9 November 2026:** new strings `home.statsHeading`, `about.clubBoardHeading`, `about.clubLifeHeading` and `entry.galleryHeading`. **Changed again (D55):** new string `home.volunteerCta`, "Sea voluntario", the Home page's primary button, as worded in Aryah's redesign brief. It's masculine, unlike the neutral phrasing elsewhere (D25, for example "Haga voluntariado"), so confirm it or suggest a neutral alternative such as "Haga voluntariado con nosotros".
 - [ ] `src/i18n/routes.ts`: the Spanish addresses (`acerca-de`, `programas`, `obtener-ayuda`, `voluntariado`, `donar`, `noticias`, `contacto`, `accesibilidad`, `privacidad`). Changing one after launch needs a redirect, so confirm them now.
 - [ ] `src/pages/404.astro`: the Spanish half of the "page not found" page (open any wrong address, like `/es/no-existe/`). Checked for tú forms during the switch; it had none.
 

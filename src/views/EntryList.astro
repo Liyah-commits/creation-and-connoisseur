@@ -29,7 +29,7 @@ const entries = section === 'programs' ? await getPrograms(lang) : await getNews
           ))}
         </ul>
       ) : (
-        <p class="rounded-lg border border-ink/15 bg-white p-6 text-lg">{t(lang, section === 'programs' ? 'programs.empty' : 'news.empty')}</p>
+        <p class="card p-6 text-lg">{t(lang, section === 'programs' ? 'programs.empty' : 'news.empty')}</p>
       )
     }
   </div>

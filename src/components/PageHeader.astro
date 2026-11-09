@@ -1,5 +1,5 @@
 ---
-/** The top of every page: the one h1, an optional introduction, and a decorative band. */
+/** The top of every page: the one h1, an optional introduction, a decorative pattern, and a 2px sandstone rule underneath (D55). */
 interface Props {
   title: string;
   intro?: string | undefined;
@@ -7,13 +7,13 @@ interface Props {
 const { title, intro } = Astro.props;
 ---
 
-<div class="border-b border-ink/10 bg-white">
+<div class="border-b-2 border-sandstone bg-white">
   <div class="container-page grid items-center gap-8 py-10 md:grid-cols-[1fr_auto] md:py-14">
     <div>
       <h1>{title}</h1>
       {intro && <p class="lead mt-4 text-ink-muted">{intro}</p>}
       <slot />
     </div>
-    <div class="placeholder-pattern hidden h-36 w-56 rounded-lg border border-ink/10 md:block" aria-hidden="true"></div>
+    <div class="placeholder-pattern hidden h-36 w-56 rounded-xl border border-sandstone md:block" aria-hidden="true"></div>
   </div>
 </div>

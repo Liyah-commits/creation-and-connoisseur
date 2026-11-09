@@ -1,6 +1,8 @@
 ---
 /**
- * Home: the title and introduction beside the main photo, the stats strip,
+ * Home: the title and hero line (the page introduction, in the display face)
+ * beside the main photo, with one primary and one secondary button; the stats
+ * strip on a sand band;
  * the page text, the three ways to take part, and the latest programs and news.
  * The photo and stats come from "Home and About photos and stats" in Keystatic.
  * The photo is the only image on the site that is not lazy loaded: it is the
@@ -34,14 +36,14 @@ const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UI
 ---
 
 <Base lang={lang} title={page.data.title} description={page.data.metaDescription} alternates={alternatesFor('home')} isHome>
-  <div class="border-b border-ink/10 bg-white">
+  <div class="border-b-2 border-sandstone bg-white">
     <div class="container-page grid items-center gap-10 py-12 md:grid-cols-[3fr_2fr] md:py-20">
       <div>
         <h1>{page.data.title}</h1>
-        {page.data.intro && <p class="lead mt-5 text-ink-muted">{page.data.intro}</p>}
+        {page.data.intro && <p class="mt-5 max-w-[32ch] font-serif text-2xl leading-snug text-ink sm:text-3xl">{page.data.intro}</p>}
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href={routes.getHelp[lang]} class="btn btn-primary">{t(lang, 'home.getHelpTitle')}</a>
-          <a href={routes.volunteer[lang]} class="btn btn-secondary">{t(lang, 'home.volunteerTitle')}</a>
+          <a href={routes.volunteer[lang]} class="btn btn-primary">{t(lang, 'home.volunteerCta')}</a>
+          <a href={routes.getHelp[lang]} class="btn btn-secondary">{t(lang, 'home.getHelpTitle')}</a>
         </div>
       </div>
       {
@@ -55,10 +57,10 @@ const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UI
             fallbackFormat="webp"
             loading="eager"
             fetchpriority="high"
-            class="h-auto w-full rounded-lg border border-ink/10"
+            class="h-auto w-full rounded-xl border border-sandstone"
           />
         ) : (
-          <div class="placeholder-pattern hidden aspect-[4/3] rounded-lg border border-ink/10 md:block" aria-hidden="true" />
+          <div class="placeholder-pattern hidden aspect-[4/3] rounded-xl border border-sandstone md:block" aria-hidden="true" />
         )
       }
     </div>
@@ -66,15 +68,15 @@ const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UI
 
   {
     stats.length > 0 && (
-      <section class="border-b border-ink/10" aria-labelledby="stats-heading">
+      <section class="bg-sand" aria-labelledby="stats-heading">
         <div class="container-page py-10">
           <h2 id="stats-heading" class="sr-only">{t(lang, 'home.statsHeading')}</h2>
           <ul class:list={['grid gap-8 text-center', statColumns]} role="list">
             {stats.map((stat) => (
-              <li>
-                <p>
-                  <span class="block font-serif text-4xl font-bold text-tomato-dark">{lang === 'es' ? stat.valueEs || stat.value : stat.value}</span>{' '}
-                  <span class="mt-1 block">{lang === 'en' ? stat.labelEn : stat.labelEs}</span>
+              <li class="min-w-0">
+                <p class="break-words">
+                  <span class="block font-serif text-4xl text-sage">{lang === 'es' ? stat.valueEs || stat.value : stat.value}</span>{' '}
+                  <span class="mt-1 block text-ink">{lang === 'en' ? stat.labelEn : stat.labelEs}</span>
                 </p>
               </li>
             ))}
@@ -97,7 +99,7 @@ const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UI
     <ul class="mt-6 grid gap-5 md:grid-cols-3" role="list">
       {
         actions.map((action) => (
-          <li class="rounded-lg border border-ink/15 bg-white p-6">
+          <li class="card p-6">
             <h3>
               <a href={routes[action.key][lang]} class="text-ink">{t(lang, action.title)}</a>
             </h3>

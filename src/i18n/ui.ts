@@ -54,6 +54,7 @@ export const ui = {
 
   // Home
   'home.actionsHeading': { en: 'How you can take part', es: 'Cómo puede participar' },
+  'home.volunteerCta': { en: 'Volunteer with us', es: 'Sea voluntario' },
   'home.getHelpTitle': { en: 'Get help', es: 'Obtener ayuda' },
   'home.getHelpText': { en: 'Find out how to get food support.', es: 'Descubra cómo obtener apoyo con alimentos.' },
   'home.volunteerTitle': { en: 'Volunteer', es: 'Haga voluntariado' },

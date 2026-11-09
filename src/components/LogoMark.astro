@@ -1,0 +1,45 @@
+---
+/**
+ * The logo mark (D55): a coral sun setting behind a sage mesa, standing on a
+ * sandstone table line. Always decorative here (aria-hidden), because the
+ * wordmark beside it names the site. public/favicon.svg and the PNG icons
+ * (scripts/make-images.mjs) use the same drawing.
+ *
+ * "tile" puts the mark on a sand-50 rounded square, for dark backgrounds where
+ * the sage mesa would otherwise disappear (the footer).
+ */
+interface Props {
+  size: number;
+  tile?: boolean;
+  class?: string;
+}
+const { size, tile = false, class: className } = Astro.props;
+---
+
+<svg
+  aria-hidden="true"
+  focusable="false"
+  width={size}
+  height={size}
+  viewBox={tile ? '0 0 64 64' : '0 0 32 32'}
+  class:list={['shrink-0', className]}
+>
+  {
+    tile ? (
+      <>
+        <rect width="64" height="64" rx="12" class="fill-sand-50" />
+        <g transform="translate(4 1.375) scale(1.75)">
+          <circle cx="16" cy="14" r="7" class="fill-coral" />
+          <path d="M2 24l7-7 4 4 5-6 12 9z" class="fill-sage" />
+          <rect x="2" y="25" width="28" height="3" rx="1" class="fill-sandstone" />
+        </g>
+      </>
+    ) : (
+      <>
+        <circle cx="16" cy="14" r="7" class="fill-coral" />
+        <path d="M2 24l7-7 4 4 5-6 12 9z" class="fill-sage" />
+        <rect x="2" y="25" width="28" height="3" rx="1" class="fill-sandstone" />
+      </>
+    )
+  }
+</svg>

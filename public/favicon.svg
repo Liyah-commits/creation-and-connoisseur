@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <title>Creation and Connoisseur</title>
-  <rect width="64" height="64" rx="12" fill="#B23A1E"/>
-  <text x="32" y="44" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700" fill="#FFF8EE">C&amp;C</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="t">
+  <title id="t">Creation and Connoisseur</title>
+  <rect width="64" height="64" rx="12" fill="#F7F3EC"/>
+  <g transform="translate(4 1.375) scale(1.75)"><circle cx="16" cy="14" r="7" fill="#B04A32"/><path d="M2 24l7-7 4 4 5-6 12 9z" fill="#3F5A47"/><rect x="2" y="25" width="28" height="3" rx="1" fill="#E3C9A8"/></g>
 </svg>

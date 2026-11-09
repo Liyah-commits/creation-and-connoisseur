@@ -20,7 +20,7 @@ const image = entry.data.image.discriminant ? entry.data.image.value : null;
 const date = 'date' in entry.data ? entry.data.date : null;
 ---
 
-<article class="flex h-full flex-col overflow-hidden rounded-lg border border-ink/15 bg-white">
+<article class="card flex h-full flex-col overflow-hidden">
   {
     image ? (
       <Picture src={image.image} alt={image.alt} widths={[400, 800]} sizes="(min-width: 64rem) 22rem, (min-width: 40rem) 45vw, 100vw" formats={['avif']} fallbackFormat="webp" class="aspect-[3/2] w-full object-cover" />
@@ -34,6 +34,6 @@ const date = 'date' in entry.data ? entry.data.date : null;
     </Heading>
     {date && <p class="text-sm text-ink-muted"><time datetime={date.toISOString().slice(0, 10)}>{formatDate(lang, date)}</time></p>}
     <p>{entry.data.summary}</p>
-    {entry.data.draft && <p class="mt-auto inline-block self-start rounded bg-saffron px-2 py-0.5 text-sm font-semibold text-ink">{t(lang, 'draft.badge')}</p>}
+    {entry.data.draft && <p class="mt-auto inline-block self-start rounded bg-sandstone px-2 py-0.5 text-sm font-semibold text-ink">{t(lang, 'draft.badge')}</p>}
   </div>
 </article>

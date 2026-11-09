@@ -80,7 +80,7 @@ A running record of every choice made in the rebuild and why. Newest entries go 
 - Organization and NGO structured data (`@type: ["Organization","NGO"]`, `nonprofitStatus: Nonprofit501c3`) on the home page in each language. `taxID`, `email`, `telephone`, `legalName`, `foundingDate` and `sameAs` appear only once supplied.
 - One bilingual `404.html`, served with status 404, `noindex`, the Spanish half marked `lang="es"`.
 
-**D17. Palette and contrast.**
+**D17. Palette and contrast.** *Superseded on 9 November 2026 by the "desert table" palette (D55); kept as the record of the first build.*
 - **Why these colors:** there's no logo or brand color to inherit (`docs/OPEN_ITEMS.md`), so the palette is new: warm and food-related (cream, tomato, herb, saffron) with a dark brown ink.
 - **Restricted:** Tailwind's default palette is switched off (`--color-*: initial`), so only these tokens can be used and the contrast table below covers every pair.
 - **Checked by script:** `scripts/contrast.mjs` reads the tokens from `src/styles/global.css`, computes every pair with the WCAG formula, writes `reports/contrast.md`, and fails the suite below 4.5:1 for text or 3:1 for non-text and focus indicators. Saffron is never used for text or meaningful shapes on light backgrounds (1.74:1 on cream); it's decoration there.
@@ -120,11 +120,11 @@ A running record of every choice made in the rebuild and why. Newest entries go 
 | tomato `#B23A1E` | white `#FFFFFF` | Primary button shape against cards | non-text | 5.97:1 | 3:1 | Pass |
 | tomato-dark `#8F2C14` | white `#FFFFFF` | Error border on invalid form fields | non-text | 8.27:1 | 3:1 | Pass |
 
-**D18. Focus indicator.**
+**D18. Focus indicator.** *The ring is unchanged in D55, except that on the dark footer it is now sand-50 instead of saffron.*
 - A 3px outline with a 3px gap on every interactive element (`:focus-visible`). It's focus blue on light surfaces and saffron on the dark footer. Because of the gap, the ring sits against the page background rather than the control, so the ratios that matter are blue on cream, white and saffron, and saffron on ink (all in the table).
 - The skip link uses the blue ring, not saffron: its ring sits on cream, where saffron would be 1.74:1.
 
-**D19. Fonts.** System sans-serif for text and a system serif stack (Georgia and similar) for headings. No web fonts to download, so nothing shifts while fonts load.
+**D19. Fonts.** *Superseded by D55: DM Serif Display and Inter, self-hosted.* System sans-serif for text and a system serif stack (Georgia and similar) for headings. No web fonts to download, so nothing shifts while fonts load.
 
 **D20. Header, navigation and interaction choices.**
 - No sticky header, so focused content is never hidden behind it (WCAG 2.4.11).
@@ -159,7 +159,7 @@ A running record of every choice made in the rebuild and why. Newest entries go 
 - **Why:** the Vercel adapter writes the deployment's routing itself (`.vercel/output/config.json`). A test entry in Astro's `redirects` showed up there as a route with status 301 on 6 November 2026. Whether Vercel also applies `vercel.json` redirects on top of an adapter's output couldn't be confirmed from Vercel's documentation, so the site doesn't rely on it. The brief's aim, a 301 for every old URL at Vercel's edge, is unchanged.
 - **Effect:** there's no `vercel.json`. `docs/REDIRECTS.md` has the steps. It doesn't apply yet, because there's no old site (D4).
 
-**D24. Share image and icons are typographic.** `public/og-image.png` (1200 by 630) shows the name as a wordmark, and the icons show "C&C" on tomato. No logo has been supplied, so none was invented. `pnpm images` (`scripts/make-images.mjs`) regenerates them from HTML in Playwright's Chromium. Replace them once real logo files exist (`docs/OPEN_ITEMS.md`).
+**D24. Share image and icons are typographic.** *Superseded by D55: the icons and share image are now drawn from the logo mark.* `public/og-image.png` (1200 by 630) shows the name as a wordmark, and the icons show "C&C" on tomato. No logo has been supplied, so none was invented. `pnpm images` (`scripts/make-images.mjs`) regenerates them from HTML in Playwright's Chromium. Replace them once real logo files exist (`docs/OPEN_ITEMS.md`).
 
 **D25. Spanish register and gender.** Revised 6 November 2026: usted replaces tú. Ruled by Aryah.
 - **Usted throughout.** The site was first written in neutral US Latin American Spanish in the tú register. It now uses usted everywhere: interface strings, form labels, hints, errors and success messages, button labels, and every page.
@@ -310,3 +310,76 @@ The site had no tagline field, so Site settings now has "Tagline (English / Span
 - **Club intro:** the UNLV Food Tasting Club program's short summary, which is the introduction under its heading (and its card text), is now "Culture nights celebrating the cultures that make up Nevada." ("Noches culturales que celebran las culturas que forman Nevada.").
 - **Mission:** already the `FACTS.md` mission (D53). Unchanged.
 - **No mention of a particular service club anywhere.** Aryah's instruction of 9 November 2026. Aryah's bio no longer names a membership (both languages), and the two decision and review notes that named it were reworded. Older commits in the git history still contain the earlier wording.
+
+## Desert table redesign (9 November 2026)
+
+**D55. "Desert table" redesign: palette, type, logo and icons.** Direction B, chosen by Aryah on 9 November 2026 (`photos-inbox/REDESIGN.md`, git-ignored).
+- **Why:** the first palette (tomato, saffron and cream, D17) and the "C&C" favicon (D24) were placeholders made before any brand existed. The new look is meant to feel warm, calm and specific to Nevada, and to let the food photos carry the color: sand neutrals, a deep sage for actions, and coral as a small accent.
+- **Palette:** it replaces the whole `@theme` color block, and the token names changed. Every class that used `cream`, `tomato`, `tomato-dark`, `herb` or `saffron` was moved to the new names across `src/`. A search of `src/` for the old names comes back empty.
+
+  | Token | Hex | Role |
+  |---|---|---|
+  | sand-50 | `#F7F3EC` | Page background |
+  | white | `#FFFFFF` | Cards, page headers, form fields |
+  | sand | `#EFE3D1` | Stats strip band; card borders |
+  | sandstone | `#E3C9A8` | Decoration only: rules under headers, image frames, the draft badge, the logo's table line |
+  | ink | `#26302A` | Body text and headings |
+  | ink-muted | `#4E5A52` | Intros, dates, roles, hints, form field borders |
+  | sage | `#3F5A47` | Primary buttons, stat numbers, current navigation item |
+  | sage-dark | `#2C4033` | Links, primary button hover, footer background |
+  | coral | `#B04A32` | Donate button, the logo's sun |
+  | coral-dark | `#8E3A25` | Donate hover, form error text and error borders |
+  | focus | `#1A4FBF` | Focus indicator (unchanged) |
+
+- **Rules:** coral is never text on sand or sandstone (4.28:1 and 3.41:1 would fail). The only coral text is white-on-coral in the Donate button. ink-muted is never on sandstone. Text selection is ink on sandstone.
+- **Focus ring on the footer:** the ring stays focus blue on light surfaces (D18). The footer is now sage-dark, where blue would be about 1.5:1, so the footer ring is sand-50 (10.05:1). The keyboard-walk test checks both colors.
+- **Contrast, every pair the templates use** (`scripts/contrast.mjs` checks these on every run; text needs 4.5:1 and non-text 3:1, and no text relies on the large-text allowance):
+
+| Foreground | Background | Use | Type | Ratio | Needed | Result |
+|---|---|---|---|---|---|---|
+| ink `#26302A` | sand-50 `#F7F3EC` | Body text on the page background; the wordmark in the header | text | 12.34:1 | 4.5:1 | Pass |
+| ink `#26302A` | white `#FFFFFF` | Text on cards, page headers, form fields and secondary buttons; the Home hero line | text | 13.65:1 | 4.5:1 | Pass |
+| ink `#26302A` | sand `#EFE3D1` | Stat labels on the stats strip | text | 10.77:1 | 4.5:1 | Pass |
+| ink `#26302A` | sandstone `#E3C9A8` | Draft badge, draft notice and text selection | text | 8.57:1 | 4.5:1 | Pass |
+| ink-muted `#4E5A52` | white `#FFFFFF` | Introductions, dates, roles, hints and the unavailable Donate button | text | 7.22:1 | 4.5:1 | Pass |
+| ink-muted `#4E5A52` | sand-50 `#F7F3EC` | Muted text on the page background (404 page) | text | 6.53:1 | 4.5:1 | Pass |
+| sage `#3F5A47` | sand `#EFE3D1` | Stat numbers on the stats strip | text | 6.00:1 | 4.5:1 | Pass |
+| sage `#3F5A47` | sand-50 `#F7F3EC` | The current navigation item; "and" in the header wordmark | text | 6.87:1 | 4.5:1 | Pass |
+| sage-dark `#2C4033` | sand-50 `#F7F3EC` | Links on the page background, including the language switch area | text | 10.05:1 | 4.5:1 | Pass |
+| sage-dark `#2C4033` | white `#FFFFFF` | Links on cards, page headers and forms | text | 11.12:1 | 4.5:1 | Pass |
+| white `#FFFFFF` | sage `#3F5A47` | Primary buttons (Volunteer with us, Send) | text | 7.60:1 | 4.5:1 | Pass |
+| white `#FFFFFF` | sage-dark `#2C4033` | Primary buttons on hover | text | 11.12:1 | 4.5:1 | Pass |
+| white `#FFFFFF` | coral `#B04A32` | Donate button in the header | text | 5.42:1 | 4.5:1 | Pass |
+| white `#FFFFFF` | coral-dark `#8E3A25` | Donate button on hover | text | 7.55:1 | 4.5:1 | Pass |
+| coral-dark `#8E3A25` | white `#FFFFFF` | Form error text | text | 7.55:1 | 4.5:1 | Pass |
+| sand-50 `#F7F3EC` | sage-dark `#2C4033` | Footer text and headings | text | 10.05:1 | 4.5:1 | Pass |
+| sandstone `#E3C9A8` | sage-dark `#2C4033` | Footer links | text | 6.98:1 | 4.5:1 | Pass |
+| sand-50 `#F7F3EC` | ink `#26302A` | The skip link | text | 12.34:1 | 4.5:1 | Pass |
+| focus `#1A4FBF` | sand-50 `#F7F3EC` | Focus indicator on the page background | non-text | 6.51:1 | 3:1 | Pass |
+| focus `#1A4FBF` | white `#FFFFFF` | Focus indicator on cards, page headers and forms | non-text | 7.21:1 | 3:1 | Pass |
+| sand-50 `#F7F3EC` | sage-dark `#2C4033` | Focus indicator in the footer | non-text | 10.05:1 | 3:1 | Pass |
+| ink `#26302A` | white `#FFFFFF` | Secondary button border | non-text | 13.65:1 | 3:1 | Pass |
+| ink `#26302A` | sand-50 `#F7F3EC` | Menu button border in the header | non-text | 12.34:1 | 3:1 | Pass |
+| ink-muted `#4E5A52` | white `#FFFFFF` | Form field borders; unavailable button border | non-text | 7.22:1 | 3:1 | Pass |
+| sage `#3F5A47` | white `#FFFFFF` | Primary button shape against cards, forms and the Home hero | non-text | 7.60:1 | 3:1 | Pass |
+| coral `#B04A32` | sand-50 `#F7F3EC` | Donate button shape against the header | non-text | 4.90:1 | 3:1 | Pass |
+| coral-dark `#8E3A25` | white `#FFFFFF` | Error border on invalid form fields | non-text | 7.55:1 | 3:1 | Pass |
+| sage `#3F5A47` | sand-50 `#F7F3EC` | Form status message border | non-text | 6.87:1 | 3:1 | Pass |
+
+- **Type:**
+  - Headings and the wordmark are DM Serif Display, which has one weight, so `h1`, `h2` and `h3` are weight 400 with `font-synthesis-weight: none`, and every `font-bold` on serif text was removed. The browser never fakes a bold.
+  - Body and interface text is Inter (variable). Body size stays 1.0625rem with line-height 1.6.
+  - Both are self-hosted through `@fontsource/dm-serif-display` and `@fontsource-variable/inter` (5.3.0, older than the seven-day rule of D7), with `font-display: swap` and the system stacks as fallbacks. Only the Latin and Latin Extended subsets are declared (`src/styles/fonts.css`), so Spanish accents render. No request goes to Google Fonts or any other font service.
+  - The two Latin files every page uses first (DM Serif Display regular, Inter regular) are preloaded.
+- **Logo:** an original mark of a coral sun setting behind a sage mesa, on a sandstone table line ("a Nevada table"), with no UNLV marks, colors or typefaces.
+  - In the header: the mark at 32px (`aria-hidden`), then the wordmark as live text ("Creation *and* Connoisseur", DM Serif Display, ink, "and" in italic sage). The lockup is still the home link, with the same accessible name.
+  - In the footer: the mark at 24px. On sage-dark the sage mesa would disappear, so there it sits on a small sand-50 rounded tile, the same tile as the favicon.
+  - The drawing is `src/components/LogoMark.astro`.
+- **Icons and share image:** `pnpm images` (`scripts/make-images.mjs`) draws them from the mark, with colors read from `global.css`, the hero line from `content/en/pages/home.md`, and the self-hosted DM Serif Display. `favicon.svg` is the mark on a sand-50 rounded square (rx 12 on a 64 viewBox) and keeps its `<title>`. `favicon.ico` holds 32 and 16 pixel images. `apple-touch-icon.png` is 180 pixels on sand-50. `og-image.png` is 1200 by 630: sand-50, the mark, the wordmark and the English hero line in ink. The example images for the template build are only redrawn with `--examples`, and keep their original look, which their alt text describes. Nothing else in `public/` changed.
+- **Layout:**
+  - The saffron band at the top of every page is gone. A 2px sandstone rule runs under the site header and under each page's header band (the page title band, the Home hero and the program and news header).
+  - Cards (program and news cards, people, the Home action cards, the Donate box, the forms and empty states) are white with a 1px sand border, 12px corners and no shadow (`.card`).
+  - The Home hero keeps the Thai Night photo. The hero line is in DM Serif Display. There is one primary button, sage, "Volunteer with us" ("Sea voluntario"), and one secondary button outlined in ink ("Get help").
+  - The stats strip is a sand band, with numbers in sage DM Serif Display and labels in ink. It is one column on phones and three columns from 640px. At 320, 768 and 1280px, in both languages, nothing overflows and each value (including "Hundreds" and "Cientos") stays on one line.
+  - Links are still underlined everywhere, and the focus style is unchanged. The only transition is the existing button background, inside `prefers-reduced-motion: no-preference`.
+- **Spanish:** "Sea voluntario" is Aryah's wording from the brief. It uses the masculine form, unlike D25's neutral phrasing, so the Spanish reviewer should confirm it (`docs/SPANISH_REVIEW.md`).

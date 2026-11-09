@@ -3,7 +3,11 @@
  * The page shell: <head> metadata, header, main landmark and footer.
  * Every page on the site uses it.
  */
+import '../styles/fonts.css';
 import '../styles/global.css';
+// The Latin files of the two faces every page uses first, preloaded so headings and body text don't wait for the CSS (D55).
+import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import serifLatin from '@fontsource/dm-serif-display/files/dm-serif-display-latin-400-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { htmlLang, langs, ogLocale, otherLang, type Alternates, type Lang } from '../i18n/routes';
@@ -56,6 +60,8 @@ const jsonLd = isHome ? organizationJsonLd(settings, lang, site) : null;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={serifLatin} as="font" type="font/woff2" crossorigin />
     <script is:inline>document.documentElement.classList.add('js');</script>
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
@@ -81,7 +87,7 @@ const jsonLd = isHome ? organizationJsonLd(settings, lang, site) : null;
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#fff8ee" />
+    <meta name="theme-color" content="#f7f3ec" />
     <link rel="sitemap" href="/sitemap.xml" />
     {jsonLd && <script type="application/ld+json" set:html={jsonLdString(jsonLd)} />}
   </head>

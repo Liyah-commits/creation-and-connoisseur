@@ -122,28 +122,36 @@ Computed by `scripts/contrast.mjs` from the color tokens in `src/styles/global.c
 
 | Foreground | Background | Use | Type | Ratio | Needed | Result |
 |---|---|---|---|---|---|---|
-| ink `#2B1D16` | cream `#FFF8EE` | Body text on the page background | text | 15.44:1 | 4.5:1 | Pass |
-| ink `#2B1D16` | white `#FFFFFF` | Text on cards, page headers, form fields and secondary buttons | text | 16.28:1 | 4.5:1 | Pass |
-| ink-muted `#5E4A3E` | white `#FFFFFF` | Introductions, dates, roles, hints and the unavailable Donate button | text | 8.32:1 | 4.5:1 | Pass |
-| ink-muted `#5E4A3E` | cream `#FFF8EE` | Muted text on the page background (404 page) | text | 7.89:1 | 4.5:1 | Pass |
-| tomato-dark `#8F2C14` | cream `#FFF8EE` | Links and the current navigation item | text | 7.85:1 | 4.5:1 | Pass |
-| tomato-dark `#8F2C14` | white `#FFFFFF` | Links on cards and page headers; form error text | text | 8.27:1 | 4.5:1 | Pass |
-| white `#FFFFFF` | tomato `#B23A1E` | Primary buttons (Donate, Get help, Send) | text | 5.97:1 | 4.5:1 | Pass |
-| white `#FFFFFF` | tomato-dark `#8F2C14` | Primary buttons on hover | text | 8.27:1 | 4.5:1 | Pass |
-| ink `#2B1D16` | saffron `#F2B544` | Draft badge and text selection | text | 8.89:1 | 4.5:1 | Pass |
-| cream `#FFF8EE` | ink `#2B1D16` | Footer text and the skip link | text | 15.44:1 | 4.5:1 | Pass |
-| saffron `#F2B544` | ink `#2B1D16` | Footer links | text | 8.89:1 | 4.5:1 | Pass |
-| focus `#1A4FBF` | cream `#FFF8EE` | Focus indicator on the page background | non-text | 6.83:1 | 3:1 | Pass |
+| ink `#26302A` | sand-50 `#F7F3EC` | Body text on the page background; the wordmark in the header | text | 12.34:1 | 4.5:1 | Pass |
+| ink `#26302A` | white `#FFFFFF` | Text on cards, page headers, form fields and secondary buttons; the Home hero line | text | 13.65:1 | 4.5:1 | Pass |
+| ink `#26302A` | sand `#EFE3D1` | Stat labels on the stats strip | text | 10.77:1 | 4.5:1 | Pass |
+| ink `#26302A` | sandstone `#E3C9A8` | Draft badge, draft notice and text selection | text | 8.57:1 | 4.5:1 | Pass |
+| ink-muted `#4E5A52` | white `#FFFFFF` | Introductions, dates, roles, hints and the unavailable Donate button | text | 7.22:1 | 4.5:1 | Pass |
+| ink-muted `#4E5A52` | sand-50 `#F7F3EC` | Muted text on the page background (404 page) | text | 6.53:1 | 4.5:1 | Pass |
+| sage `#3F5A47` | sand `#EFE3D1` | Stat numbers on the stats strip | text | 6.00:1 | 4.5:1 | Pass |
+| sage `#3F5A47` | sand-50 `#F7F3EC` | The current navigation item; "and" in the header wordmark | text | 6.87:1 | 4.5:1 | Pass |
+| sage-dark `#2C4033` | sand-50 `#F7F3EC` | Links on the page background, including the language switch area | text | 10.05:1 | 4.5:1 | Pass |
+| sage-dark `#2C4033` | white `#FFFFFF` | Links on cards, page headers and forms | text | 11.12:1 | 4.5:1 | Pass |
+| white `#FFFFFF` | sage `#3F5A47` | Primary buttons (Volunteer with us, Send) | text | 7.60:1 | 4.5:1 | Pass |
+| white `#FFFFFF` | sage-dark `#2C4033` | Primary buttons on hover | text | 11.12:1 | 4.5:1 | Pass |
+| white `#FFFFFF` | coral `#B04A32` | Donate button in the header | text | 5.42:1 | 4.5:1 | Pass |
+| white `#FFFFFF` | coral-dark `#8E3A25` | Donate button on hover | text | 7.55:1 | 4.5:1 | Pass |
+| coral-dark `#8E3A25` | white `#FFFFFF` | Form error text | text | 7.55:1 | 4.5:1 | Pass |
+| sand-50 `#F7F3EC` | sage-dark `#2C4033` | Footer text and headings | text | 10.05:1 | 4.5:1 | Pass |
+| sandstone `#E3C9A8` | sage-dark `#2C4033` | Footer links | text | 6.98:1 | 4.5:1 | Pass |
+| sand-50 `#F7F3EC` | ink `#26302A` | The skip link | text | 12.34:1 | 4.5:1 | Pass |
+| focus `#1A4FBF` | sand-50 `#F7F3EC` | Focus indicator on the page background | non-text | 6.51:1 | 3:1 | Pass |
 | focus `#1A4FBF` | white `#FFFFFF` | Focus indicator on cards, page headers and forms | non-text | 7.21:1 | 3:1 | Pass |
-| focus `#1A4FBF` | saffron `#F2B544` | Focus indicator where it crosses the saffron band at the top of the page | non-text | 3.93:1 | 3:1 | Pass |
-| saffron `#F2B544` | ink `#2B1D16` | Focus indicator in the footer | non-text | 8.89:1 | 3:1 | Pass |
-| ink `#2B1D16` | white `#FFFFFF` | Secondary button and menu button border | non-text | 16.28:1 | 3:1 | Pass |
-| ink-muted `#5E4A3E` | white `#FFFFFF` | Form field borders; unavailable button border | non-text | 8.32:1 | 3:1 | Pass |
-| tomato `#B23A1E` | cream `#FFF8EE` | Primary button shape against the page | non-text | 5.66:1 | 3:1 | Pass |
-| tomato `#B23A1E` | white `#FFFFFF` | Primary button shape against cards | non-text | 5.97:1 | 3:1 | Pass |
-| tomato-dark `#8F2C14` | white `#FFFFFF` | Error border on invalid form fields | non-text | 8.27:1 | 3:1 | Pass |
+| sand-50 `#F7F3EC` | sage-dark `#2C4033` | Focus indicator in the footer | non-text | 10.05:1 | 3:1 | Pass |
+| ink `#26302A` | white `#FFFFFF` | Secondary button border | non-text | 13.65:1 | 3:1 | Pass |
+| ink `#26302A` | sand-50 `#F7F3EC` | Menu button border in the header | non-text | 12.34:1 | 3:1 | Pass |
+| ink-muted `#4E5A52` | white `#FFFFFF` | Form field borders; unavailable button border | non-text | 7.22:1 | 3:1 | Pass |
+| sage `#3F5A47` | white `#FFFFFF` | Primary button shape against cards, forms and the Home hero | non-text | 7.60:1 | 3:1 | Pass |
+| coral `#B04A32` | sand-50 `#F7F3EC` | Donate button shape against the header | non-text | 4.90:1 | 3:1 | Pass |
+| coral-dark `#8E3A25` | white `#FFFFFF` | Error border on invalid form fields | non-text | 7.55:1 | 3:1 | Pass |
+| sage `#3F5A47` | sand-50 `#F7F3EC` | Form status message border | non-text | 6.87:1 | 3:1 | Pass |
 
-Saffron (1.74:1 on cream) is used on light backgrounds only as decoration, never for text or meaningful shapes.
+Updated 9 November 2026 for the "desert table" palette (D55). Coral is used for text only as white-on-coral in the Donate button, never on sand or sandstone. Sandstone is decoration only, and ink-muted never sits on it.
 
 ### 5.4 Broken-link check
 
