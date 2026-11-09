@@ -15,7 +15,7 @@ Every file that contains Spanish the public will read. It needs review by a Span
 - **Club board titles are gendered, as supplied** (D51). Each Spanish title follows that person's supplied Spanish photo description ("Zau, organizador de eventos", "Joy, secretaria", "Jaziel, fotógrafo"). Confirm each one with the person before ticking the People files.
 - **Photo descriptions (alt text) were supplied in both languages** with the photos and are used word for word (D46). If one needs changing, tell Aryah, so the English and Spanish stay in step and the source files match.
 - **Names stay in English:** "Creation and Connoisseur", "UNLV Food Tasting Club", "Three Square Food Bank", "Olive Crest", "Nevada 211", "Access Nevada", and event and restaurant names ("Taste of the Philippines", "Thai Night", "Down By The Bayou", "Tina's Filipino Cuisine", "Chao Thai"). The film is given its US Latin American title, *La princesa y el sapo*.
-- **The pantry is planned, not running.** Every Spanish mention of the despensa móvil must say it's planned or expected for 2027 ("prevista para 2027", "que planeamos", "llevaría"), never that it already operates or is guaranteed, and must not mention Rotary or partners. Check this in the mission, the About story, the club and pantry programs, Get Help, the Pantry team role and Aryah's bio.
+- **The pantry is planned, not running.** Every Spanish mention of the despensa móvil must say it's planned or expected for 2027 ("prevista para 2027", "que planeamos", "llevaría"), never that it already operates or is guaranteed, and must not name any outside organization or partner. Check this in the mission, the About story, the club and pantry programs, Get Help, the Pantry team role and Aryah's bio.
 - **Same facts as the English:** the Spanish must say no more and no less than the English version of each page.
 - **How to see it:** run `pnpm build:test && pnpm serve` and open `http://localhost:4321/es/`. Spanish pages are under `/es/`. The programs and Aryah's bio were published on 7 November 2026, so they're live content: review them first.
 
@@ -56,7 +56,7 @@ Every file that contains Spanish the public will read. It needs review by a Span
 
 Each file holds the page title, the search result description, the introduction and the main text.
 
-- [ ] `content/es/pages/home.md`: Inicio (`/es/`)
+- [ ] `content/es/pages/home.md`: Inicio (`/es/`). **Changed 9 November 2026 (D54):** the introduction is now Aryah's hero line, "Celebramos las culturas que forman Nevada y trabajamos para que nadie pase hambre."
 - [ ] `content/es/pages/about.md`: Quiénes somos (`/es/acerca-de/`). **Changed:** story from the batch, figures removed, pantry planned; usted description. **Changed 9 November 2026:** "Cada dos semanas" removed from the second paragraph (D48). The page also shows the new club board and club life sections (see People and Organization text).
 - [ ] `content/es/pages/programs.md`: Programas (`/es/programas/`)
 - [ ] `content/es/pages/getHelp.md`: Obtener ayuda (`/es/obtener-ayuda/`). **Changed:** new text from the batch, four resource links, pantry planned. Check especially for plain, friendly language.
@@ -69,7 +69,7 @@ Each file holds the page title, the search result description, the introduction 
 
 ## Programs (`content/es/programs/`, published 7 November 2026)
 
-- [ ] `content/es/programs/unlv-food-tasting-club.md`: UNLV Food Tasting Club. **Changed (new).** **Changed 9 November 2026:** "Misión del club" (translated from the club's English mission), the club email line, a main photo and two more photos with supplied descriptions.
+- [ ] `content/es/programs/unlv-food-tasting-club.md`: UNLV Food Tasting Club. **Changed (new).** **Changed 9 November 2026:** "Misión del club" (translated from the club's English mission), the club email line, a main photo and two more photos with supplied descriptions. **Changed again (D54):** the short summary, shown as the page introduction and on the card, is now "Noches culturales que celebran las culturas que forman Nevada." (supplied).
 - [ ] `content/es/programs/jornadas-de-voluntariado.md`: Jornadas de Voluntariado (`/es/programas/jornadas-de-voluntariado/`). **Changed 9 November 2026:** renamed from `voluntariado-quincenal.md` ("Voluntariado Quincenal"), new name, summary and schedule line (supplied), "Cada dos semanas" removed, partners line added, photo added (D48).
 - [ ] `content/es/programs/despensa-movil-de-alimentos.md`: Despensa Móvil de Alimentos (prevista para 2027). **Changed (new).**
 
@@ -85,7 +85,7 @@ All **Changed 9 November 2026 (new)**. Each has two paragraphs written from `pho
 ## People
 
 - [ ] Club board, **Changed 9 November 2026 (new)**: `roleEs`, `bioEs` ("Comida favorita: …") and `altEs` (supplied) in `content/people/aryah.yaml`, `mya.yaml`, `joy.yaml`, `priya.yaml`, `zau.yaml`, `katelyn.yaml`, `emily.yaml`, `george.yaml` and `jaziel.yaml`. Check the food names read naturally ("sándwich po'boy de camarón", "pollo mochiko con poke de atún ahi picante").
-- [ ] `content/people/aryah-certain.yaml`: `roleEs` and `bioEs`. **Changed (new; published 7 November 2026).** The last sentence of the bio was revised to "…y la despensa móvil de alimentos que está en planificación".
+- [ ] `content/people/aryah-certain.yaml`: `roleEs` and `bioEs`. **Changed (new; published 7 November 2026).** The last sentence of the bio was revised to "…y la despensa móvil de alimentos que está en planificación". **Changed 9 November 2026 (D54):** the membership named in the second sentence was removed; it now reads "es fundadora de dos empresas locales".
 
 ## Interface text
 
@@ -96,7 +96,7 @@ All **Changed 9 November 2026 (new)**. Each has two paragraphs written from `pho
 ## Organization text
 
 - [ ] `content/settings.yaml`: `missionEs` (the mission, rewritten so the pantry is planned), `taglineEs` (the tagline, also used for social bios), `unlvStatementEs` (the relationship to UNLV, shown in every footer) and `descriptionEs` (search results and social previews). **Changed.** **Changed 9 November 2026:** `missionEs` is now "Creation and Connoisseur combate la inseguridad alimentaria en UNLV y en todo Las Vegas.", with no pantry wording (D53).
-- [ ] `content/highlights.yaml` (Shared > Home and About photos and stats): the three stat labels (`labelEs`) and the photo descriptions (`altEs`, supplied). **Changed 9 November 2026 (new).**
+- [ ] `content/highlights.yaml` (Shared > Home and About photos and stats): the stats and the photo descriptions (`altEs`, supplied). **Changed 9 November 2026 (new).** **Changed again (D54):** the stats are now "1,000+ personas alimentadas", "100+ familias alimentadas" and "Cientos de estudiantes en noches culturales" (`valueEs` "Cientos", all supplied).
 
 ## Template examples (never published)
 

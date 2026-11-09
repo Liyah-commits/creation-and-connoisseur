@@ -73,7 +73,7 @@ const actions: { key: 'getHelp' | 'volunteer' | 'donate'; title: UIKey; text: UI
             {stats.map((stat) => (
               <li>
                 <p>
-                  <span class="block font-serif text-4xl font-bold text-tomato-dark">{stat.value}</span>{' '}
+                  <span class="block font-serif text-4xl font-bold text-tomato-dark">{lang === 'es' ? stat.valueEs || stat.value : stat.value}</span>{' '}
                   <span class="mt-1 block">{lang === 'en' ? stat.labelEn : stat.labelEs}</span>
                 </p>
               </li>

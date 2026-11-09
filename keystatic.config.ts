@@ -412,13 +412,19 @@ export default config({
         stats: fields.array(
           fields.object({
             value: fields.text({
-              label: 'Number',
-              description: 'The figure exactly as it should appear, for example "700+". Only publish a figure you can point to a source for.',
+              label: 'Number or word (English)',
+              description:
+                'The figure exactly as it should appear, for example "1,000+" or "Hundreds". Only publish a figure you can point to a source for.',
               validation: { length: { min: 1, max: 12 } },
+            }),
+            valueEs: fields.text({
+              label: 'Number or word (Spanish)',
+              description: 'Leave empty when it is the same in Spanish, like "100+". Fill it in when it is a word, like "Cientos".',
+              validation: { length: { max: 12 } },
             }),
             labelEn: fields.text({
               label: 'What it counts (English)',
-              description: 'Plain words that follow the number, for example "people fed in one two hour volunteer shift".',
+              description: 'Plain words that follow the number, for example "people fed".',
               validation: { length: { min: 1, max: 80 } },
             }),
             labelEs: fields.text({

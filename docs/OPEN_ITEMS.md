@@ -8,7 +8,7 @@ Every fact or asset the site needs that could not be found or hasn't been suppli
 
 Item numbers stay fixed so other documents can refer to them. **Supplied** items are loaded, and the note says what's left before they go live. Programs and Aryah's bio were loaded as drafts and published on 7 November 2026, before the first deploy (D44). Pages and Site settings have no draft state, so their text has been in the build since it was loaded.
 
-*(Updated 9 November 2026 after the photos, stats, board, news and contact batch, D46 to D53.)*
+*(Updated 9 November 2026 after the photos, stats, board, news and contact batch, D46 to D53, and the confirmed stats and hero line, D54.)*
 
 ## Organization facts
 
@@ -63,6 +63,6 @@ Item numbers stay fixed so other documents can refer to them. **Supplied** items
 
 ## Added 9 November 2026 (from `photos-inbox/FACTS.md`)
 
-28. **The cultural food nights count.** **To confirm.** `FACTS.md` derives "13 cultural food nights since 2024" from captions, but also lists the count as TO CONFIRM, and one of the 13 (the Italian American Heritage dinner, October 2024) is noted "confirm it was held". It isn't published (D46). Once checked, add it as the fourth stat in Shared > Home and About photos and stats, in both languages.
-29. **Stats that go out of date.** "20,000 people reached on Instagram this fall" is Instagram insights for 10 August to 7 November 2026 (19,973 accounts reached, rounded). Update or remove it after the fall semester. The two volunteering stats come from reel captions of 24 January 2026 and 6 November 2026.
+28. **The cultural food nights count.** **Resolved** (`FACTS.md`, 9 November 2026): no count of nights is shown, because the club has run far more culture nights than the 13 documented on Instagram. The stat is now "Hundreds of students at culture nights" (D54).
+29. **The "1,000+ people fed" stat.** Confirmed by Aryah from the club's captions (over 700 people fed on 23 January 2026, over 100 families fed on 6 November 2026). `FACTS.md`: raise it to "thousands" only if Three Square's impact report for the group supports it. Instagram reach, impressions and follower counts are never shown (D54).
 30. **Two confirmed links with no place on the site yet.** The volunteer sign-up form (Google Forms) and "Become a member" (UNLV Involvement Center) are CONFIRMED in `FACTS.md`, but it gives no placement for them, so they aren't on the site. Decide where they go (for example, the Volunteer page and the club program page). The Volunteer page already has its own form.

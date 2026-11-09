@@ -2,9 +2,7 @@
 title: UNLV Food Tasting Club
 draft: false
 englishVersion: unlv-food-tasting-club
-summary: >-
-  Nuestro programa en el campus: noches culturales y eventos gastronómicos
-  mensuales donde se reúnen los miembros y se recaudan fondos.
+summary: Noches culturales que celebran las culturas que forman Nevada.
 schedule: Eventos mensuales durante el año académico
 location: Campus de UNLV
 image:

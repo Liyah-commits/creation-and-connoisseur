@@ -5,15 +5,18 @@ heroImage:
     altEn: "About sixty students gather behind a row of Thai dancers in traditional dress at Thai Night, a Food Tasting Club culture night."
     altEs: "Unos sesenta estudiantes se reúnen detrás de una fila de bailarines tailandeses con vestimenta tradicional en una noche cultural del Food Tasting Club dedicada a la cultura tailandesa."
 stats:
-  - value: 700+
-    labelEn: people fed in one two hour volunteer shift
-    labelEs: personas alimentadas en un solo turno de voluntariado de dos horas
+  - value: 1,000+
+    valueEs: ''
+    labelEn: people fed
+    labelEs: personas alimentadas
   - value: 100+
-    labelEn: families fed at Three Square in two hours
-    labelEs: familias alimentadas en Three Square en dos horas
-  - value: '20,000'
-    labelEn: people reached on Instagram this fall
-    labelEs: personas alcanzadas en Instagram este otoño
+    valueEs: ''
+    labelEn: families fed
+    labelEs: familias alimentadas
+  - value: Hundreds
+    valueEs: Cientos
+    labelEn: of students at culture nights
+    labelEs: de estudiantes en noches culturales
 aboutPhotos:
   - image: ./images/highlights/aboutPhotos/0/image.webp
     altEn: "The six members of the 2026 to 2027 UNLV Food Tasting Club executive board pose together on a city street."

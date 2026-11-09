@@ -140,7 +140,15 @@ const highlights = defineCollection({
         ])
         .default({ discriminant: false }),
       stats: z
-        .array(z.object({ value: z.string().trim().min(1), labelEn: z.string().trim().min(1), labelEs: z.string().trim().min(1) }))
+        .array(
+          z.object({
+            value: z.string().trim().min(1),
+            /** Spanish wording of the value when it differs ("Cientos" for "Hundreds"); empty means the same as English. */
+            valueEs: optionalText,
+            labelEn: z.string().trim().min(1),
+            labelEs: z.string().trim().min(1),
+          }),
+        )
         .max(4)
         .default([]),
       aboutPhotos: z.array(bilingualPhoto(image)).default([]),

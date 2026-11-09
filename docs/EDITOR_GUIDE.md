@@ -104,7 +104,7 @@ To remove an image, untick **Add an image** and save. To remove one of the **Mor
 Choose **Home and About photos and stats** (under Shared). It's one screen for both languages:
 
 - **Show a photo at the top of the Home page**: the main Home photo, with a description in English and in Spanish. Use a landscape photo. It loads first, so keep it to one good photo.
-- **Home page stats**: up to four figures, shown in a strip under the photo. Each has a **Number** (written exactly as it should appear, like "700+") and what it counts, in English and in Spanish. Only publish a figure you can point to a source for, and update or remove figures that go out of date ("this fall").
+- **Home page stats**: up to four figures, shown in a strip under the photo. Each has a **Number or word** (written exactly as it should appear, like "1,000+" or "Hundreds"), its Spanish wording if it's a word ("Cientos"), and what it counts, in English and in Spanish. Only publish a figure you can point to a source for. Don't show Instagram reach, impressions or follower counts.
 - **Club life photos (About page)**: up to six photos, shown on About under "Club life", each with a description in both languages.
 
 ## Edit a fixed page (Home, About, Get help…)

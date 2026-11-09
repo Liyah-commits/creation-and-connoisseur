@@ -82,9 +82,10 @@ test.describe('production build', () => {
       const items = strip.locator('li');
       await expect(items).toHaveCount(3);
       for (const item of await items.all()) {
-        // Each item reads as one phrase: the number, then its plain-language label.
-        await expect(item).toHaveText(/^\s*[\d,]+\+?\s+\p{L}.{10,}$/u);
+        // Each item reads as one phrase: the value (a number or a word such as "Hundreds"), then its plain-language label.
+        await expect(item).toHaveText(/^\s*\S+\s+\p{L}[\p{L} ]+$/u);
       }
+      await expect(items.last()).toHaveText(lang === 'en' ? /^\s*Hundreds\s/ : /^\s*Cientos\s/);
     });
 
     test(`About: the club board is a second group after the nonprofit's people (${lang})`, async ({ page }) => {
@@ -129,10 +130,13 @@ test.describe('production build', () => {
     }
   });
 
-  test('no page claims a biweekly volunteering schedule', async ({ page }) => {
+  test('no page claims a biweekly volunteering schedule, or shows Instagram figures', async ({ page }) => {
     for (const path of PAGES) {
       await page.goto(path);
-      await expect(page.locator('body'), path).not.toContainText(/biweekly|every other week|every two weeks|quincenal|cada dos semanas/i);
+      const body = page.locator('body');
+      await expect(body, path).not.toContainText(/biweekly|every other week|every two weeks|quincenal|cada dos semanas/i);
+      // FACTS.md (D54): no Instagram reach, impressions or follower counts anywhere.
+      await expect(body, path).not.toContainText(/reached on instagram|alcanzadas en instagram|impressions|impresiones|followers|seguidores/i);
     }
   });
 
