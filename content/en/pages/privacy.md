@@ -26,7 +26,7 @@ Only our board members and volunteer coordinator can read form messages.
 
 ## Donations
 
-Donations are processed by Zeffy, which receives your name, email address and payment details under its own privacy policy. We receive your name, email address and the amount of your gift, and use them to thank you and keep our records.
+Donations are processed by Zeffy, which receives your name, email address and payment details under [its own privacy policy](https://support.zeffy.com/legal-data-privacy-security). We receive your name, email address and the amount of your gift, and use them to thank you and keep our records.
 
 ## Hosting
 

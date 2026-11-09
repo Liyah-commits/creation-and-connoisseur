@@ -117,6 +117,8 @@ Choose **Photos and stats** (under Shared). It's one screen for both languages:
 3. Don't change the **Internal name** or **File name**, and don't add or delete pages in this list. The site finds each page by its internal name. Deleting one stops the site from updating until it's restored (the admin can do this).
 4. Each page needs its own **Search result description**: a different sentence for every page, in each language.
 
+**Links to other sites:** write them as ordinary links. The site adds "(goes to an external site)" for screen readers by itself, in the page's language, so don't type it. On Spanish pages, still add "(en inglés)" after a link to a site that's only in English.
+
 On **Home**, the **Introduction** is the main heading at the top of the page (the hero line). The **Page title** (the organization's name) isn't shown on the page. It's the title in the browser tab and in search results, and the header already shows the name.
 
 On **About**, the main text appears as "Our story". The mission comes from **Site settings**, the people from **People** (in two groups, see "Add a person"), and the header and club life photos from **Photos and stats**. A photo shouldn't appear twice on one page, so don't use the About header photo in club life too.

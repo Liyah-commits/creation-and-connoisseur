@@ -66,7 +66,7 @@ Each file holds the page title, the search result description, the introduction 
 - [ ] `content/es/pages/news.md`: Noticias (`/es/noticias/`)
 - [ ] `content/es/pages/contact.md`: Contáctenos (`/es/contacto/`). **Changed:** title, search result description and introduction switched to usted ("Contáctanos" became "Contáctenos", and "Comunícate" became "Comuníquese"). **Changed 9 November 2026:** new main text, the UNLV Food Tasting Club email line, shown under "Otras formas de comunicarse con nosotros" (D52).
 - [ ] `content/es/pages/accessibility.md`: Declaración de accesibilidad (`/es/accesibilidad/`). **Changed:** new text from the batch. **Changed 9 November 2026 (D56):** "Escriba a info@creationandconnoisseur.org" replaces the pointer to the Contact page's email.
-- [ ] `content/es/pages/privacy.md`: Política de privacidad (`/es/privacidad/`). **Changed:** new text from the batch. Needs legal review too (`docs/OPEN_ITEMS.md`, item 18). **Changed 9 November 2026 (D56):** "escríbanos a info@creationandconnoisseur.org" and "Escriba a info@creationandconnoisseur.org" give the address directly; the date is now "9 de noviembre de 2026". **Changed again (D60):** new section "Donaciones" (Zeffy processes donations; what Zeffy receives and what we receive). The date stays "9 de noviembre de 2026".
+- [ ] `content/es/pages/privacy.md`: Política de privacidad (`/es/privacidad/`). **Changed:** new text from the batch. Needs legal review too (`docs/OPEN_ITEMS.md`, item 18). **Changed 9 November 2026 (D56):** "escríbanos a info@creationandconnoisseur.org" and "Escriba a info@creationandconnoisseur.org" give the address directly; the date is now "9 de noviembre de 2026". **Changed again (D60):** new section "Donaciones" (Zeffy processes donations; what Zeffy receives and what we receive). The date stays "9 de noviembre de 2026". **Changed again (D61):** "política de privacidad" in the Donaciones section now links to Zeffy's policy, followed by "(en inglés)", because the page has no Spanish version.
 
 ## Programs (`content/es/programs/`, published 7 November 2026)
 
@@ -117,3 +117,5 @@ These are drafts used only by the test build, but they show editors what good Sp
 Whenever a Spanish page, program, news post or person is added or changed, a Spanish speaker should review it before **Hide from the live site** is unticked. Add new files to this list, and uncheck any file that changes.
 
 No interface strings were added on 9 November 2026 for the photo changes (D58): every new Spanish text is a supplied photo description.
+
+Since D61, every link to another site in page text gets "(lo lleva a un sitio externo)" for screen readers automatically (the `donate.leavesSite` string in `src/i18n/ui.ts`). Listen for it with a screen reader on the Spanish Get Help and privacy pages.

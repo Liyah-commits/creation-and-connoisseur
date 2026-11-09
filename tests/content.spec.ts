@@ -231,6 +231,29 @@ test.describe('production build', () => {
     await expect(page.locator('main > div').first().locator('img[alt*="bag of groceries"]')).toHaveCount(1);
   });
 
+  test('privacy: the Zeffy policy is linked, with the screen-reader note; Spanish marks it as English', async ({ page }) => {
+    for (const lang of ['en', 'es'] as const) {
+      await page.goto(routes.privacy[lang]);
+      const link = page.locator('main .prose a[href="https://support.zeffy.com/legal-data-privacy-security"]');
+      await expect(link).toHaveCount(1);
+      await expect(link.locator('.sr-only')).toHaveText(` ${ui['donate.leavesSite'][lang]}`);
+      if (lang === 'es') expect(await link.evaluate((a) => a.nextSibling?.textContent?.trim().startsWith('(en inglés)'))).toBe(true);
+    }
+  });
+
+  test('every link to another site in page text carries the screen-reader note in the page language (D61)', async ({ page }) => {
+    let checked = 0;
+    for (const path of PAGES) {
+      await page.goto(path);
+      const lang = path.startsWith('/es/') ? 'es' : 'en';
+      for (const link of await page.locator('main .prose a[href^="http"]').all()) {
+        await expect(link.locator('.sr-only'), `${path} ${await link.getAttribute('href')}`).toHaveText(` ${ui['donate.leavesSite'][lang]}`);
+        checked++;
+      }
+    }
+    expect(checked).toBeGreaterThan(10);
+  });
+
   test('no placeholder pattern or empty image slot anywhere, and no photo twice on any page', async ({ page }) => {
     for (const path of PAGES) {
       await page.goto(path);

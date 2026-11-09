@@ -26,7 +26,7 @@ Solo los miembros de nuestra junta directiva y la persona coordinadora de volunt
 
 ## Donaciones
 
-Las donaciones las procesa Zeffy, que recibe su nombre, correo electrónico y datos de pago según su propia política de privacidad. Nosotros recibimos su nombre, correo electrónico y el monto de su donación, y los usamos para agradecerle y llevar nuestros registros.
+Las donaciones las procesa Zeffy, que recibe su nombre, correo electrónico y datos de pago según su propia [política de privacidad](https://support.zeffy.com/legal-data-privacy-security) (en inglés). Nosotros recibimos su nombre, correo electrónico y el monto de su donación, y los usamos para agradecerle y llevar nuestros registros.
 
 ## Alojamiento
 

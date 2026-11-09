@@ -4,6 +4,8 @@ import react from '@astrojs/react';
 import vercel from '@astrojs/vercel';
 import keystatic from '@keystatic/astro';
 import tailwindcss from '@tailwindcss/vite';
+import { satteri } from '@astrojs/markdown-satteri';
+import externalLinkNote from './src/lib/external-link-note.ts';
 
 /**
  * The public site URL, used for canonical links, hreflang, the sitemap and
@@ -69,6 +71,9 @@ export default defineConfig({
   },
   adapter: vercel(),
   integrations: [react(), keystatic()],
+  // Page text: Astro's default Markdown processor (Sätteri, same defaults) plus one plugin that
+  // gives links to other sites a screen-reader note in the page's language (D61).
+  markdown: { processor: satteri({ hastPlugins: [externalLinkNote] }) },
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es'],
