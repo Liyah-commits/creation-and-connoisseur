@@ -469,3 +469,9 @@ The site had no tagline field, so Site settings now has "Tagline (English / Span
   - Home Volunteer card: 06, tacos being served (it was 18). Photo 06 is also the Get help header, a different page.
   - All alt text is the sidecar's, word for word.
 - **Spare photos:** spare 07, the fall kickoff game, is removed, so the rule that put it on the Three Square post is gone. The duplicate check itself stays, because Thai Night's news photo (01) is the Home photo. On Home, that card uses the one remaining spare, 23 (Smash and Slice), which isn't used elsewhere on Home. The test that compares every image's alt text on every page confirms no photo appears twice on Home in English or Spanish, and a new test checks the three placements above.
+
+**D63. The Thai Night card on Home shows a Thai Night photo.** Aryah's instruction of 9 November 2026.
+- **Home Get help card:** 23, the Smash and Slice outing (it was 05).
+- **Thai Night news card on Home:** 05, the Thai Night plate and Thai tea, so the card shows a Thai Night photo instead of the pizza outing. The post's own image is still 01, which is also the main Home photo, so on Home the duplicate check swaps it for the spare. The one spare is now 05 (it was 23), so that swap lands on a Thai Night photo. The Thai Night post page is unchanged: 01 at the top, 05 in its gallery.
+- The two image files traded places. Both were already optimized copies in the repo, so no new image came from `photos-inbox/`. All alt text is the sidecar's, word for word.
+- The test that compares every image's alt text on every page confirms no photo appears twice on Home in English or Spanish, and the Home placement test now also checks the Get help card and the Thai Night card.

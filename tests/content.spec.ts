@@ -293,19 +293,34 @@ test.describe('production build', () => {
     }
   });
 
-  test('Home photo placement (D62): Volunteer card, Volunteer Days card and the Three Square post', async ({ page }) => {
+  test('Home photo placement (D62, D63): the cards, Volunteer Days, the Three Square post and Thai Night', async ({ page }) => {
     const expected = {
-      en: { volunteerCard: /gloved volunteer spoons chopped cilantro/, volunteerDays: /volunteer in gloves serves food from foil trays/, threeSquare: /bag of groceries/ },
-      es: { volunteerCard: /voluntaria con guantes sirve cilantro/, volunteerDays: /voluntaria con guantes sirve comida de bandejas/, threeSquare: /bolsa de comestibles/ },
+      en: {
+        getHelpCard: /pizza boxes during a restaurant outing at Smash and Slice/,
+        volunteerCard: /gloved volunteer spoons chopped cilantro/,
+        volunteerDays: /volunteer in gloves serves food from foil trays/,
+        threeSquare: /bag of groceries/,
+        thaiNight: /two cups of Thai iced tea/,
+      },
+      es: {
+        getHelpCard: /cajas de pizza durante una salida al restaurante Smash and Slice/,
+        volunteerCard: /voluntaria con guantes sirve cilantro/,
+        volunteerDays: /voluntaria con guantes sirve comida de bandejas/,
+        threeSquare: /bolsa de comestibles/,
+        thaiNight: /dos vasos de té tailandés helado/,
+      },
     } as const;
+    const newsCard = (href: string) => page.locator('section[aria-labelledby="news-heading"] article', { has: page.locator(`a[href="${href}"]`) }).locator('img');
     for (const lang of ['en', 'es'] as const) {
       await page.goto(routes.home[lang]);
-      const card = page.locator('section[aria-labelledby="actions-heading"] li', { hasText: ui['home.volunteerTitle'][lang] });
-      await expect(card.locator('img')).toHaveAttribute('alt', expected[lang].volunteerCard);
+      const card = (title: string) => page.locator('section[aria-labelledby="actions-heading"] li', { hasText: title }).locator('img');
+      await expect(card(ui['home.getHelpTitle'][lang])).toHaveAttribute('alt', expected[lang].getHelpCard);
+      await expect(card(ui['home.volunteerTitle'][lang])).toHaveAttribute('alt', expected[lang].volunteerCard);
       const days = page.locator('section[aria-labelledby="programs-heading"] article', { has: page.locator(`a[href="${lang === 'en' ? '/programs/volunteer-days/' : '/es/programas/jornadas-de-voluntariado/'}"]`) });
       await expect(days.locator('img')).toHaveAttribute('alt', expected[lang].volunteerDays);
-      const post = page.locator('section[aria-labelledby="news-heading"] article', { has: page.locator(`a[href="${lang === 'en' ? '/news/volunteering-at-three-square/' : '/es/noticias/voluntariado-en-three-square/'}"]`) });
-      await expect(post.locator('img')).toHaveAttribute('alt', expected[lang].threeSquare);
+      await expect(newsCard(lang === 'en' ? '/news/volunteering-at-three-square/' : '/es/noticias/voluntariado-en-three-square/')).toHaveAttribute('alt', expected[lang].threeSquare);
+      // Thai Night's own photo is the main Home photo, so on Home its card shows the spare: a Thai Night plate (D63).
+      await expect(newsCard(lang === 'en' ? '/news/thai-night/' : '/es/noticias/thai-night/')).toHaveAttribute('alt', expected[lang].thaiNight);
     }
   });
 

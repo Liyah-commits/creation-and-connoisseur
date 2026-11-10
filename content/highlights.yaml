@@ -65,8 +65,8 @@ homeCardPhotos:
     discriminant: true
     value:
       image: ./images/highlights/homeCardPhotos/getHelp/value/image.webp
-      altEn: "A plate of yellow rice, roasted chicken, fried fritters and noodles beside two cups of Thai iced tea at a club event."
-      altEs: "Un plato de arroz amarillo, pollo asado, frituras y fideos junto a dos vasos de té tailandés helado en un evento del club."
+      altEn: "Club members smile around a table of pizza boxes during a restaurant outing at Smash and Slice."
+      altEs: "Miembros del club sonríen alrededor de una mesa con cajas de pizza durante una salida al restaurante Smash and Slice."
   volunteer:
     discriminant: true
     value:
@@ -81,8 +81,8 @@ homeCardPhotos:
       altEs: "Unos treinta estudiantes posan bajo una diapositiva del Food Tasting Club en la noche de pizza y karaoke de bienvenida de la primavera de 2026."
 homeFallbackPhotos:
   - image: ./images/highlights/homeFallbackPhotos/0/image.webp
-    altEn: "Club members smile around a table of pizza boxes during a restaurant outing at Smash and Slice."
-    altEs: "Miembros del club sonríen alrededor de una mesa con cajas de pizza durante una salida al restaurante Smash and Slice."
+    altEn: "A plate of yellow rice, roasted chicken, fried fritters and noodles beside two cups of Thai iced tea at a club event."
+    altEs: "Un plato de arroz amarillo, pollo asado, frituras y fideos junto a dos vasos de té tailandés helado en un evento del club."
 aboutPhotos:
   - image: ./images/highlights/aboutPhotos/0/image.webp
     altEn: "About thirty students pose under a Food Tasting Club slide at the spring 2026 welcome back pizza and karaoke night."
