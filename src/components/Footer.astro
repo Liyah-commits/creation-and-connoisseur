@@ -88,7 +88,13 @@ const addressLines = settings.mailingAddress.split('\n').map((line) => line.trim
     </div>
   </div>
   <div class="border-t border-sand-50/20">
-    <p class="container-page py-5 text-sm">© {year} {SITE_NAME}. {t(lang, 'footer.copyright')}</p>
+    <div class="container-page flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-5 text-sm">
+      <p>© {year} {SITE_NAME}. {t(lang, 'footer.copyright')}</p>
+      <p>
+        {t(lang, 'footer.credit')}{' '}
+        <a href="https://stacklightai.com/" class="footer-link">Stacklight AI<span class="sr-only"> {t(lang, 'donate.leavesSite')}</span></a>
+      </p>
+    </div>
   </div>
 </footer>
 

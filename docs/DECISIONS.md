@@ -475,3 +475,20 @@ The site had no tagline field, so Site settings now has "Tagline (English / Span
 - **Thai Night news card on Home:** 05, the Thai Night plate and Thai tea, so the card shows a Thai Night photo instead of the pizza outing. The post's own image is still 01, which is also the main Home photo, so on Home the duplicate check swaps it for the spare. The one spare is now 05 (it was 23), so that swap lands on a Thai Night photo. The Thai Night post page is unchanged: 01 at the top, 05 in its gallery.
 - The two image files traded places. Both were already optimized copies in the repo, so no new image came from `photos-inbox/`. All alt text is the sidecar's, word for word.
 - The test that compares every image's alt text on every page confirms no photo appears twice on Home in English or Spanish, and the Home placement test now also checks the Get help card and the Thai Night card.
+
+## Bid readiness fixes (9 November 2026)
+
+Made from a review of the live site as an RFP portfolio example. Aryah's instruction of 9 November 2026 ("fix them all"). These edits were made outside the usual session and the test suite has not been run on them yet: run `pnpm test:all` before pushing.
+
+**D64. "Founded and led by", not "owned and run by".** A 501(c)(3) has no owner, and a nonprofit or public sector evaluator reads "owned" as a mistake about the organization's own legal form. This replaces the fourth of D5's four facts.
+- **English:** the site description (`descriptionEn`, which is also the Organization structured data description) and the About meta description now say "founded and led by Aryah Certain". The About intro says "It was founded and is led by Aryah Certain."
+- **Spanish:** "La fundó Aryah Certain, quien también la dirige." in `descriptionEs` and the About intro. The About meta description already said "dirigida por". Listed for review in `docs/SPANISH_REVIEW.md`.
+- The template fixture (`tests/fixtures/settings.template.yaml`) carries the same wording.
+- `docs/BRIEF.md` and `docs/PLAN.md` keep the old wording as the record of what was asked at the time.
+
+**D65. Security headers, set in `vercel.json`.** The live site sent only Vercel's default HSTS header. Every response now also carries `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy: camera=(), microphone=(), geolocation=()`, `X-Frame-Options: SAMEORIGIN` and a narrow `Content-Security-Policy` (`frame-ancestors 'self'; base-uri 'self'; object-src 'none'`).
+- **Not included, on purpose:** a `script-src` or `style-src` policy. The pages carry inline scripts (the form script, Astro's module scripts) and the Keystatic editor loads its own, so a script policy needs hashes generated at build time and a full test run, including the editor at `/keystatic`. That's `docs/OPEN_ITEMS.md` item 31.
+- **Check after the first deploy:** open the preview deployment, confirm the headers are present on a page response, then sign in at `/keystatic` and save one edit.
+
+**D66. A site credit in the footer.** The bottom bar now reads "Website by Stacklight AI" ("Sitio web creado por Stacklight AI"), linking to `https://stacklightai.com/`, so a reviewer who is given this site as a portfolio example can see who built it. The link uses the footer's existing link style and focus ring and carries the site's external link note for screen readers (`donate.leavesSite`). If the firm's name changes, it is the one string in `src/components/Footer.astro`.
+

@@ -3,10 +3,10 @@ internalName: about
 title: About us
 metaDescription: >-
   About Creation and Connoisseur, a 501(c)(3) nonprofit focused on food
-  insecurity at UNLV, owned and run by Aryah Certain.
+  insecurity at UNLV, founded and led by Aryah Certain.
 intro: >-
   Creation and Connoisseur is a 501(c)(3) nonprofit focused on food insecurity
-  at UNLV. It is owned and run by Aryah Certain.
+  at UNLV. It was founded and is led by Aryah Certain.
 ---
 Creation and Connoisseur started at UNLV with a simple observation: a lot of students were hungry, and most of them were not getting help. Food insecurity on campus is common, quiet, and easy to miss. We decided to do something about it.
 

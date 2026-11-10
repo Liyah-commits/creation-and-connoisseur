@@ -66,3 +66,9 @@ Item numbers stay fixed so other documents can refer to them. **Supplied** items
 28. **The cultural food nights count.** **Resolved** (`FACTS.md`, 9 November 2026): no count of nights is shown, because the club has run far more culture nights than the 13 documented on Instagram. The stat is now "Hundreds of students at culture nights" (D54).
 29. **The "1,000+ people fed" stat.** Confirmed by Aryah from the club's captions (over 700 people fed on 23 January 2026, over 100 families fed on 6 November 2026). `FACTS.md`: raise it to "thousands" only if Three Square's impact report for the group supports it. Instagram reach, impressions and follower counts are never shown (D54).
 30. **Two confirmed links with no place on the site yet.** The volunteer sign-up form (Google Forms) and "Become a member" (UNLV Involvement Center) are CONFIRMED in `FACTS.md`, but it gives no placement for them, so they aren't on the site. Decide where they go (for example, the Volunteer page and the club program page). The Volunteer page already has its own form.
+
+## Added 9 November 2026 (bid readiness review)
+
+31. **A script and style Content Security Policy.** D65 added the security headers that can't break a page. A full policy (`script-src`, `style-src`, `connect-src` for Formspree) needs build time hashes for the inline scripts and a test run that includes the Keystatic editor. Do it as its own change, with `pnpm test:all` and a preview deployment.
+32. **Partner wording.** The site calls Three Square Food Bank and Olive Crest "partner organizations". Confirm with each that they are comfortable being named that way before the site goes into a proposal.
+

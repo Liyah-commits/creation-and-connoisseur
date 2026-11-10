@@ -50,6 +50,8 @@ export const ui = {
   'footer.socialHeading': { en: 'Follow us', es: 'Síganos' },
   'footer.siteHeading': { en: 'About this site', es: 'Sobre este sitio' },
   'footer.copyright': { en: 'All rights reserved.', es: 'Todos los derechos reservados.' },
+  // Site credit (D66): the firm's name stays in English in both languages.
+  'footer.credit': { en: 'Website by', es: 'Sitio web creado por' },
 
   // Contact details
   'contact.email': { en: 'Email', es: 'Correo electrónico' },

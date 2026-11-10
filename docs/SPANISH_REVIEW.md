@@ -11,7 +11,7 @@ Every file that contains Spanish the public will read. It needs review by a Span
 ## Before you start
 
 - **Register:** neutral US Latin American Spanish, using **usted** throughout ("Envíenos un mensaje", "Si usted o su familia necesitan alimentos…", "Únase al club"). The site was first written in tú. Every tú form was replaced, and a search of every Spanish file for tú forms came back clean. Flag any that remain.
-- **Gender-neutral phrasing** is used where Spanish would otherwise force a gender: "Haga voluntariado", "Pertenece a Aryah Certain, quien también la dirige", "Persona anfitriona de Noche Cultural", "la persona coordinadora de voluntarios". Aryah's title, "Fundadora y Presidenta", is as supplied. Confirm these read naturally.
+- **Gender-neutral phrasing** is used where Spanish would otherwise force a gender: "Haga voluntariado", "La fundó Aryah Certain, quien también la dirige" (changed 9 November 2026, D64; it was "Pertenece a Aryah Certain"), "Persona anfitriona de Noche Cultural", "la persona coordinadora de voluntarios". Aryah's title, "Fundadora y Presidenta", is as supplied. Confirm these read naturally.
 - **Club board titles are gendered, as supplied** (D51). Each Spanish title follows that person's supplied Spanish photo description ("Zau, organizador de eventos", "Joy, secretaria", "Jaziel, fotógrafo"). Confirm each one with the person before ticking the People files.
 - **Photo descriptions (alt text) were supplied in both languages** with the photos and are used word for word (D46). If one needs changing, tell Aryah, so the English and Spanish stay in step and the source files match.
 - **Names stay in English:** "Creation and Connoisseur", "UNLV Food Tasting Club", "Three Square Food Bank", "Olive Crest", "Nevada 211", "Access Nevada", and event and restaurant names ("Taste of the Philippines", "Thai Night", "Down By The Bayou", "Tina's Filipino Cuisine", "Chao Thai"). The film is given its US Latin American title, *La princesa y el sapo*.
@@ -119,3 +119,8 @@ Whenever a Spanish page, program, news post or person is added or changed, a Spa
 No interface strings were added on 9 November 2026 for the photo changes (D58): every new Spanish text is a supplied photo description.
 
 Since D61, every link to another site in page text gets "(lo lleva a un sitio externo)" for screen readers automatically (the `donate.leavesSite` string in `src/i18n/ui.ts`). Listen for it with a screen reader on the Spanish Get Help and privacy pages.
+
+**Changed 9 November 2026 (D64, D66), not yet reviewed.** Two Spanish strings changed after the last update, so untick `content/settings.yaml` and `content/es/pages/about.md` if they had been ticked:
+
+- "La fundó Aryah Certain, quien también la dirige." replaces "Pertenece a Aryah Certain, quien también la dirige." in the site description (`descriptionEs`) and the About intro.
+- "Sitio web creado por" is a new interface string (`footer.credit` in `src/i18n/ui.ts`), shown at the bottom of every Spanish page before the link "Stacklight AI".
